@@ -1,10 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwjcltlvvv3sh"]
+[gd_scene load_steps=4 format=3 uid="uid://dwjcltlvvv3sh"]
 
+[ext_resource type="Script" uid="uid://ckox3i4862uu1" path="res://Scripts/World.gd" id="1_5nsto"]
+[ext_resource type="PackedScene" uid="uid://bg60q61fxbuyh" path="res://Scenes/Player.tscn" id="1_j0p05"]
 [ext_resource type="PackedScene" uid="uid://deaki4yumnjy6" path="res://Scenes/Areas/StartingArea.tscn" id="2_5nsto"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=["world"]]
+script = ExtResource("1_5nsto")
 
-[node name="StartingArea" parent="." instance=ExtResource("2_5nsto")]
+[node name="Player" parent="." instance=ExtResource("1_j0p05")]
 
-[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
-position = Vector2(-88, -21)
+[node name="CurrentArea" type="Node2D" parent="."]
+
+[node name="StartingArea" parent="CurrentArea" instance=ExtResource("2_5nsto")]
+script = null

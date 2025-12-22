@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://dvmiixnjbclps"]
+[gd_scene load_steps=12 format=4 uid="uid://dvmiixnjbclps"]
 
 [ext_resource type="Texture2D" uid="uid://bykofg7wku4ra" path="res://Assets/TileSets/Home Made Assets/Exported/HouseInt.png" id="1_qk4ws"]
-[ext_resource type="PackedScene" uid="uid://bg60q61fxbuyh" path="res://Scenes/Player.tscn" id="2_nc2ua"]
+[ext_resource type="Script" uid="uid://1ydq6hngbqq0" path="res://Scripts/Exits/Exits.gd" id="2_nc2ua"]
+[ext_resource type="Script" uid="uid://dis20uqw6dsyi" path="res://Scripts/Camera/CameraBounds.gd" id="3_vq36m"]
+[ext_resource type="Script" uid="uid://c223dphhm6648" path="res://Scripts/SpawnPoints/SpawnPoint.gd" id="4_tyggk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nc2ua"]
 texture = ExtResource("1_qk4ws")
@@ -964,10 +966,13 @@ texture = ExtResource("1_qk4ws")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_tyggk")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vq36m"]
+size = Vector2(16, 17)
+
 [node name="Home" type="Node2D"]
 
 [node name="Ground" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD9/wIAAAAeAB4AAAD+/wIAAAAeAB4AAAD//wIAAAAeAB4AAAAAAAIAAAAeAB4AAAABAAIAAAAeAB4AAAACAAIAAAAeAB4AAAADAAIAAAAeAB4AAAD8/wIAAAAeAB4AAAD8/wMAAAAeAB4AAAD9/wMAAAAeAB4AAAD+/wMAAAAeAB4AAAD//wMAAAAeAB4AAAAAAAMAAAAeAB4AAAABAAMAAAAeAB4AAAACAAMAAAAeAB4AAAADAAMAAAAeAB4AAAD8/wQAAAAeAB4AAAD9/wQAAAAeAB4AAAD+/wQAAAAeAB4AAAD//wQAAAAeAB4AAAAAAAQAAAAeAB4AAAABAAQAAAAeAB4AAAACAAQAAAAeAB4AAAADAAQAAAAeAB4AAAD8/wUAAAAeAB4AAAD9/wUAAAAeAB4AAAD+/wUAAAAeAB4AAAD//wUAAAAeAB4AAAAAAAUAAAAeAB4AAAABAAUAAAAeAB4AAAACAAUAAAAeAB4AAAADAAUAAAAeAB4AAAD8/wYAAAAeAB4AAAD9/wYAAAAeAB4AAAD+/wYAAAAeAB4AAAD//wYAAAAeAB4AAAAAAAYAAAAeAB4AAAABAAYAAAAeAB4AAAACAAYAAAAeAB4AAAADAAYAAAAeAB4AAAAEAAIAAAAeAB4AAAAEAAMAAAAeAB4AAAAEAAQAAAAeAB4AAAAEAAUAAAAeAB4AAAAEAAYAAAAeAB4AAAA=")
+tile_map_data = PackedByteArray("AAD9/wIAAAAeAB4AAAD+/wIAAAAeAB4AAAD//wIAAAAeAB4AAAAAAAIAAAAeAB4AAAABAAIAAAAeAB4AAAACAAIAAAAeAB4AAAADAAIAAAAeAB4AAAD8/wIAAAAeAB4AAAD8/wMAAAAeAB4AAAD9/wMAAAAeAB4AAAD+/wMAAAAeAB4AAAD//wMAAAAeAB4AAAAAAAMAAAAeAB4AAAABAAMAAAAeAB4AAAACAAMAAAAeAB4AAAADAAMAAAAeAB4AAAD8/wQAAAAeAB4AAAD9/wQAAAAeAB4AAAD+/wQAAAAeAB4AAAD//wQAAAAeAB4AAAAAAAQAAAAeAB4AAAABAAQAAAAeAB4AAAACAAQAAAAeAB4AAAADAAQAAAAeAB4AAAD8/wUAAAAeAB4AAAD9/wUAAAAeAB4AAAD+/wUAAAAeAB4AAAD//wUAAAAeAB4AAAAAAAUAAAAeAB4AAAABAAUAAAAeAB4AAAACAAUAAAAeAB4AAAADAAUAAAAeAB4AAAD8/wYAAAAeAB4AAAD9/wYAAAAeAB4AAAD+/wYAAAAeAB4AAAD//wYAAAAeAB4AAAAAAAYAAAAeAB4AAAABAAYAAAAeAB4AAAACAAYAAAAeAB4AAAADAAYAAAAeAB4AAAAEAAIAAAAeAB4AAAAEAAMAAAAeAB4AAAAEAAQAAAAeAB4AAAAEAAUAAAAeAB4AAAAEAAYAAAAeAB4AAAAAAAcAAAAeAB4AAAA=")
 tile_set = SubResource("TileSet_vq36m")
 
 [node name="Air" type="TileMapLayer" parent="."]
@@ -980,5 +985,19 @@ tile_set = SubResource("TileSet_nc2ua")
 tile_map_data = PackedByteArray("AAD8/wAAAAAaAB0AAAD9/wAAAAAbAB0AAAD+/wAAAAAbAB0AAAD//wAAAAAbAB0AAAAAAAAAAAAbAB0AAAABAAAAAAAbAB0AAAACAAAAAAAbAB0AAAD8/wEAAAAaAB8AAAD9/wEAAAAbAB8AAAD+/wEAAAAbAB8AAAD//wEAAAAbAB8AAAAAAAEAAAAbAB8AAAABAAEAAAAbAB8AAAACAAEAAAAbAB8AAAAEAAAAAAAcAB0AAAAEAAEAAAAcAB8AAAADAAAAAAAbAB0AAAADAAEAAAAbAB8AAAAEAAIAAAABAAQAAAADAAMAAAABAAEAAAADAAIAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_ukdna")
 
-[node name="Player" parent="." instance=ExtResource("2_nc2ua")]
-position = Vector2(7, 91)
+[node name="Exit" type="Area2D" parent="."]
+script = ExtResource("2_nc2ua")
+target_scene_path = "res://Scenes/Areas/StartingArea.tscn"
+target_spawn_name = "SpawnHome"
+
+[node name="Exit" type="CollisionShape2D" parent="Exit"]
+position = Vector2(8, 119.5)
+shape = SubResource("RectangleShape2D_vq36m")
+
+[node name="CameraBounds" type="Node2D" parent="."]
+script = ExtResource("3_vq36m")
+
+[node name="SpawnHome" type="Marker2D" parent="." groups=["spawn"]]
+position = Vector2(8, 88)
+script = ExtResource("4_tyggk")
+spawn_id = "SpawnStart"
