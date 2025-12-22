@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwjcltlvvv3sh"]
+
+[ext_resource type="PackedScene" uid="uid://deaki4yumnjy6" path="res://Scenes/Areas/StartingArea.tscn" id="2_5nsto"]
+
+[node name="World" type="Node2D"]
+
+[node name="StartingArea" parent="." instance=ExtResource("2_5nsto")]
+
+[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(-88, -21)
