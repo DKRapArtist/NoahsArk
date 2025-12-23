@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://cu5b6t3721kk4"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Inventory/InventoryScripts/InventoryItems.gd" id="1_tkt6j"]
+[ext_resource type="Texture2D" uid="uid://d23vw8o3fk0dt" path="res://Assets/TileSets/DG Fire Zone Asset Pack/Items/Orb.png" id="2_h1bd0"]
+
+[resource]
+script = ExtResource("1_tkt6j")
+name = "Orb"
+texture = ExtResource("2_h1bd0")
+metadata/_custom_type_script = "uid://dohcr3jcw0bv6"

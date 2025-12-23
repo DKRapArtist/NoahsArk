@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @export var speed: float = 60.0
 @export var move_hold_threshold: float = 0.02  # seconds before movement starts
+@export var inv: Inv
+@export var item: InvItem
 
 var last_direction: String = "Down" # "Front", "Back", "Left", "Right"
 var hold_time: float = 0.0

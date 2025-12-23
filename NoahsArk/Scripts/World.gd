@@ -2,6 +2,7 @@ extends Node2D
 class_name World
 
 @onready var current_area := $CurrentArea
+var first_load := true
 
 func _ready() -> void:
 	add_to_group("world")
@@ -9,9 +10,14 @@ func _ready() -> void:
 
 
 func load_area(scene_path: String, spawn_id: String) -> void:
-	# 1. Start transition (fade out)
-	TransitionScene.transition()
-	await TransitionScene.on_transition_finished
+	if first_load:
+		first_load = false
+		# Only play the fade-in, don't await
+		TransitionScene.fade_in_from_black()
+	else:
+		# Normal fade-out → fade-in
+		TransitionScene.transition()
+		await TransitionScene.on_transition_finished
 
 	# 2. Remove old area
 	for child in current_area.get_children():

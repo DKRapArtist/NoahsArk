@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://ge7k16gxtmrw"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Inventory/InventoryScripts/InventoryItems.gd" id="1_3g1ob"]
+[ext_resource type="Texture2D" uid="uid://c7yaii4uyxemo" path="res://Assets/TileSets/DG Fire Zone Asset Pack/Items/Cube.png" id="2_wwqap"]
+
+[resource]
+script = ExtResource("1_3g1ob")
+name = "Cube"
+texture = ExtResource("2_wwqap")
+max_stack = 2
+metadata/_custom_type_script = "uid://dohcr3jcw0bv6"

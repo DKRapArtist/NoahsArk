@@ -20,3 +20,8 @@ func _on_animation_finished(anim_name):
 func transition():
 	color_rect.visible = true
 	animation_player.play("FadeToBlack")
+
+func fade_in_from_black():
+	color_rect.visible = true
+	# Ensure it starts fully black – set alpha to 1 in the Animation or here
+	animation_player.play("FadeToNormal")

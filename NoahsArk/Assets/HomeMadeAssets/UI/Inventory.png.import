@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://plkm0h7tr4te"
-path="res://.godot/imported/CharacterWalkSpriteSheet.png-c70fe177de398118521074e0acbe4429.ctex"
+uid="uid://j11hokylnoh6"
+path="res://.godot/imported/Inventory.png-c016f65af804a9795435191d13bad86b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PlayerSpriteSheets/CharacterWalkSpriteSheet.png"
-dest_files=["res://.godot/imported/CharacterWalkSpriteSheet.png-c70fe177de398118521074e0acbe4429.ctex"]
+source_file="res://Assets/HomeMadeAssets/UI/Inventory.png"
+dest_files=["res://.godot/imported/Inventory.png-c016f65af804a9795435191d13bad86b.ctex"]
 
 [params]
 

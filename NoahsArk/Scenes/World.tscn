@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwjcltlvvv3sh"]
+[gd_scene load_steps=4 format=3 uid="uid://dwjcltlvvv3sh"]
 
 [ext_resource type="Script" uid="uid://ckox3i4862uu1" path="res://Scripts/World.gd" id="1_5nsto"]
 [ext_resource type="PackedScene" uid="uid://bg60q61fxbuyh" path="res://Scenes/Player.tscn" id="1_j0p05"]
+[ext_resource type="PackedScene" uid="uid://creebnybkq5g7" path="res://Inventory/InventoryScenes/InventoryUI.tscn" id="4_gjpho"]
 
 [node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_5nsto")
@@ -9,3 +10,11 @@ script = ExtResource("1_5nsto")
 [node name="Player" parent="." instance=ExtResource("1_j0p05")]
 
 [node name="CurrentArea" type="Node2D" parent="."]
+
+[node name="Inventory" type="CanvasLayer" parent="."]
+
+[node name="InventoryUI" parent="Inventory" instance=ExtResource("4_gjpho")]
+offset_left = 64.0
+offset_top = 56.0
+offset_right = 64.0
+offset_bottom = 56.0
