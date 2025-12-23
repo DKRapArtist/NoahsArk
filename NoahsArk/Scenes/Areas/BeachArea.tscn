@@ -5263,6 +5263,7 @@ size = Vector2(21, 40)
 [node name="Beach" type="Node2D"]
 
 [node name="CameraBounds" type="Node2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds"]
 position = Vector2(902, -146)
@@ -5324,11 +5325,11 @@ target_spawn_name = "DockSpawn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartingAreaExit"]
 z_index = 2
-position = Vector2(354.5, -9)
+position = Vector2(344, -11)
 shape = SubResource("RectangleShape2D_wa7n5")
 
 [node name="BeachSpawn" type="Marker2D" parent="."]
 z_index = 1
-position = Vector2(379, -11)
+position = Vector2(398, -11)
 script = ExtResource("6_2jw0k")
 spawn_id = "BeachSpawn"

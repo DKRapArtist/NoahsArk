@@ -5941,6 +5941,7 @@ size = Vector2(16, 24)
 script = SubResource("GDScript_pb6dk")
 
 [node name="CameraBounds" type="Node2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds"]
 position = Vector2(25, 30)
@@ -6002,7 +6003,7 @@ target_scene_path = "res://Scenes/Areas/BeachArea.tscn"
 target_spawn_name = "BeachSpawn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/DockExit"]
-position = Vector2(323, -8)
+position = Vector2(296, -8)
 shape = SubResource("RectangleShape2D_1n7vx")
 
 [node name="DoorExit" type="Area2D" parent="Exits"]
@@ -6020,6 +6021,6 @@ script = ExtResource("11_xu5hv")
 spawn_id = "SpawnHome"
 
 [node name="DockSpawn" type="Marker2D" parent="." groups=["spawn"]]
-position = Vector2(287, -8)
+position = Vector2(253, -8)
 script = ExtResource("11_xu5hv")
 spawn_id = "DockSpawn"

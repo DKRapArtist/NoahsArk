@@ -9,13 +9,17 @@ func _ready() -> void:
 
 
 func load_area(scene_path: String, spawn_id: String) -> void:
-	# Remove old area
+	# 1. Start transition (fade out)
+	TransitionScene.transition()
+	await TransitionScene.on_transition_finished
+
+	# 2. Remove old area
 	for child in current_area.get_children():
 		child.queue_free()
 
 	await get_tree().process_frame
 
-	# Load new area
+	# 3. Load new area
 	var area: Node2D = load(scene_path).instantiate()
 	current_area.add_child(area)
 
@@ -25,11 +29,8 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 	var spawn := _find_spawn_in_area(area, spawn_id)
 
 	if player and spawn:
-		# Move player
 		player.velocity = Vector2.ZERO
 		player.global_position = spawn.global_position
-
-		# Update camera limits from this area's CameraBounds
 		_set_camera_limits_from_area(player, area)
 	else:
 		push_warning("Spawn not found in area: " + spawn_id)
