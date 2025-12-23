@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdbbqwxe0oi2q"
-path="res://.godot/imported/HouseInt.png-0615d6e0d2528f1799b33a2224ca5b35.ctex"
+uid="uid://k6diwmg6pjbq"
+path="res://.godot/imported/Ark.png-5121523583042aa27aafbd71ccf13b83.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/TileSets/Home Made Assets/Exported/HouseInt.png"
-dest_files=["res://.godot/imported/HouseInt.png-0615d6e0d2528f1799b33a2224ca5b35.ctex"]
+source_file="res://Assets/TileSets/Home Made Assets/Ark.png"
+dest_files=["res://.godot/imported/Ark.png-5121523583042aa27aafbd71ccf13b83.ctex"]
 
 [params]
 

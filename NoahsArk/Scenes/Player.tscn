@@ -641,7 +641,7 @@ radius = 4.0
 height = 8.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-z_index = 1
+z_index = 10
 script = ExtResource("1_kyqiw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -655,9 +655,4 @@ shape = SubResource("CapsuleShape2D_oudfo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.2, 1.2)
-limit_enabled = false
-limit_left = -322
-limit_top = -240
-limit_right = 336
-limit_bottom = 256
 editor_draw_limits = true

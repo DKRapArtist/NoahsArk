@@ -1,12 +1,14 @@
 extends Node2D
 class_name World
 
-@onready var current_area = $CurrentArea
+@onready var current_area := $CurrentArea
 
-func _ready():
+func _ready() -> void:
 	add_to_group("world")
+	load_area("res://Scenes/Areas/Home.tscn", "BedSpawn")
 
-func load_area(scene_path: String, spawn_id: String):
+
+func load_area(scene_path: String, spawn_id: String) -> void:
 	# Remove old area
 	for child in current_area.get_children():
 		child.queue_free()
@@ -14,37 +16,61 @@ func load_area(scene_path: String, spawn_id: String):
 	await get_tree().process_frame
 
 	# Load new area
-	var area = load(scene_path).instantiate()
+	var area: Node2D = load(scene_path).instantiate()
 	current_area.add_child(area)
 
 	await get_tree().process_frame
 
-	var player = get_tree().get_first_node_in_group("player")
-	var spawn = _find_spawn_in_area(area, spawn_id)
+	var player := get_tree().get_first_node_in_group("player")
+	var spawn := _find_spawn_in_area(area, spawn_id)
 
 	if player and spawn:
+		# Move player
 		player.velocity = Vector2.ZERO
 		player.global_position = spawn.global_position
+
+		# Update camera limits from this area's CameraBounds
+		_set_camera_limits_from_area(player, area)
 	else:
 		push_warning("Spawn not found in area: " + spawn_id)
 
+
+func _set_camera_limits_from_area(player: Node, area: Node) -> void:
+	var cam: Camera2D = player.get_node_or_null("Camera2D")
+	if cam == null:
+		print("No Camera2D on player")
+		return
+
+	var shape_node: CollisionShape2D = area.get_node_or_null("CameraBounds/CollisionShape2D")
+	if shape_node == null:
+		print("No CameraBounds/CollisionShape2D in area:", area.name)
+		return
+
+	var rect_shape: RectangleShape2D = shape_node.shape as RectangleShape2D
+	if rect_shape == null:
+		print("CameraBounds shape is not RectangleShape2D in area:", area.name)
+		return
+
+	var size: Vector2 = rect_shape.size
+	var center: Vector2 = shape_node.global_position
+	var half: Vector2 = size * 0.5
+
+	print("Camera limits for", area.name, "size:", size, "center:", center)
+
+	cam.limit_left = int(center.x - half.x)
+	cam.limit_right = int(center.x + half.x)
+	cam.limit_top = int(center.y - half.y)
+	cam.limit_bottom = int(center.y + half.y)
+
+
 func _find_spawn_in_area(area: Node, spawn_id: String) -> SpawnPoint:
-	print("=== SEARCHING IN:", area.name, "FOR:", spawn_id)
-
 	for child in area.get_children():
-		print("Node:", child.name, "Type:", child.get_class())
-
-		if child is SpawnPoint:
-			print("  -> spawn_id =", child.spawn_id)
-
-			if child.spawn_id == spawn_id:
-				print("  ✅ MATCH")
-				return child
+		if child is SpawnPoint and child.spawn_id == spawn_id:
+			return child
 
 		if child.get_child_count() > 0:
-			var found = _find_spawn_in_area(child, spawn_id)
+			var found := _find_spawn_in_area(child, spawn_id)
 			if found:
 				return found
 
-	print("❌ NO MATCH IN:", area.name)
 	return null

@@ -13,7 +13,6 @@ config_version=5
 config/name="Noahs Ark"
 run/main_scene="uid://dwjcltlvvv3sh"
 config/features=PackedStringArray("4.5", "Mobile")
-config/icon="res://icon.svg"
 
 [display]
 
@@ -48,3 +47,4 @@ right={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

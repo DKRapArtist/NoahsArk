@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdbbqwxe0oi2q"
-path="res://.godot/imported/HouseInt.png-0615d6e0d2528f1799b33a2224ca5b35.ctex"
+uid="uid://crtkccgfck1i8"
+path="res://.godot/imported/tilesetV2.png-2a6c116769ba9a20ac0cae1f30f5d322.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/TileSets/Home Made Assets/Exported/HouseInt.png"
-dest_files=["res://.godot/imported/HouseInt.png-0615d6e0d2528f1799b33a2224ca5b35.ctex"]
+source_file="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/tilesetV2.png"
+dest_files=["res://.godot/imported/tilesetV2.png-2a6c116769ba9a20ac0cae1f30f5d322.ctex"]
 
 [params]
 
