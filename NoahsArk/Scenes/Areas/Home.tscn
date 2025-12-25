@@ -1356,16 +1356,16 @@ tile_set = SubResource("TileSet_ukdna")
 [node name="Exit" type="Area2D" parent="."]
 script = ExtResource("2_nc2ua")
 target_scene_path = "res://Scenes/Areas/StartingArea.tscn"
-target_spawn_name = "SpawnHome"
+target_spawn_name = "FromHome"
 
-[node name="Exit" type="CollisionShape2D" parent="Exit"]
+[node name="ToStart" type="CollisionShape2D" parent="Exit"]
 position = Vector2(8, 138.25)
 shape = SubResource("RectangleShape2D_vq36m")
 
 [node name="SpawnHome" type="Marker2D" parent="." groups=["spawn"]]
 position = Vector2(8, 116)
 script = ExtResource("4_tyggk")
-spawn_id = "SpawnStart"
+spawn_id = "FromStart"
 
 [node name="BedSpawn" type="Marker2D" parent="." groups=["spawn"]]
 position = Vector2(40, 48)

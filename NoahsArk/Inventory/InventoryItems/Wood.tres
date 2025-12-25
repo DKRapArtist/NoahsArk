@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://c2fn0k7f2blgv"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Inventory/InventoryScripts/InventoryItems.gd" id="1_2up72"]
+[ext_resource type="Texture2D" uid="uid://cpynvpjonxwcv" path="res://Assets/TileSets/DG Fire Zone Asset Pack/Items/Book.png" id="2_wdc66"]
+
+[resource]
+script = ExtResource("1_2up72")
+name = "Wood"
+texture = ExtResource("2_wdc66")
+metadata/_custom_type_script = "uid://dohcr3jcw0bv6"
