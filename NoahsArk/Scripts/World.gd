@@ -2,12 +2,29 @@ extends Node2D
 class_name World
 
 @onready var current_area := $CurrentArea
+@onready var inventory_ui := $Inventory/InventoryUI
+@onready var item_scene := preload("res://PickUps/PickUpScenes/ItemPickUp.tscn")
 var first_load := true
 
 func _ready() -> void:
 	add_to_group("world")
 	load_area("res://Scenes/Areas/Home.tscn", "BedSpawn")
+	inventory_ui.drop_item_to_world.connect(_on_item_dropped_from_inventory)
 
+func _on_item_dropped_from_inventory(item: InvItem, amount: int) -> void:
+	print("Dropping item:", item.name, "amount:", amount)
+	var pickup := item_scene.instantiate()
+	pickup.item = item
+	pickup.amount = amount
+
+	var player := get_tree().get_first_node_in_group("player")
+	if player:
+		pickup.global_position = player.global_position + Vector2(0, 16)
+	else:
+		print("No player in group 'player'!")
+		pickup.global_position = Vector2.ZERO
+
+	add_child(pickup)
 
 func load_area(scene_path: String, spawn_id: String) -> void:
 	if first_load:
