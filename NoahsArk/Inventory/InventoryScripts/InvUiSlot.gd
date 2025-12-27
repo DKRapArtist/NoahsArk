@@ -52,3 +52,7 @@ func set_hotkey_text(text: String) -> void:
 	if hotkey_label:
 		hotkey_label.text = text
 		hotkey_label.visible = text != ""
+
+func set_hotkey_color(color: Color) -> void:
+	if hotkey_label:
+		hotkey_label.modulate = color

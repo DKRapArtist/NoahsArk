@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwjcltlvvv3sh"]
+[gd_scene load_steps=6 format=3 uid="uid://dwjcltlvvv3sh"]
 
 [ext_resource type="Script" uid="uid://ckox3i4862uu1" path="res://Scripts/World.gd" id="1_5nsto"]
 [ext_resource type="PackedScene" uid="uid://bg60q61fxbuyh" path="res://Scenes/Player.tscn" id="1_j0p05"]
 [ext_resource type="PackedScene" uid="uid://creebnybkq5g7" path="res://Inventory/InventoryScenes/InventoryUI.tscn" id="4_gjpho"]
+[ext_resource type="PackedScene" uid="uid://c0xgbc86q818s" path="res://Inventory/Hotbar/Hotbar Scenes/HotbarUI.tscn" id="4_p70al"]
+[ext_resource type="Resource" uid="uid://fvmnrqbmwkx4" path="res://Inventory/PlayerInventory.tres" id="5_p70al"]
 
 [node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_5nsto")
@@ -14,7 +16,14 @@ script = ExtResource("1_5nsto")
 [node name="Inventory" type="CanvasLayer" parent="."]
 
 [node name="InventoryUI" parent="Inventory" instance=ExtResource("4_gjpho")]
-offset_left = 105.0
+offset_left = 89.0
 offset_top = 71.0
-offset_right = 105.0
+offset_right = 89.0
 offset_bottom = 71.0
+
+[node name="HotBarUI" parent="Inventory" instance=ExtResource("4_p70al")]
+offset_left = 95.448
+offset_top = 228.784
+offset_right = 118.79199
+offset_bottom = 238.07199
+inv = ExtResource("5_p70al")

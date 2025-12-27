@@ -114,9 +114,10 @@ func try_pickup() -> void:
 	# 3) Finish
 	if remaining <= 0:
 		print("Picked up", amount, item.name)
-		inv_ui.update_slots()
+		inv.notify_changed()
+
 		queue_free()
 	else:
 		amount = remaining
-		inv_ui.update_slots()
+		inv.notify_changed()
 		print("Inventory full; still", remaining, "of", item.name, "left on ground")

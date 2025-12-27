@@ -8,6 +8,7 @@ extends CharacterBody2D
 var last_direction: String = "Down" # "Front", "Back", "Left", "Right"
 var hold_time: float = 0.0
 var last_input_dir: Vector2 = Vector2.ZERO
+var active_hotbar_index: int = -1
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -57,3 +58,46 @@ func _update_animation(input_dir: Vector2) -> void:
 
 func on_hotbar_item_selected(selected_item: InvItem, index: int) -> void:
 	print("Player selected from hotbar:", selected_item.name, "slot", index)
+
+func select_hotbar_slot(index: int) -> void:
+	if index < 0 or index >= 10:
+		return
+
+	var slot := inv.slots[index]
+	if slot == null or slot.item == null:
+		return
+
+	active_hotbar_index = index
+
+	var hotbar := get_tree().get_first_node_in_group("hotbar_ui")
+	if hotbar:
+		hotbar.set_active_slot(index)
+
+	var inv_ui := get_tree().get_first_node_in_group("inventory_ui")
+	if inv_ui:
+		inv_ui.set_active_hotbar(index)
+
+	on_hotbar_item_selected(slot.item, index)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if Input.is_action_just_pressed("hotbar_1"):
+			select_hotbar_slot(0)
+		elif Input.is_action_just_pressed("hotbar_2"):
+			select_hotbar_slot(1)
+		elif Input.is_action_just_pressed("hotbar_3"):
+			select_hotbar_slot(2)
+		elif Input.is_action_just_pressed("hotbar_4"):
+			select_hotbar_slot(3)
+		elif Input.is_action_just_pressed("hotbar_5"):
+			select_hotbar_slot(4)
+		elif Input.is_action_just_pressed("hotbar_6"):
+			select_hotbar_slot(5)
+		elif Input.is_action_just_pressed("hotbar_7"):
+			select_hotbar_slot(6)
+		elif Input.is_action_just_pressed("hotbar_8"):
+			select_hotbar_slot(7)
+		elif Input.is_action_just_pressed("hotbar_9"):
+			select_hotbar_slot(8)
+		elif Input.is_action_just_pressed("hotbar_0"):
+			select_hotbar_slot(9)
