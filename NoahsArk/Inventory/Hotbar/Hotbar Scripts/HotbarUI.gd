@@ -1,5 +1,5 @@
 extends Control
-class_name HotbarUI
+class_name HotBarUI
 
 @export var inv: Inv
 @onready var slots := $Background/GridContainer.get_children()

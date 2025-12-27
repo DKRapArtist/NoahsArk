@@ -101,3 +101,25 @@ func _input(event: InputEvent) -> void:
 			select_hotbar_slot(8)
 		elif Input.is_action_just_pressed("hotbar_0"):
 			select_hotbar_slot(9)
+
+func use_active_item():
+	if active_hotbar_index == -1:
+		return
+
+	var slot := inv.slots[active_hotbar_index]
+	if slot == null or slot.item == null:
+		return
+
+	var selected_item := slot.item
+
+	var space := get_world_2d().direct_space_state
+	var query := PhysicsPointQueryParameters2D.new()
+	query.position = global_position
+	query.collide_with_areas = true
+
+	var results := space.intersect_point(query)
+
+	for hit in results:
+		if hit.collider.has_method("interact"):
+			hit.collider.interact(selected_item)
+			break
