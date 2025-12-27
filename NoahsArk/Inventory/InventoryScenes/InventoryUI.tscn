@@ -6,18 +6,24 @@
 
 [node name="InventoryUI" type="Control" groups=["inventory_ui"]]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.035
+anchor_right = 0.56200004
+anchor_bottom = 0.47200003
+offset_left = -17.92
+offset_right = 0.25598145
+offset_bottom = 0.06399536
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pbufk")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 362.49997
+offset_bottom = 168.74998
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_4h62o")
+expand_mode = 1
+stretch_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="TextureRect"]
 layout_mode = 0

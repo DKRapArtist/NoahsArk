@@ -1,4 +1,5 @@
 extends Control
+class_name InventoryUI
 
 signal drop_item_to_world(item: InvItem, amount: int)
 
@@ -9,6 +10,7 @@ signal drop_item_to_world(item: InvItem, amount: int)
 var is_open = false
 var picked_slot_index: int = -1  # -1 = nothing in hand
 var is_dragging: bool = false
+var active_hotbar_index: int = -1
 
 func _ready() -> void:
 	slots.clear()
@@ -47,6 +49,30 @@ func update_slots() -> void:
 			slot_data = inv.slots[i] as InvSlot
 
 		ui_slot.update(slot_data)
+
+		# Hotkey numbers only on first 10 slots (0–9)
+		if i == 0:
+			ui_slot.set_hotkey_text("1")
+		elif i == 1:
+			ui_slot.set_hotkey_text("2")
+		elif i == 2:
+			ui_slot.set_hotkey_text("3")
+		elif i == 3:
+			ui_slot.set_hotkey_text("4")
+		elif i == 4:
+			ui_slot.set_hotkey_text("5")
+		elif i == 5:
+			ui_slot.set_hotkey_text("6")
+		elif i == 6:
+			ui_slot.set_hotkey_text("7")
+		elif i == 7:
+			ui_slot.set_hotkey_text("8")
+		elif i == 8:
+			ui_slot.set_hotkey_text("9")
+		elif i == 9:
+			ui_slot.set_hotkey_text("0")
+		else:
+			ui_slot.set_hotkey_text("")
 
 func open():
 	visible = true
@@ -131,12 +157,49 @@ func drop_held_item_to_world() -> void:
 	update_slots()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not is_open:
+	# Mouse release logic should stay gated by is_open
+	if is_open:
+		if event is InputEventMouseButton \
+		and event.button_index == MOUSE_BUTTON_LEFT \
+		and event.is_pressed() == false:
+			if picked_slot_index != -1:
+				drop_held_item_to_world()
+
+	# Hotbar keys should work regardless of inventory visibility
+	if event.is_pressed():
+		if Input.is_action_just_pressed("hotbar_1"):
+			_use_hotbar_slot(1)
+		elif Input.is_action_just_pressed("hotbar_2"):
+			_use_hotbar_slot(2)
+		elif Input.is_action_just_pressed("hotbar_3"):
+			_use_hotbar_slot(3)
+		elif Input.is_action_just_pressed("hotbar_4"):
+			_use_hotbar_slot(4)
+		elif Input.is_action_just_pressed("hotbar_5"):
+			_use_hotbar_slot(5)
+		elif Input.is_action_just_pressed("hotbar_6"):
+			_use_hotbar_slot(6)
+		elif Input.is_action_just_pressed("hotbar_7"):
+			_use_hotbar_slot(7)
+		elif Input.is_action_just_pressed("hotbar_8"):
+			_use_hotbar_slot(8)
+		elif Input.is_action_just_pressed("hotbar_9"):
+			_use_hotbar_slot(9)
+		elif Input.is_action_just_pressed("hotbar_0"):
+			_use_hotbar_slot(0)
+
+func _use_hotbar_slot(slot_index: int) -> void:
+	if slot_index < 0 or slot_index >= inv.slots.size():
 		return
 
-	if event is InputEventMouseButton \
-	and event.button_index == MOUSE_BUTTON_LEFT \
-	and event.is_pressed() == false:
-		# Mouse released outside UI (slots didn’t handle it)
-		if picked_slot_index != -1:
-			drop_held_item_to_world()
+	var slot: InvSlot = inv.slots[slot_index]
+	if slot == null or slot.item == null or slot.amount <= 0:
+		return
+
+	active_hotbar_index = slot_index
+	print("Hotbar slot", slot_index, "selected:", slot.item.name)
+
+	# Example: call a method on the player to equip/use
+	var player := get_tree().get_first_node_in_group("player")
+	if player and player.has_method("on_hotbar_item_selected"):
+		player.on_hotbar_item_selected(slot.item, slot_index)

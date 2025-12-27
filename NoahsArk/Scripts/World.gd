@@ -13,9 +13,13 @@ func _ready() -> void:
 
 func _on_item_dropped_from_inventory(item: InvItem, amount: int) -> void:
 	print("Dropping item:", item.name, "amount:", amount)
-	var pickup := item_scene.instantiate()
+	var pickup := item_scene.instantiate() as ItemPickup
 	pickup.item = item
 	pickup.amount = amount
+
+	# Dropped by player -> wait 3 seconds before it can be picked up
+	pickup.use_auto_pickup_delay = true
+	pickup.auto_pickup_time = 3.0
 
 	var player := get_tree().get_first_node_in_group("player")
 	if player:

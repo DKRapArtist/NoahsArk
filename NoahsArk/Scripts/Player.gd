@@ -37,12 +37,13 @@ func _update_direction(input_dir: Vector2) -> void:
 	if input_dir == Vector2.ZERO:
 		return
 
-	if abs(input_dir.x) > abs(input_dir.y):
-		if input_dir.x < 0:
-			last_direction = "Left"
-		else:
-			last_direction = "Right"
+	# Prioritize horizontal for diagonals
+	if input_dir.x < 0:
+		last_direction = "Left"
+	elif input_dir.x > 0:
+		last_direction = "Right"
 	else:
+		# No horizontal input -> use vertical
 		if input_dir.y > 0:
 			last_direction = "Down"
 		else:
@@ -50,8 +51,9 @@ func _update_direction(input_dir: Vector2) -> void:
 
 func _update_animation(input_dir: Vector2) -> void:
 	if input_dir == Vector2.ZERO or hold_time < move_hold_threshold:
-		# Not moving yet → idle in last direction
 		anim.play("Idle" + last_direction)
 	else:
-		# Moving → walk in last direction
 		anim.play("Walk" + last_direction)
+
+func on_hotbar_item_selected(selected_item: InvItem, index: int) -> void:
+	print("Player selected from hotbar:", selected_item.name, "slot", index)

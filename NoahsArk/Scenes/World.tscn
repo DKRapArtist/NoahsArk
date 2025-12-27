@@ -14,7 +14,7 @@ script = ExtResource("1_5nsto")
 [node name="Inventory" type="CanvasLayer" parent="."]
 
 [node name="InventoryUI" parent="Inventory" instance=ExtResource("4_gjpho")]
-offset_left = 64.0
-offset_top = 56.0
-offset_right = 64.0
-offset_bottom = 56.0
+offset_left = 105.0
+offset_top = 71.0
+offset_right = 105.0
+offset_bottom = 71.0
