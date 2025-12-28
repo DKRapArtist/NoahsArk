@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=4 uid="uid://dvmiixnjbclps"]
+[gd_scene load_steps=19 format=4 uid="uid://dvmiixnjbclps"]
 
+[ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scripts/Areas/StartingArea.gd" id="1_k4x5e"]
 [ext_resource type="Texture2D" uid="uid://cdbbqwxe0oi2q" path="res://Assets/TileSets/Home Made Assets/Exported/HouseInt.png" id="1_qk4ws"]
 [ext_resource type="Script" uid="uid://1ydq6hngbqq0" path="res://Scripts/Exits/Exits.gd" id="2_nc2ua"]
 [ext_resource type="Script" uid="uid://c223dphhm6648" path="res://Scripts/SpawnPoints/SpawnPoint.gd" id="4_tyggk"]
@@ -1346,6 +1347,7 @@ tool_type = "axe"
 metadata/_custom_type_script = "uid://dohcr3jcw0bv6"
 
 [node name="Home" type="Node2D"]
+script = ExtResource("1_k4x5e")
 
 [node name="TileMapLayers" type="Node2D" parent="."]
 

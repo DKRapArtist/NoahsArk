@@ -13,6 +13,10 @@ func _ready():
 		push_error("HotbarUI.inv not assigned")
 		return
 
+	# Make sure each hotbar SlotUI has the correct index
+	for i in slots.size():
+		slots[i].index = i
+
 	inv.inventory_changed.connect(update_hotbar)
 
 	var inv_ui := get_tree().get_first_node_in_group("inventory_ui")

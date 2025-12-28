@@ -2,14 +2,18 @@ extends Node2D
 class_name World
 
 @onready var current_area := $CurrentArea
-@onready var inventory_ui := $Inventory/InventoryUI
+@onready var inventory_ui := $UIRoot/InventoryUI
 @onready var item_scene := preload("res://PickUps/PickUpScenes/ItemPickUp.tscn")
 var first_load := true
 
 func _ready() -> void:
 	add_to_group("world")
 	load_area("res://Scenes/Areas/Home.tscn", "BedSpawn")
-	inventory_ui.drop_item_to_world.connect(_on_item_dropped_from_inventory)
+	inventory_ui = get_tree().get_first_node_in_group("inventory_ui") as InventoryUI
+	if inventory_ui:
+		inventory_ui.drop_item_to_world.connect(_on_item_dropped_from_inventory)
+	else:
+		push_error("World: InventoryUI not found in group 'inventory_ui'")
 
 func _on_item_dropped_from_inventory(item: InvItem, amount: int) -> void:
 	print("Dropping item:", item.name, "amount:", amount)

@@ -160,12 +160,3 @@ layout_mode = 2
 
 [node name="InvUISlot30" parent="TextureRect/GridContainer2" instance=ExtResource("3_4h62o")]
 layout_mode = 2
-
-[node name="DragIcon" type="TextureRect" parent="."]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-stretch_mode = 3

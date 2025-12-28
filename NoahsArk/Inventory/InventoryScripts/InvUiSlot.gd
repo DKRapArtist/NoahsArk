@@ -1,4 +1,3 @@
-# SlotUI.gd (same file as above)
 extends Panel
 
 @export var index: int = -1
@@ -19,10 +18,7 @@ func _gui_input(event: InputEvent) -> void:
 		_on_left_click()
 
 func _on_left_click() -> void:
-	var inv_ui := get_parent().get_parent().get_parent() as Control
-	# Adjust the path above so it points to your inventory Control node.
-	# You can also export a NodePath instead of using get_parent() chains.
-
+	var inv_ui := get_tree().get_first_node_in_group("inventory_ui") as InventoryUI
 	if inv_ui == null:
 		return
 
@@ -32,7 +28,7 @@ func update(slot: InvSlot):
 	if slot == null or slot.item == null or slot.amount <= 0:
 		item_display.visible = false
 		amount_text.visible = false
-		amount_text.text = ""   # important: clear old number
+		amount_text.text = ""
 	else:
 		item_display.visible = true
 		item_display.texture = slot.item.texture
@@ -42,7 +38,7 @@ func update(slot: InvSlot):
 			amount_text.text = str(slot.amount)
 		else:
 			amount_text.visible = false
-			amount_text.text = ""   # keep text in sync
+			amount_text.text = ""
 
 func set_item_visible(show_item: bool) -> void:
 	item_display.visible = show_item

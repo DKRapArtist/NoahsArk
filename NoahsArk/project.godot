@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.5", "Mobile")
 [autoload]
 
 TransitionScene="*res://Scenes/Transitions/TransitionScene.tscn"
+MusicManagerGlobal="*res://Scripts/Globals/MusicManagerGlobal.gd"
 
 [display]
 

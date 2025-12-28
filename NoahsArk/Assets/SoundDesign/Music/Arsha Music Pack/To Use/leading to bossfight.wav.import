@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c6btkygo4t072"
+path="res://.godot/imported/leading to bossfight.wav-a1de9960139b46fbd465ebbafb4811c6.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Music/Arsha Music Pack/To Use/leading to bossfight.wav"
+dest_files=["res://.godot/imported/leading to bossfight.wav-a1de9960139b46fbd465ebbafb4811c6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

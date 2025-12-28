@@ -1,5 +1,6 @@
 [gd_scene load_steps=49 format=4 uid="uid://btrhhyiun1g4r"]
 
+[ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scripts/Areas/StartingArea.gd" id="1_ejlk6"]
 [ext_resource type="Texture2D" uid="uid://iehyyh7pqbn6" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/trees & stuff.png" id="2_csbud"]
 [ext_resource type="Texture2D" uid="uid://bf4xnmcvser75" path="res://Assets/TileSets/pixel 16 woods v2.0/summer/summer_tileset.png" id="2_d0cm5"]
 [ext_resource type="Texture2D" uid="uid://crtkccgfck1i8" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/tilesetV2.png" id="2_e16jf"]
@@ -15,8 +16,6 @@
 [ext_resource type="Resource" uid="uid://cu5b6t3721kk4" path="res://Inventory/InventoryItems/Orb.tres" id="13_euaas"]
 [ext_resource type="Resource" uid="uid://ge7k16gxtmrw" path="res://Inventory/InventoryItems/Cube.tres" id="13_tv7hm"]
 [ext_resource type="Resource" uid="uid://c2fn0k7f2blgv" path="res://Inventory/InventoryItems/Wood.tres" id="15_gsau2"]
-
-[sub_resource type="GDScript" id="GDScript_pb6dk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e16jf"]
 size = Vector2(620, 540)
@@ -5959,7 +5958,7 @@ size = Vector2(16, 24)
 
 [node name="StartingArea" type="Node2D"]
 texture_filter = 1
-script = SubResource("GDScript_pb6dk")
+script = ExtResource("1_ejlk6")
 
 [node name="CameraBounds" type="Node2D" parent="."]
 visible = false

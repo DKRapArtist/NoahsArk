@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="2021.01.13" orientation="orthogonal" renderorder="right-down" width="20" height="12" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="1">
+ <tileset firstgid="1" source="royal garden.tsx"/>
+ <tileset firstgid="1025" source="bonus summer grass and dirt.tsx"/>
+ <layer id="1" name="Layer 1" width="20" height="12">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAAuUIAFKKHiiAS9IaJnFwZmAGOJp3KAcSVBQw/+71fj+4OfDV0j98oph9kPn2to2k37jCunbX4AUnC01bKxH4xz2cxtSxa1HtxRGYpkxAFBFJappzziQ84gQR9OiBeMB0GRoPB3e4CgsFcEhjV+INDH+OEfm0Wit2Slm1c3zgyzsCTagBvRQV01bWYAJCQ2c7EsARgKSYAJlQYLCJLM39O9Ne4eg9t3gugTy/TseP0rO1D7PlMQ3ckG4P8PUdH0VxRWyyCcIvCd1Kv25yk2pjsjfBLiDz8XvE6qXuDX3hmaVxon+yRdiB9f8HOtP7A/EgLOMrzlX0tOyZXeVzHHplAoepFnvJ3m6UJ4ap6eT8zmd6Az13jKZzfwFO9pvMh1YB
+  </data>
+ </layer>
+ <layer id="2" name="Layer 2" width="20" height="12">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAAhUJACaRKSxQV5YxoBxEOZ3NTnpkbKedqr6lt80mp/L4v8RzXCPI4QIAY++XhCkMj0KRKRoAHQAgAEDXSzjOSV+YcpSfVI9601N4BY/gA7denfoUu0aGLrSOx/E2nsZ1njOI9zxL5jGHmXgSj/QiHvRd3nKRh9Sc5rp4Fq8ixV9GT/QaPEwQ3sEz+HOfZTyBA19yGHCAl/5QcpLzfOfM6KKzfAXj5jZVQP5xhgM1IFCCUlXlA9MM/MFhonSHwSYl8icI/Nc/DcVKYAiBlQjgN/wWRGywS/7T2XzZuzezdjH++dgDmD/TIzsOHTtH8S7yglEsF9mZoQHcHO6Zm5bZfSaJANa6cU/LfEpLWyUkGE0jgHtwWgAjDt7zeWf2PNsRB2SgPDNl
+  </data>
+ </layer>
+ <layer id="4" name="Layer 3" width="20" height="12">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAAjUEAPQDACwBAEUBAF4zHAAAABoASgAAAEsAAAB8AAAAfQAAABYAAAAXAAAASAAAAEl6AAAAewAAABgAAAAZB/MlAcEAIqDBqqm0dj0DAAMLQzsPyhceEX4CLdsIxH/BL9rrBrjr9LBv5RWY+xnZXFgmH3eX2zKu+UQ9g0KPSWIy6UennbN5dAcK
+  </data>
+ </layer>
+</map>
