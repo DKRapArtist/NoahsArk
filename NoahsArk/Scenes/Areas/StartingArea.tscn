@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://btrhhyiun1g4r"]
+[gd_scene load_steps=50 format=4 uid="uid://btrhhyiun1g4r"]
 
 [ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scripts/Areas/StartingArea.gd" id="1_ejlk6"]
 [ext_resource type="Texture2D" uid="uid://iehyyh7pqbn6" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/trees & stuff.png" id="2_csbud"]
@@ -15,7 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://nwmgv5yu5145" path="res://PickUps/PickUpScenes/ItemPickUp.tscn" id="12_e16jf"]
 [ext_resource type="Resource" uid="uid://cu5b6t3721kk4" path="res://Inventory/InventoryItems/Orb.tres" id="13_euaas"]
 [ext_resource type="Resource" uid="uid://ge7k16gxtmrw" path="res://Inventory/InventoryItems/Cube.tres" id="13_tv7hm"]
-[ext_resource type="Resource" uid="uid://c2fn0k7f2blgv" path="res://Inventory/InventoryItems/Wood.tres" id="15_gsau2"]
+[ext_resource type="Resource" uid="uid://y1wr2u7jxkl4" path="res://Inventory/InventoryItems/Wood.tres" id="15_gsau2"]
+[ext_resource type="PackedScene" uid="uid://b2rh8trst3e4q" path="res://Resources/Trees/Log/Log.tscn" id="17_xciqf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e16jf"]
 size = Vector2(620, 540)
@@ -6081,3 +6082,7 @@ item = ExtResource("13_euaas")
 [node name="ItemPickup4" parent="Items" instance=ExtResource("12_e16jf")]
 position = Vector2(61, 35)
 item = ExtResource("15_gsau2")
+
+[node name="Log" parent="Items" instance=ExtResource("17_xciqf")]
+position = Vector2(221, -63)
+wood_item = ExtResource("15_gsau2")

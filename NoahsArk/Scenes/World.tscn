@@ -18,16 +18,18 @@ script = ExtResource("1_5nsto")
 script = ExtResource("3_45d1s")
 
 [node name="InventoryUI" parent="UIRoot" instance=ExtResource("4_gjpho")]
-offset_left = 89.0
-offset_top = 71.0
-offset_right = 89.0
-offset_bottom = 71.0
+offset_left = 114.07999
+offset_top = 84.00003
+offset_right = 114.08002
+offset_bottom = 84.00003
+scale = Vector2(0.8, 0.8)
 
 [node name="HotBarUI" parent="UIRoot" instance=ExtResource("4_p70al")]
-offset_left = 95.448
-offset_top = 228.784
-offset_right = 118.79199
-offset_bottom = 238.07199
+offset_left = 135.448
+offset_top = 248.784
+offset_right = 158.79199
+offset_bottom = 258.072
+scale = Vector2(0.7, 0.7)
 inv = ExtResource("5_p70al")
 
 [node name="DragIcon" type="TextureRect" parent="UIRoot"]

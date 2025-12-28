@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2rh8trst3e4q"]
+
+[ext_resource type="Script" uid="uid://b3cf1vjgqxxui" path="res://Resources/Trees/BaseTree/BaseTree.gd" id="1_bx0ve"]
+[ext_resource type="Texture2D" uid="uid://iehyyh7pqbn6" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/trees & stuff.png" id="2_sxye5"]
+[ext_resource type="Script" uid="uid://oky0rxxfjfk4" path="res://Resources/Trees/Log/HitArea.gd" id="3_sxye5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7mpki"]
+radius = 5.0
+height = 20.60611
+
+[node name="Log" type="Node2D"]
+script = ExtResource("1_bx0ve")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-176.423, 52.472)
+scale = Vector2(0.98098046, 1.0016667)
+texture = ExtResource("2_sxye5")
+region_enabled = true
+region_rect = Rect2(241.73529, 80.34955, 26.5112, 15.431885)
+
+[node name="Blocker" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blocker"]
+position = Vector2(-175, 52)
+rotation = -2.024582
+shape = SubResource("CapsuleShape2D_7mpki")
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_sxye5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(-175, 52)
+rotation = -2.024582
+shape = SubResource("CapsuleShape2D_7mpki")
