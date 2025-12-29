@@ -85,11 +85,10 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 
 func _move_buildings_to_world(node: Node) -> void:
 	for child in node.get_children():
-		if child is House:
-			var house := child
-			var global_pos = house.global_position
-			house.reparent(buildings_root)
-			house.global_position = global_pos
+		if child.is_in_group("houses"):
+			var global_pos = child.global_position
+			child.reparent(buildings_root)
+			child.global_position = global_pos
 		else:
 			_move_buildings_to_world(child)
 
