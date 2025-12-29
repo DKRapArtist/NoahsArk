@@ -11,10 +11,11 @@ class_name World
 
 var first_load := true
 
-
-func _ready() -> void:
+# ✅ MOVE GROUP REGISTRATION HERE
+func _enter_tree() -> void:
 	add_to_group("world")
 
+func _ready() -> void:
 	load_area("res://Scenes/Areas/Home.tscn", "BedSpawn")
 
 	inventory_ui = get_tree().get_first_node_in_group("inventory_ui") as InventoryUI

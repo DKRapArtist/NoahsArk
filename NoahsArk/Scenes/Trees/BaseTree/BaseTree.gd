@@ -27,17 +27,23 @@ var health := 0
 var target_alpha := 1.0
 
 # ===============================
-# SETUP
+# LIFECYCLE
 # ===============================
-func _ready():
+func _ready() -> void:
 	health = max_health
-	trigger.body_entered.connect(_on_body_entered)
-	trigger.body_exited.connect(_on_body_exited)
+
+	trigger.body_entered.connect(_on_canopy_entered)
+	trigger.body_exited.connect(_on_canopy_exited)
+
+	# ✅ Wait one frame before registering
+	if is_in_group("trees"):
+		await get_tree().process_frame
+		_register_tree()
 
 # ===============================
 # UPDATE
 # ===============================
-func _process(delta):
+func _process(delta: float) -> void:
 	canopy.modulate.a = lerp(
 		canopy.modulate.a,
 		target_alpha,
@@ -45,20 +51,17 @@ func _process(delta):
 	)
 
 # ===============================
-# INTERACTION ENTRY POINT
+# INTERACTION
 # ===============================
 func interact(tool: InvItem) -> void:
 	if tool == null:
 		return
-
 	if tool.item_type != InvItem.ItemType.TOOL:
 		return
-
 	if tool.tool_type != required_tool:
 		return
 
 	health -= tool.power
-	print("Tree HP:", health)
 
 	if health <= 0:
 		chop_down()
@@ -66,12 +69,12 @@ func interact(tool: InvItem) -> void:
 # ===============================
 # TREE DESTRUCTION
 # ===============================
-func chop_down():
+func chop_down() -> void:
 	for i in range(wood_amount):
-		spawn_wood()
+		_spawn_wood()
 	queue_free()
 
-func spawn_wood():
+func _spawn_wood() -> void:
 	if wood_item == null:
 		return
 
@@ -80,19 +83,36 @@ func spawn_wood():
 	pickup.amount = 1
 	pickup.use_auto_pickup_delay = false
 
-	get_tree().get_first_node_in_group("world").pickups_root.add_child(pickup)
-	pickup.global_position = drop_point.global_position + Vector2(
-		randf_range(-8, 8),
-		randf_range(-8, 8)
-	)
+	var world := get_tree().get_first_node_in_group("world")
+	if world:
+		world.pickups_root.add_child(pickup)
+		pickup.global_position = drop_point.global_position + Vector2(
+			randf_range(-8, 8),
+			randf_range(-8, 8)
+		)
 
 # ===============================
 # CANOPY FADE
 # ===============================
-func _on_body_entered(body: Node) -> void:
+func _on_canopy_entered(body: Node) -> void:
 	if body.is_in_group("player"):
 		target_alpha = FADE_ALPHA
 
-func _on_body_exited(body: Node) -> void:
+func _on_canopy_exited(body: Node) -> void:
 	if body.is_in_group("player"):
 		target_alpha = 1.0
+
+# ===============================
+# TREE REGISTRATION
+# ===============================
+func _register_tree() -> void:
+	var world := get_tree().get_first_node_in_group("world")
+	if world == null:
+		return
+
+	var trees_root := world.get_node_or_null("TreesRoot")
+	if trees_root == null:
+		return
+
+	if get_parent() != trees_root:
+		reparent(trees_root)

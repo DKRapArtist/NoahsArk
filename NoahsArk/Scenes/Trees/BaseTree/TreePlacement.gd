@@ -11,7 +11,6 @@ func replace_tree_tiles():
 		push_error("World not found")
 		return
 
-	var trees_root := world.get_node("TreesRoot")
 	var tile_size := tile_set.tile_size
 
 	for cell in get_used_cells():
@@ -26,7 +25,7 @@ func replace_tree_tiles():
 		var world_pos := global_transform * local_pos
 
 		var tree := tree_scene.instantiate()
-		trees_root.add_child(tree)
+		world.add_child(tree)                # ✅ IMPORTANT
 		tree.global_position = world_pos
 
 		erase_cell(cell)
