@@ -8,6 +8,8 @@ class_name BaseTree
 @onready var hit_area: Area2D = $HitArea
 @onready var trigger: Area2D = $CanopyTrigger
 @onready var drop_point: Marker2D = $DropPoint
+@onready var trunk: Sprite2D = $Trunk
+
 
 # ===============================
 # CONFIG
@@ -18,6 +20,12 @@ class_name BaseTree
 @export var wood_amount := 2
 @export var respawn_time := 10.0
 @export var can_respawn := true
+@export var shake_strength := 2.0
+@export var shake_duration := 0.08
+
+var _shake_time := 0.0
+var _canopy_original_pos := Vector2.ZERO
+var _trunk_original_pos := Vector2.ZERO
 
 const FADE_ALPHA := 0.35
 const FADE_SPEED := 8.0
@@ -34,10 +42,12 @@ var target_alpha := 1.0
 func _ready() -> void:
 	health = max_health
 
+	_canopy_original_pos = canopy.position
+	_trunk_original_pos = trunk.position
+	
 	trigger.body_entered.connect(_on_canopy_entered)
 	trigger.body_exited.connect(_on_canopy_exited)
 
-	# ✅ Wait one frame before registering
 	if is_in_group("trees"):
 		await get_tree().process_frame
 		_register_tree()
@@ -46,11 +56,27 @@ func _ready() -> void:
 # UPDATE
 # ===============================
 func _process(delta: float) -> void:
+	# Fade canopy
 	canopy.modulate.a = lerp(
 		canopy.modulate.a,
 		target_alpha,
 		delta * FADE_SPEED
 	)
+
+	# Shake visuals ONLY
+	if _shake_time > 0.0:
+		_shake_time -= delta
+
+		var offset := Vector2(
+			randf_range(-shake_strength, shake_strength),
+			randf_range(-shake_strength, shake_strength)
+		)
+
+		canopy.position = _canopy_original_pos + offset
+		trunk.position = _trunk_original_pos + offset * 0.5
+	else:
+		canopy.position = _canopy_original_pos
+		trunk.position = _trunk_original_pos
 
 # ===============================
 # INTERACTION
@@ -64,6 +90,7 @@ func interact(tool: InvItem) -> void:
 		return
 
 	health -= tool.power
+	_start_shake()
 
 	if health <= 0:
 		chop_down()
@@ -128,3 +155,6 @@ func _register_tree() -> void:
 
 	if get_parent() != trees_root:
 		reparent(trees_root)
+
+func _start_shake() -> void:
+	_shake_time = shake_duration
