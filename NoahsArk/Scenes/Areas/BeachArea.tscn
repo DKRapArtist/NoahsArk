@@ -6357,6 +6357,7 @@ size = Vector2(12, 21)
 size = Vector2(26, 27)
 
 [node name="Beach" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_bhb5r")
 
 [node name="CameraBounds" type="Node2D" parent="."]

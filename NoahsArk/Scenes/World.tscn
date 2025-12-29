@@ -8,11 +8,24 @@
 [ext_resource type="Resource" uid="uid://fvmnrqbmwkx4" path="res://Inventory/PlayerInventory.tres" id="5_p70al"]
 
 [node name="World" type="Node2D" groups=["world"]]
+y_sort_enabled = true
 script = ExtResource("1_5nsto")
 
-[node name="Player" parent="." instance=ExtResource("1_j0p05")]
+[node name="AreaRoot" type="Node2D" parent="."]
 
-[node name="CurrentArea" type="Node2D" parent="."]
+[node name="CurrentArea" type="Node2D" parent="AreaRoot"]
+
+[node name="TreesRoot" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="BuildingsRoot" type="Node2D" parent="."]
+
+[node name="PropsRoot" type="Node2D" parent="."]
+
+[node name="PickupsRoot" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_j0p05")]
+y_sort_enabled = true
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
 script = ExtResource("3_45d1s")

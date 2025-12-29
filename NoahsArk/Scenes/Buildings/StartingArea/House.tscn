@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://cg1k264j31a0e"]
+
+[ext_resource type="Texture2D" uid="uid://cq1yg4guh38yg" path="res://Assets/TileSets/Home Made Assets/House.png" id="1_jyin2"]
+[ext_resource type="Script" uid="uid://gx42ny37i6ew" path="res://Scripts/Buildings/StartingArea/House.gd" id="1_wh3aq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wh3aq"]
+size = Vector2(14.5, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxx60"]
+size = Vector2(29.5, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyin2"]
+size = Vector2(70, 63)
+
+[node name="House" type="Node2D"]
+script = ExtResource("1_wh3aq")
+
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(0, -25.455)
+texture = ExtResource("1_jyin2")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 60.46949, 96, 25.718086)
+
+[node name="Roof" type="Sprite2D" parent="."]
+position = Vector2(0, -86.7)
+texture = ExtResource("1_jyin2")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, -1.2067585, 96, 61.676247)
+
+[node name="DoorMat" type="Sprite2D" parent="."]
+position = Vector2(47.9, 0)
+texture = ExtResource("1_jyin2")
+centered = false
+region_enabled = true
+region_rect = Rect2(47.877094, 86.18758, 16.497906, 9.898865)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(71, -13)
+shape = SubResource("RectangleShape2D_wh3aq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(33, -14)
+shape = SubResource("RectangleShape2D_nxx60")
+
+[node name="RoofTrigger" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoofTrigger"]
+position = Vector2(49, -55.5)
+shape = SubResource("RectangleShape2D_jyin2")

@@ -20,6 +20,8 @@ var has_hit_this_swing := false
 # MOVEMENT
 # --------------------
 func _physics_process(delta: float) -> void:
+	if is_on_wall():
+		print("PLAYER IS TOUCHING A WALL")
 	if is_swinging:
 		velocity = Vector2.ZERO
 		move_and_slide()

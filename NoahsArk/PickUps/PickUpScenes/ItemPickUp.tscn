@@ -5,6 +5,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_3djdk"]
 
 [node name="ItemPickup" type="Area2D"]
+collision_layer = 8
 script = ExtResource("1_h5iv1")
 auto_pickup_time = 0.0
 use_auto_pickup_delay = false

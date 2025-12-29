@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2rh8trst3e4q"]
+
+[ext_resource type="Script" uid="uid://b3cf1vjgqxxui" path="res://Resources/Trees/BaseTree/BaseTree.gd" id="1_hcdk0"]
+[ext_resource type="Texture2D" uid="uid://iehyyh7pqbn6" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/trees & stuff.png" id="2_7mpki"]
+[ext_resource type="Resource" uid="uid://y1wr2u7jxkl4" path="res://Inventory/InventoryItems/Wood.tres" id="2_ijmjp"]
+[ext_resource type="Script" uid="uid://oky0rxxfjfk4" path="res://Resources/Trees/BaseTree/HitArea.gd" id="3_ijmjp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mpki"]
+size = Vector2(19, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijmjp"]
+size = Vector2(32, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcdk0"]
+size = Vector2(32, 20)
+
+[node name="BaseTree" type="Node2D"]
+script = ExtResource("1_hcdk0")
+wood_item = ExtResource("2_ijmjp")
+wood_amount = 5
+
+[node name="Trunk" type="Sprite2D" parent="."]
+texture = ExtResource("2_7mpki")
+region_enabled = true
+region_rect = Rect2(16.450468, 128.67548, 31.661085, 16.648071)
+
+[node name="Canopy" type="Sprite2D" parent="."]
+position = Vector2(0, -29)
+texture = ExtResource("2_7mpki")
+region_enabled = true
+region_rect = Rect2(15.515637, 87.117455, 32.97483, 41.55802)
+
+[node name="Blocker" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blocker"]
+position = Vector2(0.5, -2)
+shape = SubResource("RectangleShape2D_7mpki")
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_ijmjp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_ijmjp")
+
+[node name="CanopyTrigger" type="Area2D" parent="."]
+z_index = 1
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanopyTrigger"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_hcdk0")
+
+[node name="DropPoint" type="Marker2D" parent="."]
+
+[connection signal="body_entered" from="CanopyTrigger" to="." method="_on_canopy_trigger_body_entered"]
+[connection signal="body_exited" from="CanopyTrigger" to="." method="_on_canopy_trigger_body_exited"]
