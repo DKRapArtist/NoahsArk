@@ -128,3 +128,23 @@ func _find_spawn_in_area(area: Node, spawn_id: String) -> SpawnPoint:
 				return found
 
 	return null
+
+func request_tree_respawn(scene_path: String, spawn_pos: Vector2, delay: float) -> void:
+	var timer := Timer.new()
+	timer.one_shot = true
+	timer.wait_time = delay
+	add_child(timer)
+
+	timer.timeout.connect(func():
+		if not FileAccess.file_exists(scene_path):
+			return
+
+		var tree_scene := load(scene_path)
+		var tree = tree_scene.instantiate()
+		trees_root.add_child(tree)
+		tree.global_position = spawn_pos
+
+		timer.queue_free()
+	)
+
+	timer.start()

@@ -11,8 +11,8 @@ size = Vector2(19, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ijmjp"]
 size = Vector2(32, 34.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcdk0"]
-size = Vector2(87, 53)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnv35"]
+size = Vector2(36, 53)
 
 [node name="BaseTree" type="Node2D" groups=["trees"]]
 script = ExtResource("1_hcdk0")
@@ -53,6 +53,6 @@ collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanopyTrigger"]
 position = Vector2(0, -18)
-shape = SubResource("RectangleShape2D_hcdk0")
+shape = SubResource("RectangleShape2D_nnv35")
 
 [node name="DropPoint" type="Marker2D" parent="."]

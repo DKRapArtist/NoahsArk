@@ -16,6 +16,8 @@ class_name BaseTree
 @export var required_tool := "axe"
 @export var wood_item: InvItem
 @export var wood_amount := 2
+@export var respawn_time := 10.0
+@export var can_respawn := true
 
 const FADE_ALPHA := 0.35
 const FADE_SPEED := 8.0
@@ -70,8 +72,18 @@ func interact(tool: InvItem) -> void:
 # TREE DESTRUCTION
 # ===============================
 func chop_down() -> void:
+	if can_respawn:
+		var world := get_tree().get_first_node_in_group("world")
+		if world:
+			world.request_tree_respawn(
+				scene_file_path,
+				global_position,
+				respawn_time
+			)
+
 	for i in range(wood_amount):
 		_spawn_wood()
+
 	queue_free()
 
 func _spawn_wood() -> void:
