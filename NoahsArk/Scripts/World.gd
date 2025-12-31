@@ -2,9 +2,7 @@ extends Node2D
 class_name World
 
 @onready var current_area := $AreaRoot/CurrentArea
-@onready var trees_root: Node2D = $TreesRoot
-@onready var buildings_root: Node2D = $BuildingsRoot
-@onready var pickups_root: Node2D = $PickupsRoot
+@onready var pickups_root: Node2D = $YSort/PickupsRoot
 @onready var inventory_ui := $UIRoot/InventoryUI
 
 @onready var item_scene := preload("res://PickUps/PickUpScenes/ItemPickUp.tscn")
@@ -54,13 +52,12 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 	for child in current_area.get_children():
 		child.queue_free()
 
-	# Remove trees
-	for tree in trees_root.get_children():
-		tree.queue_free()
-
-	# Remove buildings
-	for building in buildings_root.get_children():
-		building.queue_free()
+	# Remove world objects from YSort (trees + houses)
+	for node in $YSort.get_children():
+		if node.is_in_group("trees") \
+		or node.is_in_group("house_base") \
+		or node.is_in_group("house_roof"):
+			node.queue_free()
 
 	await get_tree().process_frame
 
@@ -70,7 +67,7 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 
 	await get_tree().process_frame
 
-	# Move buildings out of area and into world
+	# Move buildings (base + roof) into YSort
 	_move_buildings_to_world(area)
 
 	var player := get_tree().get_first_node_in_group("player")
@@ -83,13 +80,22 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 	else:
 		push_warning("Spawn not found in area: " + spawn_id)
 
-
 func _move_buildings_to_world(node: Node) -> void:
 	for child in node.get_children():
 		if child.is_in_group("houses"):
-			var global_pos = child.global_position
-			child.reparent(buildings_root)
-			child.global_position = global_pos
+			var base := child.get_node("HouseBase")
+			var roof := child.get_node("HouseRoof")
+
+			var base_pos = base.global_position
+			var roof_pos = roof.global_position
+
+			base.reparent($YSort)
+			roof.reparent($YSort)
+
+			base.global_position = base_pos
+			roof.global_position = roof_pos
+
+			child.queue_free() # editor-only wrapper
 		else:
 			_move_buildings_to_world(child)
 
@@ -137,11 +143,13 @@ func request_tree_respawn(scene_path: String, spawn_pos: Vector2, delay: float) 
 
 	timer.timeout.connect(func():
 		if not FileAccess.file_exists(scene_path):
+			timer.queue_free()
 			return
 
 		var tree_scene := load(scene_path)
 		var tree = tree_scene.instantiate()
-		trees_root.add_child(tree)
+
+		$YSort.add_child(tree)
 		tree.global_position = spawn_pos
 
 		timer.queue_free()

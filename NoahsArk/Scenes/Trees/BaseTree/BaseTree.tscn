@@ -22,13 +22,13 @@ wood_amount = 5
 [node name="Trunk" type="Sprite2D" parent="."]
 texture = ExtResource("2_7mpki")
 region_enabled = true
-region_rect = Rect2(16.450468, 128.67548, 31.661085, 16.648071)
+region_rect = Rect2(16.450468, 129.00348, 31.661085, 16.320068)
 
 [node name="Canopy" type="Sprite2D" parent="."]
-position = Vector2(0, -29)
+position = Vector2(-0.28, -29.07)
 texture = ExtResource("2_7mpki")
 region_enabled = true
-region_rect = Rect2(15.515637, 87.117455, 32.97483, 41.55802)
+region_rect = Rect2(15.515637, 87.117455, 32.97483, 41.838493)
 
 [node name="Blocker" type="StaticBody2D" parent="."]
 collision_layer = 2

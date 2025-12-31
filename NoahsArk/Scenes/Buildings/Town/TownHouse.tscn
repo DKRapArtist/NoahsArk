@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://j3cmy3vub5li"]
 
-[ext_resource type="Script" uid="uid://gx42ny37i6ew" path="res://Scripts/Buildings/StartingArea/House.gd" id="1_t28rh"]
+[ext_resource type="Script" uid="uid://bp4ksamucxj6e" path="res://Scripts/Buildings/StartingArea/HouseRoof.gd" id="2_m8ms7"]
 [ext_resource type="Texture2D" uid="uid://3cu4sfqhbsg2" path="res://Assets/TileSets/Home Made Assets/UpgradedHouse.png" id="2_t28rh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t28rh"]
@@ -10,47 +10,51 @@ size = Vector2(74, 39.75)
 size = Vector2(73.375, 39.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p61qa"]
-size = Vector2(19.59375, 14)
+size = Vector2(19.59375, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g1psw"]
-size = Vector2(169.5, 71.25)
+size = Vector2(166, 80.1875)
 
 [node name="TownHouse" type="Node2D" groups=["houses"]]
-z_index = -1
-script = ExtResource("1_t28rh")
 
-[node name="Base" type="Sprite2D" parent="."]
+[node name="HouseBase" type="Node2D" parent="."]
+z_index = -1
+
+[node name="BaseSprite" type="Sprite2D" parent="HouseBase"]
 position = Vector2(0, -39.925)
 texture = ExtResource("2_t28rh")
 centered = false
 region_enabled = true
 region_rect = Rect2(28.956566, 73.55959, 166.09412, 49.060097)
 
-[node name="Roof" type="Sprite2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="HouseBase"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseBase/StaticBody2D"]
+position = Vector2(129, -20.125)
+shape = SubResource("RectangleShape2D_t28rh")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HouseBase/StaticBody2D"]
+position = Vector2(36, -20.125)
+shape = SubResource("RectangleShape2D_m8ms7")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="HouseBase/StaticBody2D"]
+position = Vector2(82.203125, -31.5)
+shape = SubResource("RectangleShape2D_p61qa")
+
+[node name="HouseRoof" type="Node2D" parent="."]
+script = ExtResource("2_m8ms7")
+
+[node name="RoofSprite" type="Sprite2D" parent="HouseRoof"]
 position = Vector2(-2.68, -115.205)
 texture = ExtResource("2_t28rh")
 centered = false
 region_enabled = true
 region_rect = Rect2(26.287746, -1.7976613, 170.78616, 75.357254)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 2
-collision_mask = 0
+[node name="RoofTrigger" type="Area2D" parent="HouseRoof"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(129, -20.125)
-shape = SubResource("RectangleShape2D_t28rh")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(36, -20.125)
-shape = SubResource("RectangleShape2D_m8ms7")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(82.203125, -33)
-shape = SubResource("RectangleShape2D_p61qa")
-
-[node name="RoofTrigger" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoofTrigger"]
-position = Vector2(83.25, -76.375)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseRoof/RoofTrigger"]
+position = Vector2(83, -80.09375)
 shape = SubResource("RectangleShape2D_g1psw")
