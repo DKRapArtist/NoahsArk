@@ -9,7 +9,9 @@ class_name World
 
 var first_load := true
 
-# ✅ MOVE GROUP REGISTRATION HERE
+# ===============================
+# LIFECYCLE
+# ===============================
 func _enter_tree() -> void:
 	add_to_group("world")
 
@@ -22,7 +24,9 @@ func _ready() -> void:
 	else:
 		push_error("World: InventoryUI not found in group 'inventory_ui'")
 
-
+# ===============================
+# INVENTORY DROP
+# ===============================
 func _on_item_dropped_from_inventory(item: InvItem, amount: int) -> void:
 	var pickup := item_scene.instantiate() as ItemPickup
 	pickup.item = item
@@ -39,7 +43,9 @@ func _on_item_dropped_from_inventory(item: InvItem, amount: int) -> void:
 
 	pickups_root.add_child(pickup)
 
-
+# ===============================
+# AREA LOADING
+# ===============================
 func load_area(scene_path: String, spawn_id: String) -> void:
 	if first_load:
 		first_load = false
@@ -80,6 +86,20 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 	else:
 		push_warning("Spawn not found in area: " + spawn_id)
 
+# ===============================
+# FENCE OCCLUDER SPAWNING (NEW)
+# ===============================
+func _spawn_fence_occluders(area: Node) -> void:
+	var tilemaps := area.find_children("*", "TileMap", true, false)
+	for tilemap in tilemaps:
+		for layer_index in tilemap.get_layers_count():
+			var layer = tilemap.get_layer_node(layer_index)
+			if layer != null and layer.has_method("spawn_fences"):
+				layer.spawn_fences()
+
+# ===============================
+# BUILDINGS
+# ===============================
 func _move_buildings_to_world(node: Node) -> void:
 	for child in node.get_children():
 		if child.is_in_group("houses"):
@@ -99,7 +119,9 @@ func _move_buildings_to_world(node: Node) -> void:
 		else:
 			_move_buildings_to_world(child)
 
-
+# ===============================
+# CAMERA LIMITS
+# ===============================
 func _set_camera_limits_from_area(player: Node, area: Node) -> void:
 	var cam: Camera2D = player.get_node_or_null("Camera2D")
 	if cam == null:
@@ -122,7 +144,9 @@ func _set_camera_limits_from_area(player: Node, area: Node) -> void:
 	cam.limit_top = int(center.y - half.y)
 	cam.limit_bottom = int(center.y + half.y)
 
-
+# ===============================
+# SPAWN POINT
+# ===============================
 func _find_spawn_in_area(area: Node, spawn_id: String) -> SpawnPoint:
 	for child in area.get_children():
 		if child is SpawnPoint and child.spawn_id == spawn_id:
@@ -135,6 +159,9 @@ func _find_spawn_in_area(area: Node, spawn_id: String) -> SpawnPoint:
 
 	return null
 
+# ===============================
+# TREE RESPAWN
+# ===============================
 func request_tree_respawn(scene_path: String, spawn_pos: Vector2, delay: float) -> void:
 	var timer := Timer.new()
 	timer.one_shot = true

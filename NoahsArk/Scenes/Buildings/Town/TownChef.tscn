@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://f3mhqwuyvsem"]
+
+[ext_resource type="Texture2D" uid="uid://cxgyx5urtr0vc" path="res://Assets/TileSets/Home Made Assets/TownChef.png" id="1_xpg7i"]
+[ext_resource type="Script" uid="uid://bp4ksamucxj6e" path="res://Scripts/Buildings/StartingArea/HouseRoof.gd" id="2_0hlbp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_324qf"]
+size = Vector2(51.5, 53.96875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wme3i"]
+size = Vector2(51, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b4d81"]
+size = Vector2(26.9375, 23.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bnxvr"]
+size = Vector2(135.25, 111)
+
+[node name="TownChef" type="Node2D" groups=["houses"]]
+
+[node name="HouseBase" type="Node2D" parent="."]
+z_index = -1
+
+[node name="BaseSprite" type="Sprite2D" parent="HouseBase"]
+position = Vector2(-3, -70)
+texture = ExtResource("1_xpg7i")
+centered = false
+region_enabled = true
+region_rect = Rect2(39.980503, 127, 128.48022, 54.015564)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="HouseBase"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseBase/StaticBody2D"]
+position = Vector2(99.25, -42.984375)
+shape = SubResource("RectangleShape2D_324qf")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HouseBase/StaticBody2D"]
+position = Vector2(22, -43)
+shape = SubResource("RectangleShape2D_wme3i")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="HouseBase/StaticBody2D"]
+position = Vector2(60.46875, -58.125)
+shape = SubResource("RectangleShape2D_b4d81")
+
+[node name="HouseRoof" type="Node2D" parent="."]
+script = ExtResource("2_0hlbp")
+
+[node name="RoofSprite" type="Sprite2D" parent="HouseRoof"]
+position = Vector2(-6, -181)
+texture = ExtResource("1_xpg7i")
+centered = false
+region_enabled = true
+region_rect = Rect2(37.01966, 15.939905, 133.98715, 111.0601)
+
+[node name="RoofTrigger" type="Area2D" parent="HouseRoof"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseRoof/RoofTrigger"]
+position = Vector2(60.375, -125.5)
+shape = SubResource("RectangleShape2D_bnxvr")

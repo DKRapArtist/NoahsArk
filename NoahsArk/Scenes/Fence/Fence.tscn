@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dibqusw4pf3rh"]
+
+[ext_resource type="Script" uid="uid://2ofxkgxisjla" path="res://Scripts/Fence/Fence.gd" id="1_lkhcs"]
+[ext_resource type="Texture2D" uid="uid://bedpdbh13ejt4" path="res://Assets/TileSets/Houses & Fences.png" id="2_lkhcs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ispi4"]
+size = Vector2(16, 16)
+
+[node name="MiddleFence" type="Node2D" groups=["fences"]]
+script = ExtResource("1_lkhcs")
+
+[node name="Top" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_lkhcs")
+region_enabled = true
+region_rect = Rect2(64, 208, 16, 16)
+
+[node name="FadeTrigger" type="Area2D" parent="."]
+z_index = 1
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FadeTrigger"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ispi4")
