@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bkv6hkdmsu1iy"]
 
 [ext_resource type="Texture2D" uid="uid://ca04drhexvc1f" path="res://Assets/TileSets/Home Made Assets/FishingShop.png" id="2_b7xcd"]
-[ext_resource type="Script" uid="uid://bp4ksamucxj6e" path="res://Scripts/Buildings/StartingArea/HouseRoof.gd" id="2_uju7s"]
+[ext_resource type="Script" uid="uid://bp4ksamucxj6e" path="res://Scenes/Areas/StartingArea/HouseRoof.gd" id="2_uju7s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wh3aq"]
 size = Vector2(14.5, 25)

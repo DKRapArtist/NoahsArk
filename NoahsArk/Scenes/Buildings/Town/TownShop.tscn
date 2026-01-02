@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://2kne4ng5evy2"]
 
-[ext_resource type="Script" uid="uid://bp4ksamucxj6e" path="res://Scripts/Buildings/StartingArea/HouseRoof.gd" id="2_j0myj"]
+[ext_resource type="Script" uid="uid://bp4ksamucxj6e" path="res://Scenes/Areas/StartingArea/HouseRoof.gd" id="2_j0myj"]
 [ext_resource type="Texture2D" uid="uid://ddis6v66umkt1" path="res://Assets/TileSets/Home Made Assets/TownShop.png" id="2_klt0l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_obfxp"]

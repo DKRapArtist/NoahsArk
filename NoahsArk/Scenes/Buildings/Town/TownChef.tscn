@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://f3mhqwuyvsem"]
 
 [ext_resource type="Texture2D" uid="uid://cxgyx5urtr0vc" path="res://Assets/TileSets/Home Made Assets/TownChef.png" id="1_xpg7i"]
-[ext_resource type="Script" uid="uid://bp4ksamucxj6e" path="res://Scripts/Buildings/StartingArea/HouseRoof.gd" id="2_0hlbp"]
+[ext_resource type="Script" uid="uid://bp4ksamucxj6e" path="res://Scenes/Areas/StartingArea/HouseRoof.gd" id="2_0hlbp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_324qf"]
 size = Vector2(51.5, 53.96875)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://6sr0sidpq2bm"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_nqcxk"]
+[ext_resource type="Texture2D" uid="uid://ctoml28pbrr8q" path="res://Assets/TileSets/fishing_full/Rods/GoodRod.png" id="2_lrc7r"]
+
+[resource]
+script = ExtResource("1_nqcxk")
+name = "GoodRod"
+texture = ExtResource("2_lrc7r")
+max_stack = 1
+amount = 0
+item_type = 1
+tool_type = "FishingRod"
+power = 2

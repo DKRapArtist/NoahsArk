@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://betjhpq3xnaui"]
 
 [ext_resource type="Texture2D" uid="uid://bedpdbh13ejt4" path="res://Assets/TileSets/Houses & Fences.png" id="2_jfom1"]
-[ext_resource type="Script" uid="uid://bp4ksamucxj6e" path="res://Scripts/Buildings/StartingArea/HouseRoof.gd" id="2_kpq3v"]
+[ext_resource type="Script" uid="uid://bp4ksamucxj6e" path="res://Scenes/Areas/StartingArea/HouseRoof.gd" id="2_kpq3v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wh3aq"]
 size = Vector2(18.25, 31.5)
