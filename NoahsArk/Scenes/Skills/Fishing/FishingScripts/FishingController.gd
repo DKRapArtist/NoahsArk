@@ -13,34 +13,40 @@ enum State { IDLE, WAITING, BITE_WINDOW }
 
 var state: State = State.IDLE
 var is_fishing := false
+var input_locked := false
 
 func _ready():
 	set_process_unhandled_input(true)
 	bite_timer.timeout.connect(_on_bite_timer_timeout)
 	bite_window_timer.timeout.connect(_on_bite_window_timeout)
-
-func _unhandled_input(event):
-	if _get_equipped_rod() == null:
-		return
 	
-	if not event.is_action_pressed("interact"):
+func _unhandled_input(_event):
+	if input_locked:
+		return
+
+	if not is_fishing:
+		return
+
+	if not Input.is_action_just_pressed("interact"):
 		return
 
 	match state:
-		State.IDLE:
-			var water_tilemap := _get_water_tilemap()
-			if water_tilemap and _is_facing_water(water_tilemap):
-				start_fishing()
-
 		State.WAITING:
 			_fail("Too early!")
 
 		State.BITE_WINDOW:
 			_catch()
 
+
 func start_fishing():
+	if is_fishing:
+		return
+
 	state = State.WAITING
 	is_fishing = true
+	input_locked = true
+
+	player.anim.play("FishingIdle" + player.last_direction)
 
 	var power := _get_rod_power()
 	var wait_mult := _get_wait_multiplier(power)
@@ -52,14 +58,17 @@ func start_fishing():
 
 	bite_timer.start(wait_time)
 
-	print("Waiting for a bite... (Rod power:", power, ")")
+	# 🔓 Unlock input next frame
+	await get_tree().process_frame
+	input_locked = false
 
 func _on_bite_timer_timeout():
 	if state != State.WAITING:
 		return
 
 	state = State.BITE_WINDOW
-	print("BITE! Click now!")
+
+	player.anim.play("FishBite" + player.last_direction)
 
 	var power := _get_rod_power()
 	var window_mult := _get_window_multiplier(power)
@@ -67,22 +76,34 @@ func _on_bite_timer_timeout():
 	bite_window_timer.start(bite_window_duration * window_mult)
 
 func _catch():
+	# Lock state, but KEEP is_fishing true
+	state = State.IDLE
+	bite_timer.stop()
+	bite_window_timer.stop()
+
 	var table := _get_fish_table()
 	var fish := _roll_fish(table)
 
 	if fish == null or fish.item == null:
-		print("Nothing was caught.")
 		_end_fishing()
 		return
 
-	var success := _add_item_to_inventory(fish.item, 1)
+	_add_item_to_inventory(fish.item, 1)
 
-	if success:
-		print("Caught %s" % fish.display_name)
-	else:
-		print("Inventory full! Fish escaped.")
+	var anim_name = "FishCaught" + player.last_direction
+	print("[FISHING] Playing caught animation:", anim_name)
 
-	_end_fishing()
+	player.anim.play(anim_name)
+
+	print("[FISHING] Waiting for caught animation to finish...")
+	await player.anim.animation_finished
+	print("[FISHING] Caught animation finished")
+
+	# ✅ NOW fishing is truly over
+	is_fishing = false
+	player.anim.play("Idle" + player.last_direction)
+
+
 
 func _fail(reason: String):
 	print("Fishing failed:", reason)
@@ -91,43 +112,13 @@ func _fail(reason: String):
 func _end_fishing():
 	state = State.IDLE
 	is_fishing = false
-
 	bite_timer.stop()
 	bite_window_timer.stop()
+	player.anim.play("Idle" + player.last_direction)
 
 func _on_bite_window_timeout():
 	if state == State.BITE_WINDOW:
 		_fail("Too late!")
-
-func _get_water_tilemap() -> TileMapLayer:
-	# Assumes your current area scene is instanced under something like CurrentArea
-	var area := get_tree().get_first_node_in_group("area_fishing")
-	if area == null:
-		return null
-
-	# area_fishing is a child; the TileMap is usually on the area root
-	var area_root := area.get_parent()
-	if area_root.has_method("get"):
-		return area_root.water_tilemap
-
-	return null
-
-func _is_facing_water(water_tilemap: TileMapLayer) -> bool:
-	var facing := _get_facing_dir()
-
-	var tile_size := water_tilemap.tile_set.tile_size.x
-	var world_pos := player.global_position + facing * tile_size
-	var cell := water_tilemap.local_to_map(
-		water_tilemap.to_local(world_pos)
-	)
-
-	var data := water_tilemap.get_cell_tile_data(cell)
-	return data and data.get_custom_data("tile_type") == "water"
-
-func _get_facing_dir() -> Vector2:
-	if player.has_meta("facing_dir"):
-		return player.get_meta("facing_dir")
-	return Vector2.DOWN
 
 func _get_fish_table() -> FishTable:
 	var area := get_tree().get_first_node_in_group("area_fishing")
@@ -211,3 +202,39 @@ func _add_item_to_inventory(item: InvItem, amount: int = 1) -> bool:
 
 	# 3️⃣ Inventory full
 	return false
+
+func _get_water_tilemap() -> TileMapLayer:
+	var area := get_tree().get_first_node_in_group("area_fishing")
+	if area == null:
+		return null
+
+	var area_root := area.get_parent()
+	if area_root.has_method("get"):
+		return area_root.water_tilemap
+
+	return null
+
+
+func _is_facing_water(water_tilemap: TileMapLayer) -> bool:
+	if water_tilemap == null:
+		return false
+
+	var facing := _get_facing_dir()
+	var tile_size := water_tilemap.tile_set.tile_size.x
+	var world_pos := player.global_position + facing * tile_size
+
+	var cell := water_tilemap.local_to_map(
+		water_tilemap.to_local(world_pos)
+	)
+
+	var data := water_tilemap.get_cell_tile_data(cell)
+	return data != null and data.get_custom_data("tile_type") == "water"
+
+
+func _get_facing_dir() -> Vector2:
+	match player.last_direction:
+		"Left":  return Vector2.LEFT
+		"Right": return Vector2.RIGHT
+		"Up":    return Vector2.UP
+		"Down":  return Vector2.DOWN
+	return Vector2.DOWN

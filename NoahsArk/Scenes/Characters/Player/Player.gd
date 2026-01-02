@@ -20,10 +20,17 @@ var has_hit_this_swing := false
 # MOVEMENT
 # --------------------
 func _physics_process(delta: float) -> void:
+	var fishing := $FishingController as FishingController
+
+	if fishing and fishing.is_fishing:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	if is_swinging:
 		velocity = Vector2.ZERO
 		move_and_slide()
-		_update_interact_ray_direction()  # ← ADD THIS
+		_update_interact_ray_direction()
 		return
 
 	var input_dir := Input.get_vector("left", "right", "up", "down")
@@ -43,8 +50,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	_update_direction(input_dir)
-	_update_animation(input_dir)
+
+	# ✅ Only update animation if NOT fishing
+	if fishing == null or not fishing.is_fishing:
+		_update_animation(input_dir)
+
 	_update_interact_ray_direction()
+
 
 # --------------------
 # AXE HIT CHECK
@@ -86,12 +98,13 @@ func _input(event: InputEvent) -> void:
 			select_hotbar_slot(9)
 
 	if event.is_action_pressed("interact"):
-		try_swing_axe()
+		try_use_tool()
 
 # --------------------
-# AXE SWING
+# UseTool
 # --------------------
-func try_swing_axe() -> void:
+
+func try_use_tool() -> void:
 	if is_swinging:
 		return
 
@@ -111,12 +124,52 @@ func try_swing_axe() -> void:
 	if slot.item.item_type != InvItem.ItemType.TOOL:
 		return
 
+	var fishing := $FishingController as FishingController
+
+	print(
+		"[PLAYER] Using tool:",
+		slot.item.tool_type,
+		"is_fishing=",
+		fishing != null and fishing.is_fishing
+	)
+
+	if fishing and fishing.is_fishing:
+		if slot.item.tool_type != "FishingRod":
+			return
+
+
+	match slot.item.tool_type.to_lower():
+		"axe":
+			_start_axe_swing(slot.item)
+
+		"fishingrod":
+			_start_fishing()
+
+		_:
+			print("[PLAYER] Unknown tool type:", slot.item.tool_type)
+
+
+func _start_axe_swing(tool: InvItem) -> void:
+	print("[PLAYER] Starting axe swing")
 	is_swinging = true
 	has_hit_this_swing = false
-	pending_tool = slot.item
-
+	pending_tool = tool
 	anim.play("Axe" + last_direction)
 
+func _start_fishing() -> void:
+	var fishing := $FishingController as FishingController
+	if fishing == null:
+		return
+
+	var water_tilemap := fishing._get_water_tilemap()
+	if water_tilemap == null:
+		return
+
+	if not fishing._is_facing_water(water_tilemap):
+		return
+
+	anim.play("FishingCast" + last_direction)
+	fishing.start_fishing()
 # --------------------
 # APPLY DAMAGE
 # --------------------
@@ -142,6 +195,7 @@ func _apply_axe_hit() -> void:
 # ANIMATION FINISHED
 # --------------------
 func _on_AnimatedSprite2D_animation_finished() -> void:
+	print("[PLAYER] animation_finished:", anim.animation)
 	is_swinging = false
 	pending_tool = null
 	has_hit_this_swing = false
@@ -162,10 +216,21 @@ func _update_direction(input_dir: Vector2) -> void:
 		last_direction = "Up"
 
 func _update_animation(input_dir: Vector2) -> void:
+	var fishing := $FishingController as FishingController
+	if fishing and fishing.is_fishing:
+		print("[PLAYER] Skipping Idle/Walk override (fishing)")
+		return
+
+	var target_anim: String
 	if input_dir == Vector2.ZERO:
-		anim.play("Idle" + last_direction)
+		target_anim = "Idle" + last_direction
 	else:
-		anim.play("Walk" + last_direction)
+		target_anim = "Walk" + last_direction
+
+	if anim.animation != target_anim:
+		print("[PLAYER] Forcing animation:", target_anim)
+
+	anim.play(target_anim)
 
 func _update_interact_ray_direction() -> void:
 	var reach := 18.0
