@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://dvmiixnjbclps"]
+[gd_scene load_steps=18 format=4 uid="uid://dvmiixnjbclps"]
 
 [ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scenes/Areas/StartingArea/StartingArea.gd" id="1_k4x5e"]
 [ext_resource type="Texture2D" uid="uid://cdbbqwxe0oi2q" path="res://Assets/TileSets/Home Made Assets/Exported/HouseInt.png" id="1_qk4ws"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://nwmgv5yu5145" path="res://Scenes/Functionalities/PickUps/PickUpScenes/ItemPickUp.tscn" id="4_ukdna"]
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="5_xc33l"]
 [ext_resource type="Texture2D" uid="uid://d02h8cwyppt1t" path="res://Assets/TileSets/DG Fire Zone Asset Pack/Items/Axe.png" id="6_k4x5e"]
+[ext_resource type="Resource" uid="uid://mirlg0te7dns" path="res://Scenes/Skills/Fishing/Items/FishingRods/BeginnerRod.tres" id="7_j4lkw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq36m"]
 size = Vector2(16, 10.5)
@@ -1058,9 +1059,13 @@ spawn_id = "BedSpawn"
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="ItemPickup" parent="Items" instance=ExtResource("4_ukdna")]
+[node name="Axe" parent="Items" instance=ExtResource("4_ukdna")]
 position = Vector2(-41, 76)
 item = SubResource("Resource_s2keo")
+
+[node name="Rod" parent="Items" instance=ExtResource("4_ukdna")]
+position = Vector2(58, 93)
+item = ExtResource("7_j4lkw")
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true

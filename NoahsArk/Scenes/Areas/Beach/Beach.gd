@@ -1,4 +1,7 @@
 extends Node2D
+class_name Beach
+
+@export var water_tilemap: TileMapLayer
 
 const MUSIC_TRACK_INDEX := 2
 

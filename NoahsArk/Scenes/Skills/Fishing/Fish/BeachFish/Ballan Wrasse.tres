@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://bxomovfvn0b5k"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_risnm"]
+[ext_resource type="Texture2D" uid="uid://u17ah24hk27" path="res://Assets/TileSets/fishing_full/Fish/14 - Ballan Wrasse.png" id="2_x3y4e"]
+
+[resource]
+script = ExtResource("1_risnm")
+name = "Ballan Wrasse"
+texture = ExtResource("2_x3y4e")
+max_stack = 20
+amount = 1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b0qa05i1pxr2p"]
 
 [ext_resource type="Script" uid="uid://b3cf1vjgqxxui" path="res://Scenes/Props/Trees/BaseTree/BaseTree.gd" id="1_l760s"]
-[ext_resource type="Resource" uid="uid://y1wr2u7jxkl4" path="res://Scenes/Functionalities/Inventory/InventoryItems/Resources/Wood.tres" id="2_n18xb"]
+[ext_resource type="Resource" uid="uid://y1wr2u7jxkl4" path="res://Scenes/Items/Resources/Woodcutting/Wood.tres" id="2_n18xb"]
 [ext_resource type="Texture2D" uid="uid://datreh15she61" path="res://Assets/TileSets/Home Made Assets/TileSet1.png" id="3_21r1i"]
 [ext_resource type="Script" uid="uid://oky0rxxfjfk4" path="res://Scenes/Props/Trees/BaseTree/HitArea.gd" id="5_q03ol"]
 

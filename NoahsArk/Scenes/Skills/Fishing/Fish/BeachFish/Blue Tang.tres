@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://budc4id28mgnv"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_28d1w"]
+[ext_resource type="Texture2D" uid="uid://chdn65wn7pbuw" path="res://Assets/TileSets/fishing_full/Fish/12 - Blue Tang.png" id="2_mo38y"]
+
+[resource]
+script = ExtResource("1_28d1w")
+name = "Blue Tang"
+texture = ExtResource("2_mo38y")
+max_stack = 20
+amount = 1

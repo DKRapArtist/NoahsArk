@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://bg60q61fxbuyh"]
+[gd_scene load_steps=109 format=3 uid="uid://bg60q61fxbuyh"]
 
 [ext_resource type="Script" uid="uid://d6nw3dgb0ua8" path="res://Scenes/Characters/Player/Player.gd" id="1_kyqiw"]
 [ext_resource type="Resource" uid="uid://fvmnrqbmwkx4" path="res://Scenes/Functionalities/Inventory/PlayerInventory.tres" id="2_dewec"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bu5rams6ub7jw" path="res://Assets/PlayerSpriteSheets/Main Character/Exported/Fishing/FishingCast.png" id="4_nn08x"]
 [ext_resource type="Texture2D" uid="uid://decp1ibo0vvcr" path="res://Assets/PlayerSpriteSheets/Main Character/Exported/Fishing/FishingIdle.png" id="5_52ee3"]
 [ext_resource type="Texture2D" uid="uid://ww17lctfd0lt" path="res://Assets/PlayerSpriteSheets/Main Character/Exported/RunAnimations.png" id="6_nn08x"]
+[ext_resource type="Script" uid="uid://dqgkrofdwddbg" path="res://Scenes/Skills/Fishing/FishingScripts/FishingController.gd" id="10_m81am"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rxg2u"]
 atlas = ExtResource("3_nn08x")
@@ -857,5 +858,14 @@ target_position = Vector2(14, 0)
 collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
+
+[node name="FishingController" type="Node" parent="."]
+script = ExtResource("10_m81am")
+
+[node name="BiteTimer" type="Timer" parent="FishingController"]
+one_shot = true
+
+[node name="BiteWindowTimer" type="Timer" parent="FishingController"]
+one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_AnimatedSprite2D_animation_finished"]

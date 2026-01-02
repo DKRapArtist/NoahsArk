@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://bsvffpmchws3o"]
+[gd_scene load_steps=69 format=4 uid="uid://bsvffpmchws3o"]
 
 [ext_resource type="Texture2D" uid="uid://crtkccgfck1i8" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/tilesetV2.png" id="1_4ydj8"]
 [ext_resource type="Script" uid="uid://dd56u2uku5x7d" path="res://Scenes/Areas/Beach/Beach.gd" id="1_bhb5r"]
@@ -12,6 +12,18 @@
 [ext_resource type="PackedScene" uid="uid://bkv6hkdmsu1iy" path="res://Scenes/Buildings/Beach/FishingShop.tscn" id="10_bhb5r"]
 [ext_resource type="Script" uid="uid://qke0vjhlsds7" path="res://Scenes/Props/Trees/BaseTree/TreePlacement.gd" id="10_pmus2"]
 [ext_resource type="PackedScene" uid="uid://b0qa05i1pxr2p" path="res://Scenes/Props/Trees/Beach/PalmTree.tscn" id="11_pmus2"]
+[ext_resource type="Script" uid="uid://clo7qm5juk2bl" path="res://Scenes/Skills/Fishing/FishingScripts/AreaFishing.gd" id="13_smh3t"]
+[ext_resource type="Script" uid="uid://lmk8lus6uit4" path="res://Scenes/Skills/Fishing/FishingScripts/FishingData.gd" id="14_kym7m"]
+[ext_resource type="Script" uid="uid://bqsui7fub84oe" path="res://Scenes/Skills/Fishing/FishingScripts/FishTable.gd" id="15_8k5o1"]
+[ext_resource type="Resource" uid="uid://cqy8jp2h2qxsi" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Tuna.tres" id="15_332p5"]
+[ext_resource type="Resource" uid="uid://doavue673ts6f" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Banded Butterflyfish.tres" id="16_332p5"]
+[ext_resource type="Resource" uid="uid://essgl6lthrd0" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Atlantic Bass.tres" id="17_ghotg"]
+[ext_resource type="Resource" uid="uid://budc4id28mgnv" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Blue Tang.tres" id="18_w61w3"]
+[ext_resource type="Resource" uid="uid://32erei4mvocy" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Pollock.tres" id="19_8isp6"]
+[ext_resource type="Resource" uid="uid://bxomovfvn0b5k" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Ballan Wrasse.tres" id="20_b6yit"]
+[ext_resource type="Resource" uid="uid://iw7y6xhmwac2" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Weaver Fish.tres" id="21_124mn"]
+[ext_resource type="Resource" uid="uid://bquafem4h4x7f" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Bream.tres" id="22_u13il"]
+[ext_resource type="Resource" uid="uid://bb1q67hgrrr2k" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Pufferfish.tres" id="23_qpxc1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhb5r"]
 size = Vector2(1116, 876)
@@ -273,6 +285,7 @@ texture = ExtResource("1_4ydj8")
 5:17/animation_frame_1/duration = 1.0
 5:17/animation_frame_2/duration = 1.0
 5:17/0 = 0
+5:17/0/custom_data_0 = "water"
 8:17/0 = 0
 9:17/0 = 0
 10:17/0 = 0
@@ -1391,6 +1404,8 @@ texture = ExtResource("4_8wu2g")
 20:10/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_pmus2"]
+custom_data_layer_0/name = "tile_type"
+custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_bhb5r")
 sources/1 = SubResource("TileSetAtlasSource_7b02j")
 sources/2 = SubResource("TileSetAtlasSource_4ydj8")
@@ -4831,9 +4846,87 @@ custom_data_layer_0/name = "is_tree"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_lu8hg")
 
-[node name="Beach" type="Node2D"]
+[sub_resource type="Resource" id="Resource_kym7m"]
+script = ExtResource("14_kym7m")
+display_name = "Tuna"
+base_value = 320
+weight = 4.0
+item = ExtResource("15_332p5")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_8k5o1"]
+script = ExtResource("14_kym7m")
+display_name = "Banded Butterflyfish"
+base_value = 45
+weight = 65.0
+item = ExtResource("16_332p5")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_ghotg"]
+script = ExtResource("14_kym7m")
+display_name = "Atlantic Bass"
+base_value = 90
+weight = 30.0
+item = ExtResource("17_ghotg")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_w61w3"]
+script = ExtResource("14_kym7m")
+display_name = "Blue Tang"
+base_value = 40
+weight = 70.0
+item = ExtResource("18_w61w3")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_8isp6"]
+script = ExtResource("14_kym7m")
+display_name = "Pollock"
+base_value = 120
+weight = 22.0
+item = ExtResource("19_8isp6")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_b6yit"]
+script = ExtResource("14_kym7m")
+display_name = "Ballan Wrasse"
+base_value = 65
+weight = 45.0
+item = ExtResource("20_b6yit")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_124mn"]
+script = ExtResource("14_kym7m")
+display_name = "Weaver Fish"
+base_value = 220
+weight = 8.0
+item = ExtResource("21_124mn")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_u13il"]
+script = ExtResource("14_kym7m")
+display_name = "Bream"
+base_value = 55
+weight = 55.0
+item = ExtResource("22_u13il")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_qpxc1"]
+script = ExtResource("14_kym7m")
+display_name = "Pufferfish"
+base_value = 180
+weight = 12.0
+item = ExtResource("23_qpxc1")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_332p5"]
+script = ExtResource("15_8k5o1")
+fish = Array[ExtResource("14_kym7m")]([SubResource("Resource_kym7m"), SubResource("Resource_8k5o1"), SubResource("Resource_ghotg"), SubResource("Resource_w61w3"), SubResource("Resource_8isp6"), SubResource("Resource_b6yit"), SubResource("Resource_124mn"), SubResource("Resource_u13il"), SubResource("Resource_qpxc1")])
+metadata/_custom_type_script = "uid://bqsui7fub84oe"
+
+[node name="Beach" type="Node2D" node_paths=PackedStringArray("water_tilemap")]
 y_sort_enabled = true
 script = ExtResource("1_bhb5r")
+water_tilemap = NodePath("YSort/TileMapLayers/Water")
 
 [node name="CameraBounds" type="Node2D" parent="."]
 visible = false
@@ -4978,3 +5071,7 @@ tree_scene = ExtResource("11_pmus2")
 [node name="FishingShop" parent="YSort/HousesRoot" instance=ExtResource("10_bhb5r")]
 z_index = -1
 position = Vector2(864, -346)
+
+[node name="AreaFishing" type="Node2D" parent="." groups=["area_fishing"]]
+script = ExtResource("13_smh3t")
+fish_table = SubResource("Resource_332p5")

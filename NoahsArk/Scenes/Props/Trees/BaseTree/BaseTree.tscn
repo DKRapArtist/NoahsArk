@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b3cf1vjgqxxui" path="res://Scenes/Props/Trees/BaseTree/BaseTree.gd" id="1_hcdk0"]
 [ext_resource type="Texture2D" uid="uid://iehyyh7pqbn6" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/trees & stuff.png" id="2_7mpki"]
-[ext_resource type="Resource" uid="uid://y1wr2u7jxkl4" path="res://Scenes/Functionalities/Inventory/InventoryItems/Resources/Wood.tres" id="2_ijmjp"]
+[ext_resource type="Resource" uid="uid://y1wr2u7jxkl4" path="res://Scenes/Items/Resources/Woodcutting/Wood.tres" id="2_ijmjp"]
 [ext_resource type="Script" uid="uid://oky0rxxfjfk4" path="res://Scenes/Props/Trees/BaseTree/HitArea.gd" id="3_ijmjp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mpki"]
