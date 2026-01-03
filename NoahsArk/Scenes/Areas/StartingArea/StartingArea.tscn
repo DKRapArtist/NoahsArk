@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://btrhhyiun1g4r"]
+[gd_scene load_steps=77 format=4 uid="uid://btrhhyiun1g4r"]
 
 [ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scenes/Areas/StartingArea/StartingArea.gd" id="1_ejlk6"]
 [ext_resource type="Texture2D" uid="uid://iehyyh7pqbn6" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/trees & stuff.png" id="2_csbud"]
@@ -18,6 +18,17 @@
 [ext_resource type="PackedScene" uid="uid://b2rh8trst3e4q" path="res://Scenes/Props/Trees/BaseTree/BaseTree.tscn" id="12_xciqf"]
 [ext_resource type="Texture2D" uid="uid://coopkn2nxaaj1" path="res://Assets/TileSets/Home Made Assets/tilesetBEACH.png" id="15_ejlk6"]
 [ext_resource type="PackedScene" uid="uid://cg1k264j31a0e" path="res://Scenes/Buildings/StartingArea/House.tscn" id="15_gsau2"]
+[ext_resource type="Script" uid="uid://clo7qm5juk2bl" path="res://Scenes/Skills/Fishing/FishingScripts/AreaFishing.gd" id="19_g6y1v"]
+[ext_resource type="Script" uid="uid://lmk8lus6uit4" path="res://Scenes/Skills/Fishing/FishingScripts/FishingData.gd" id="20_utfnq"]
+[ext_resource type="Resource" uid="uid://byregij85b7g4" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Parrot Fish.tres" id="21_muo4f"]
+[ext_resource type="Resource" uid="uid://dr3xckdtup5aq" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Mackerel.tres" id="22_g6y1v"]
+[ext_resource type="Resource" uid="uid://dlo0v8mfacghh" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Clown Fish.tres" id="23_utfnq"]
+[ext_resource type="Resource" uid="uid://rfwtb6bvcuon" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Plaice.tres" id="24_aa82x"]
+[ext_resource type="Resource" uid="uid://cuajbmw770iyx" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Silver Eel.tres" id="25_hjo4u"]
+[ext_resource type="Resource" uid="uid://cfqk06t2jxgmk" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Sea Horse.tres" id="26_jwjmo"]
+[ext_resource type="Resource" uid="uid://bnr8qio1g3ftv" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Lionfish.tres" id="27_5h5c8"]
+[ext_resource type="Resource" uid="uid://bb1ujsl3nnh40" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Cowfish.tres" id="28_s33rv"]
+[ext_resource type="Script" uid="uid://bqsui7fub84oe" path="res://Scenes/Skills/Fishing/FishingScripts/FishTable.gd" id="30_2i6aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsau2"]
 size = Vector2(578, 498)
@@ -759,6 +770,7 @@ texture = ExtResource("2_e16jf")
 5:17/animation_frame_1/duration = 1.0
 5:17/animation_frame_2/duration = 1.0
 5:17/0 = 0
+5:17/0/custom_data_0 = "water"
 8:17/0 = 0
 9:17/0 = 0
 10:17/0 = 0
@@ -1318,6 +1330,8 @@ texture = ExtResource("2_csbud")
 16:13/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_865fq"]
+custom_data_layer_0/name = "tile_type"
+custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_oyd5j")
 sources/2 = SubResource("TileSetAtlasSource_pb6dk")
 sources/3 = SubResource("TileSetAtlasSource_xu5hv")
@@ -5763,10 +5777,80 @@ physics_layer_0/collision_mask = 0
 sources/1 = SubResource("TileSetAtlasSource_8ovgi")
 sources/0 = SubResource("TileSetAtlasSource_80ts5")
 
-[node name="StartingArea" type="Node2D"]
+[sub_resource type="Resource" id="Resource_gtdqs"]
+script = ExtResource("20_utfnq")
+display_name = "Parrot Fish"
+base_value = 95
+weight = 9.5
+item = ExtResource("21_muo4f")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_db521"]
+script = ExtResource("20_utfnq")
+display_name = "Mackerel"
+base_value = 50
+weight = 13.5
+item = ExtResource("22_g6y1v")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_s2vn6"]
+script = ExtResource("20_utfnq")
+display_name = "Clown Fish"
+base_value = 230
+weight = 3.5
+item = ExtResource("23_utfnq")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_qyb0v"]
+script = ExtResource("20_utfnq")
+display_name = "Plaice"
+base_value = 80
+weight = 11.0
+item = ExtResource("24_aa82x")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_24xw0"]
+script = ExtResource("20_utfnq")
+display_name = "Silver Eel"
+base_value = 155
+weight = 6.5
+item = ExtResource("25_hjo4u")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_by0ys"]
+script = ExtResource("20_utfnq")
+display_name = "Sea Horse"
+base_value = 280
+weight = 2.5
+item = ExtResource("26_jwjmo")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_wwaei"]
+script = ExtResource("20_utfnq")
+display_name = "Lionfish"
+base_value = 170
+weight = 6.0
+item = ExtResource("27_5h5c8")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_i7tml"]
+script = ExtResource("20_utfnq")
+display_name = "Cowfish"
+base_value = 120
+weight = 8.5
+item = ExtResource("28_s33rv")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_gk7a1"]
+script = ExtResource("30_2i6aa")
+fish = Array[ExtResource("20_utfnq")]([SubResource("Resource_gtdqs"), SubResource("Resource_db521"), SubResource("Resource_s2vn6"), SubResource("Resource_qyb0v"), SubResource("Resource_24xw0"), SubResource("Resource_by0ys"), SubResource("Resource_wwaei"), SubResource("Resource_i7tml")])
+metadata/_custom_type_script = "uid://bqsui7fub84oe"
+
+[node name="StartingArea" type="Node2D" node_paths=PackedStringArray("water_tilemap")]
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_ejlk6")
+water_tilemap = NodePath("YSort/TileMapLayers/Water")
 
 [node name="CameraBounds" type="Node2D" parent="."]
 visible = false
@@ -5884,3 +5968,7 @@ tile_set = SubResource("TileSet_u6m32")
 
 [node name="House" parent="YSort/HousesRoot" instance=ExtResource("15_gsau2")]
 position = Vector2(-142.965, -25.685)
+
+[node name="AreaFishing" type="Node2D" parent="." groups=["area_fishing"]]
+script = ExtResource("19_g6y1v")
+fish_table = SubResource("Resource_gk7a1")
