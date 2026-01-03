@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b7bko8xepmj8f"
+path="res://.godot/imported/Collect (Pitch 4).wav-77bc065f88f9067f9d93e7a749ce8f1d.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Arsha SFX Pack/Collecting/Collect (Pitch 4).wav"
+dest_files=["res://.godot/imported/Collect (Pitch 4).wav-77bc065f88f9067f9d93e7a749ce8f1d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

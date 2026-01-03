@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://btrhhyiun1g4r"]
+[gd_scene load_steps=57 format=4 uid="uid://btrhhyiun1g4r"]
 
 [ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scenes/Areas/StartingArea/StartingArea.gd" id="1_ejlk6"]
 [ext_resource type="Texture2D" uid="uid://iehyyh7pqbn6" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/trees & stuff.png" id="2_csbud"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://datreh15she61" path="res://Assets/TileSets/Home Made Assets/TileSet1.png" id="2_f3xal"]
 [ext_resource type="Texture2D" uid="uid://cq1yg4guh38yg" path="res://Assets/TileSets/Home Made Assets/House.png" id="3_csbud"]
 [ext_resource type="Texture2D" uid="uid://dw5k5rxd6iqeg" path="res://Assets/TileSets/fishing_full/Tiles/tiles.png" id="3_ic5ia"]
+[ext_resource type="Script" uid="uid://dvj7f44od4114" path="res://Scenes/Functionalities/Exits/Door.gd" id="4_c4xj0"]
 [ext_resource type="Texture2D" uid="uid://dkufiuvg220r1" path="res://Assets/TileSets/fences and ladders etc.png" id="4_d0cm5"]
 [ext_resource type="Texture2D" uid="uid://3gpf8si8jyqa" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/waterfall & watertiles.png" id="4_ic5ia"]
 [ext_resource type="PackedScene" uid="uid://7hpo36n367gi" path="res://Scenes/Props/TallGrass/TallGrass.tscn" id="4_m24lw"]
@@ -5812,7 +5813,7 @@ position = Vector2(296, -8)
 shape = SubResource("RectangleShape2D_1n7vx")
 
 [node name="ToHouse" type="Area2D" parent="Exits"]
-script = ExtResource("10_pb6dk")
+script = ExtResource("4_c4xj0")
 target_scene_path = "res://Scenes/Buildings/StartingArea/Home.tscn"
 target_spawn_name = "FromStart"
 

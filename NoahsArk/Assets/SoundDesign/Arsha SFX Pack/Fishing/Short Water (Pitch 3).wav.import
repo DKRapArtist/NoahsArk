@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d38gf7gogea5a"
+path="res://.godot/imported/Short Water (Pitch 3).wav-c76e3958c85c5d0d27a9f1f37bd3bcfa.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Arsha SFX Pack/Fishing/Short Water (Pitch 3).wav"
+dest_files=["res://.godot/imported/Short Water (Pitch 3).wav-c76e3958c85c5d0d27a9f1f37bd3bcfa.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

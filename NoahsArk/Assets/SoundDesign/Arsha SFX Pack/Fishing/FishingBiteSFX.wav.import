@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cmy0054k2s7xd"
+path="res://.godot/imported/FishingBiteSFX.wav-2e342737266ba9ada33a374aee826bc9.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Arsha SFX Pack/Fishing/FishingBiteSFX.wav"
+dest_files=["res://.godot/imported/FishingBiteSFX.wav-2e342737266ba9ada33a374aee826bc9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

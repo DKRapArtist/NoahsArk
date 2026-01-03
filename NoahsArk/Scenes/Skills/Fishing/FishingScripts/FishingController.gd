@@ -4,6 +4,8 @@ class_name FishingController
 @export var bite_time_min := 3.5
 @export var bite_time_max := 7.0
 @export var bite_window_duration := 0.45
+@export var fishing_sfx_min_delay := 0.5
+@export var fishing_sfx_max_delay := 3.0
 
 @onready var bite_window_timer: Timer = $BiteWindowTimer
 @onready var bite_timer: Timer = $BiteTimer
@@ -14,11 +16,17 @@ enum State { IDLE, WAITING, BITE_WINDOW }
 var state: State = State.IDLE
 var is_fishing := false
 var input_locked := false
+var fishing_sfx_timer: Timer
 
 func _ready():
 	set_process_unhandled_input(true)
 	bite_timer.timeout.connect(_on_bite_timer_timeout)
 	bite_window_timer.timeout.connect(_on_bite_window_timeout)
+	fishing_sfx_timer = Timer.new()
+	fishing_sfx_timer.one_shot = true
+	fishing_sfx_timer.timeout.connect(_on_fishing_sfx_timer)
+
+	add_child(fishing_sfx_timer)
 	
 func _unhandled_input(_event):
 	if input_locked:
@@ -46,6 +54,8 @@ func start_fishing():
 	is_fishing = true
 	input_locked = true
 
+	_start_fishing_sfx_loop()
+
 	player.anim.play("FishingIdle" + player.last_direction)
 
 	var power := _get_rod_power()
@@ -58,7 +68,6 @@ func start_fishing():
 
 	bite_timer.start(wait_time)
 
-	# 🔓 Unlock input next frame
 	await get_tree().process_frame
 	input_locked = false
 
@@ -68,6 +77,9 @@ func _on_bite_timer_timeout():
 
 	state = State.BITE_WINDOW
 
+	# 🐟 Bite sound
+	SFXManagerGlobal.play("fishingbite")
+
 	player.anim.play("FishBite" + player.last_direction)
 
 	var power := _get_rod_power()
@@ -76,7 +88,7 @@ func _on_bite_timer_timeout():
 	bite_window_timer.start(bite_window_duration * window_mult)
 
 func _catch():
-	# Lock state, but KEEP is_fishing true
+	_stop_fishing_sfx_loop()
 	state = State.IDLE
 	bite_timer.stop()
 	bite_window_timer.stop()
@@ -90,16 +102,12 @@ func _catch():
 
 	_add_item_to_inventory(fish.item, 1)
 
-	var anim_name = "FishCaught" + player.last_direction
-	print("[FISHING] Playing caught animation:", anim_name)
+	# ✅ Catch reward sound
+	_play_random("pickup", 4)
 
-	player.anim.play(anim_name)
-
-	print("[FISHING] Waiting for caught animation to finish...")
+	player.anim.play("FishCaught" + player.last_direction)
 	await player.anim.animation_finished
-	print("[FISHING] Caught animation finished")
 
-	# ✅ NOW fishing is truly over
 	is_fishing = false
 	player.anim.play("Idle" + player.last_direction)
 
@@ -107,13 +115,20 @@ func _catch():
 
 func _fail(reason: String):
 	print("Fishing failed:", reason)
+
+	# 💦 Failed splash
+	_play_random("fishing", 3)
+
 	_end_fishing()
 
 func _end_fishing():
+	_stop_fishing_sfx_loop()
+
 	state = State.IDLE
 	is_fishing = false
 	bite_timer.stop()
 	bite_window_timer.stop()
+
 	player.anim.play("Idle" + player.last_direction)
 
 func _on_bite_window_timeout():
@@ -238,3 +253,33 @@ func _get_facing_dir() -> Vector2:
 		"Up":    return Vector2.UP
 		"Down":  return Vector2.DOWN
 	return Vector2.DOWN
+
+#SFX
+func _play_random(prefix: String, count: int):
+	var index := randi_range(1, count)
+	SFXManagerGlobal.play(prefix + str(index))
+
+func _on_fishing_sfx_timer():
+	if not is_fishing:
+		return
+
+	_play_random("fishing", 3)
+
+	fishing_sfx_timer.start(
+		randf_range(fishing_sfx_min_delay, fishing_sfx_max_delay)
+	)
+
+func _start_fishing_sfx_loop():
+	fishing_sfx_timer.stop()
+
+	# 🔊 Play immediately
+	_play_random("fishing", 3)
+
+	# ⏱ Then schedule the next random one
+	fishing_sfx_timer.start(
+		randf_range(fishing_sfx_min_delay, fishing_sfx_max_delay)
+	)
+
+func _stop_fishing_sfx_loop():
+	if fishing_sfx_timer:
+		fishing_sfx_timer.stop()

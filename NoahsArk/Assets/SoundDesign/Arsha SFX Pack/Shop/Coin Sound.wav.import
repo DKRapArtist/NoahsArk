@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxs6t8uqdyibr"
+path="res://.godot/imported/Coin Sound.wav-701da24fae7c1920c90c277950ea55ca.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Arsha SFX Pack/Shop/Coin Sound.wav"
+dest_files=["res://.godot/imported/Coin Sound.wav-701da24fae7c1920c90c277950ea55ca.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

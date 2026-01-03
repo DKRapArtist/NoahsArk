@@ -79,7 +79,7 @@ func try_pickup() -> void:
 	var inv: Inv = inv_ui.inv
 	var remaining := amount
 
-	# 1) Stack onto existing slots
+	# 1️⃣ Try stacking first
 	for slot_data in inv.slots:
 		if remaining <= 0:
 			break
@@ -96,7 +96,7 @@ func try_pickup() -> void:
 				slot.amount += to_add
 				remaining -= to_add
 
-	# 2) Use empty slots
+	# 2️⃣ Use empty slots
 	for slot_data in inv.slots:
 		if remaining <= 0:
 			break
@@ -111,11 +111,18 @@ func try_pickup() -> void:
 			slot.amount = to_add
 			remaining -= to_add
 
-	# 3) Finish
+	# 3️⃣ Finish
 	if remaining <= 0:
 		print("Picked up", amount, item.name)
-		inv.notify_changed()
 
+		# 🔊 Pickup sound (random variant + slight pitch variation)
+		SFXManagerGlobal.play(
+			"pickup" + str(randi_range(1, 4)),
+			-4.0,
+			randf_range(0.9, 1.1)
+		)
+
+		inv.notify_changed()
 		queue_free()
 	else:
 		amount = remaining

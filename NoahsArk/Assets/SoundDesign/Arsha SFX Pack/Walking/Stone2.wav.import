@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cgeotedkt0xix"
+path="res://.godot/imported/Stone2.wav-0663b60a16b5e42ae9555a76fbfbd27e.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Arsha SFX Pack/Walking/Stone2.wav"
+dest_files=["res://.godot/imported/Stone2.wav-0663b60a16b5e42ae9555a76fbfbd27e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

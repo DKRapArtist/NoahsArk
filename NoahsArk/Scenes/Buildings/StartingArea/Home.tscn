@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scenes/Areas/StartingArea/StartingArea.gd" id="1_k4x5e"]
 [ext_resource type="Texture2D" uid="uid://cdbbqwxe0oi2q" path="res://Assets/TileSets/Home Made Assets/Exported/HouseInt.png" id="1_qk4ws"]
-[ext_resource type="Script" uid="uid://1ydq6hngbqq0" path="res://Scenes/Functionalities/Exits/Exits.gd" id="2_nc2ua"]
+[ext_resource type="Script" uid="uid://dvj7f44od4114" path="res://Scenes/Functionalities/Exits/Door.gd" id="2_j4lkw"]
 [ext_resource type="Script" uid="uid://c223dphhm6648" path="res://Scenes/Functionalities/SpawnPoints/SpawnPoint.gd" id="4_tyggk"]
 [ext_resource type="PackedScene" uid="uid://nwmgv5yu5145" path="res://Scenes/Functionalities/PickUps/PickUpScenes/ItemPickUp.tscn" id="4_ukdna"]
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="5_xc33l"]
@@ -1037,7 +1037,7 @@ sources/0 = SubResource("TileSetAtlasSource_tyggk")
 script = ExtResource("1_k4x5e")
 
 [node name="Exit" type="Area2D" parent="."]
-script = ExtResource("2_nc2ua")
+script = ExtResource("2_j4lkw")
 target_scene_path = "res://Scenes/Areas/StartingArea/StartingArea.tscn"
 target_spawn_name = "FromHome"
 

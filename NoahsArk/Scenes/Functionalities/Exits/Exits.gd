@@ -1,4 +1,5 @@
 extends Area2D
+class_name Exits
 
 @export var target_scene_path: String
 @export var target_spawn_name: String

@@ -88,6 +88,13 @@ func interact(tool: InvItem) -> void:
 	health -= tool.power
 	_start_shake()
 
+	# 🪓 Chop hit SFX (random)
+	SFXManagerGlobal.play(
+		"chopping" + str(randi_range(1, 2)),
+		-4.0,
+		randf_range(0.95, 1.05)
+	)
+
 	if health <= 0:
 		chop_down()
 
@@ -95,6 +102,9 @@ func interact(tool: InvItem) -> void:
 # TREE DESTRUCTION
 # ===============================
 func chop_down() -> void:
+	# 🌲 Tree falling SFX
+	SFXManagerGlobal.play("treefalling", -2.0)
+
 	if can_respawn:
 		var world := get_tree().get_first_node_in_group("world")
 		if world:

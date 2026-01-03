@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dddbp2wmb86mm"
+path="res://.godot/imported/Stone3.wav-6b08028e90b9ac6ca36d9f7d4cfd539b.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Arsha SFX Pack/Walking/Stone3.wav"
+dest_files=["res://.godot/imported/Stone3.wav-6b08028e90b9ac6ca36d9f7d4cfd539b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

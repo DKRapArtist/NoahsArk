@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bx4w1p6bacppw"
+path="res://.godot/imported/Eat Sound 1.wav-6a01762a61d53c26ba8cfd92b8b08829.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Arsha SFX Pack/Consuming/Eat Sound 1.wav"
+dest_files=["res://.godot/imported/Eat Sound 1.wav-6a01762a61d53c26ba8cfd92b8b08829.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
