@@ -58,12 +58,14 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 	for child in current_area.get_children():
 		child.queue_free()
 
-	# Remove world objects from YSort (trees + houses)
+# Remove world objects from YSort (trees + houses + grass)
 	for node in $YSort.get_children():
 		if node.is_in_group("trees") \
 		or node.is_in_group("house_base") \
-		or node.is_in_group("house_roof"):
+		or node.is_in_group("house_roof") \
+		or node.is_in_group("tall_grass"):
 			node.queue_free()
+
 
 	await get_tree().process_frame
 
@@ -73,8 +75,13 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 
 	await get_tree().process_frame
 
-	# Move buildings (base + roof) into YSort
+# Move buildings (base + roof) into YSort
 	_move_buildings_to_world(area)
+
+# Move Y-sorted world objects out of the area
+	move_group_to_ysort("trees")
+	move_group_to_ysort("tall_grass")
+
 
 	var player := get_tree().get_first_node_in_group("player")
 	var spawn := _find_spawn_in_area(area, spawn_id)
@@ -183,3 +190,13 @@ func request_tree_respawn(scene_path: String, spawn_pos: Vector2, delay: float) 
 	)
 
 	timer.start()
+
+func move_group_to_ysort(group_name: String) -> void:
+	var ysort := $YSort
+
+	for node in get_tree().get_nodes_in_group(group_name):
+		# Only move nodes that belong to the current area
+		if not ysort.is_ancestor_of(node):
+			var pos = node.global_position
+			node.reparent(ysort)
+			node.global_position = pos

@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://bg60q61fxbuyh"]
+[gd_scene load_steps=111 format=3 uid="uid://bg60q61fxbuyh"]
 
 [ext_resource type="Script" uid="uid://d6nw3dgb0ua8" path="res://Scenes/Characters/Player/Player.gd" id="1_kyqiw"]
 [ext_resource type="Resource" uid="uid://fvmnrqbmwkx4" path="res://Scenes/Functionalities/Inventory/PlayerInventory.tres" id="2_dewec"]
@@ -831,6 +831,10 @@ animations = [{
 radius = 5.0
 height = 10.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n0syu"]
+radius = 4.0
+height = 8.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 2
 motion_mode = 1
@@ -846,6 +850,13 @@ animation = &"FishCaughtUp"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_oudfo")
+
+[node name="GrassDetector" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrassDetector"]
+position = Vector2(0, -3)
+shape = SubResource("CapsuleShape2D_n0syu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.2, 1.2)
@@ -868,3 +879,5 @@ one_shot = true
 one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_AnimatedSprite2D_animation_finished"]
+[connection signal="area_entered" from="GrassDetector" to="." method="_on_grass_detector_area_entered"]
+[connection signal="area_exited" from="GrassDetector" to="." method="_on_grass_detector_area_exited"]

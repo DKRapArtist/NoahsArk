@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal player_moving_signal
+signal player_stopped
+
 @export var speed: float = 60.0
 @export var move_hold_threshold: float = 0.02
 @export var inv: Inv
@@ -12,6 +15,10 @@ var active_hotbar_index: int = -1
 var is_swinging := false
 var pending_tool: InvItem = null
 var has_hit_this_swing := false
+var was_moving := false
+var grass_overlap_count := 0
+var grass_overlay: Sprite2D
+
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interact_ray: RayCast2D = $InteractRay
@@ -50,6 +57,18 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	_update_direction(input_dir)
+	
+		# --------------------
+	# MOVEMENT STATE SIGNALS
+	# --------------------
+	var is_moving := velocity.length() > 0.0
+
+	if is_moving and not was_moving:
+		player_moving_signal.emit()
+	elif not is_moving and was_moving:
+		player_stopped.emit()
+
+	was_moving = is_moving
 
 	# ✅ Only update animation if NOT fishing
 	if fishing == null or not fishing.is_fishing:
@@ -257,3 +276,18 @@ func select_hotbar_slot(index: int) -> void:
 	var inv_ui := get_tree().get_first_node_in_group("inventory_ui")
 	if inv_ui:
 		inv_ui.set_active_hotbar(index)
+
+const GRASS_OVERLAY_TEXTURE := preload(
+	"res://Assets/TileSets/Home Made Assets/Exported/steppedgrass.png"
+)
+
+func _ready():
+	pass
+
+func _on_grass_detector_area_entered(_area: Area2D) -> void:
+	print("PLAYER: grass entered")
+	grass_overlap_count += 1
+
+func _on_grass_detector_area_exited(_area: Area2D) -> void:
+	print("PLAYER: grass exited")
+	grass_overlap_count = max(grass_overlap_count - 1, 0)
