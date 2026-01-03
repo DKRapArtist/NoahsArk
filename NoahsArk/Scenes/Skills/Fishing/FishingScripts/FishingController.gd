@@ -98,13 +98,15 @@ func _on_bite_window_timeout():
 	if state == State.BITE_WINDOW:
 		_fail()
 
-
 func _catch():
 	_stop_fishing_sfx_loop()
 	state = State.IDLE
 
 	bite_timer.stop()
 	bite_window_timer.stop()
+
+	# 💦 Splash when fish is pulled in
+	SFXManagerGlobal.play("fishcaught", -2.0, randf_range(0.95, 1.05))
 
 	var table := _get_fish_table()
 	var fish := _roll_fish(table)
@@ -117,7 +119,6 @@ func _catch():
 	await player.anim.animation_finished
 
 	_end_fishing()
-
 
 func _fail():
 	_play_random("fishing", 3)
@@ -239,16 +240,33 @@ func _is_facing_water(water_tilemap: TileMapLayer) -> bool:
 	var facing := _get_facing_dir()
 	var tile_size := Vector2(water_tilemap.tile_set.tile_size)
 
-	var feet_pos := player.global_position + Vector2(0, tile_size.y * 0.5)
-	var world_pos := feet_pos + facing * tile_size
+	# Start from a better "interaction origin" on the player
+	var origin := player.global_position
+
+	# Tune these numbers if needed (they're in pixels)
+	# They push the check origin closer to the player's hands/feet depending on direction.
+	var x_pad := tile_size.x * 0.35
+	var y_pad := tile_size.y * 0.45
+
+	match player.last_direction:
+		"Down":
+			origin += Vector2(0, y_pad)
+		"Up":
+			origin += Vector2(0, -y_pad * 0.4)
+		"Right":
+			origin += Vector2(x_pad, y_pad * 0.2)
+		"Left":
+			origin += Vector2(-x_pad, y_pad * 0.2)
+
+	# Check one tile forward from that origin
+	var check_pos := origin + facing * tile_size
 
 	var cell := water_tilemap.local_to_map(
-		water_tilemap.to_local(world_pos)
+		water_tilemap.to_local(check_pos)
 	)
 
 	var data := water_tilemap.get_cell_tile_data(cell)
 	return data != null and data.get_custom_data("tile_type") == "water"
-
 
 func _get_facing_dir() -> Vector2:
 	match player.last_direction:
@@ -280,7 +298,6 @@ func _start_fishing_sfx_loop():
 	fishing_sfx_timer.start(
 		randf_range(fishing_sfx_min_delay, fishing_sfx_max_delay)
 	)
-
 
 func _stop_fishing_sfx_loop():
 	fishing_sfx_timer.stop()

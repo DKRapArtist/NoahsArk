@@ -6,6 +6,8 @@ signal player_stopped
 @export var speed: float = 60.0
 @export var move_hold_threshold: float = 0.02
 @export var inv: Inv
+@export var step_interval := 0.35
+@export var step_start_delay := 0.15
 
 var last_direction: String = "Down"
 var hold_time: float = 0.0
@@ -18,6 +20,7 @@ var has_hit_this_swing := false
 var was_moving := false
 var grass_overlap_count := 0
 var grass_overlay: Sprite2D
+var step_timer := step_start_delay
 
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -29,17 +32,22 @@ var grass_overlay: Sprite2D
 func _physics_process(delta: float) -> void:
 	var fishing := $FishingController as FishingController
 
+	# Block movement while fishing
 	if fishing and fishing.is_fishing:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
 
+	# Block movement while swinging
 	if is_swinging:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		_update_interact_ray_direction()
 		return
 
+	# --------------------
+	# MOVEMENT
+	# --------------------
 	var input_dir := Input.get_vector("left", "right", "up", "down")
 
 	if input_dir == Vector2.ZERO or input_dir.normalized() != last_input_dir.normalized():
@@ -57,8 +65,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	_update_direction(input_dir)
-	
-		# --------------------
+
+	# --------------------
 	# MOVEMENT STATE SIGNALS
 	# --------------------
 	var is_moving := velocity.length() > 0.0
@@ -70,12 +78,39 @@ func _physics_process(delta: float) -> void:
 
 	was_moving = is_moving
 
-	# ✅ Only update animation if NOT fishing
+	# --------------------
+	# ANIMATION
+	# --------------------
 	if fishing == null or not fishing.is_fishing:
 		_update_animation(input_dir)
 
 	_update_interact_ray_direction()
 
+	# --------------------
+	# FOOTSTEP SFX (DEBOUNCED)
+	# --------------------
+	if velocity.length() > 0.0 and not is_swinging:
+		if fishing == null or not fishing.is_fishing:
+			step_timer -= delta
+
+			if step_timer <= 0.0:
+				_play_footstep()
+				step_timer = step_interval
+	else:
+		step_timer = step_start_delay
+
+func _play_footstep() -> void:
+	var sound_prefix := "walkgrass"
+
+	# Later you can swap this based on surface type
+	if grass_overlap_count > 0:
+		sound_prefix = "walkgrass"
+
+	SFXManagerGlobal.play(
+		sound_prefix + str(randi_range(1, 3)),
+		-6.0,
+		randf_range(0.95, 1.05)
+	)
 
 # --------------------
 # AXE HIT CHECK

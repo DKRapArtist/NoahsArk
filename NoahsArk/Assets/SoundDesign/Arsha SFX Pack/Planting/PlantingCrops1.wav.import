@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c8yb88p78qdaj"
+path="res://.godot/imported/PlantingCrops1.wav-8cba53439ffb792bd24955adae268925.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Arsha SFX Pack/Planting/PlantingCrops1.wav"
+dest_files=["res://.godot/imported/PlantingCrops1.wav-8cba53439ffb792bd24955adae268925.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

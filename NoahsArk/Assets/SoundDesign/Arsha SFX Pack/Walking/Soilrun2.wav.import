@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cngijvkxucyeo"
+path="res://.godot/imported/Soilrun2.wav-9cf78be099e76f841412f33217aaaedc.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Arsha SFX Pack/Walking/Soilrun2.wav"
+dest_files=["res://.godot/imported/Soilrun2.wav-9cf78be099e76f841412f33217aaaedc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

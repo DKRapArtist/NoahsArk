@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://0nkg5j2mx7bl"
+path="res://.godot/imported/WoodStep3.wav-065800d3fa40349c21a859d9e2a9aec2.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Arsha SFX Pack/Walking/WoodStep3.wav"
+dest_files=["res://.godot/imported/WoodStep3.wav-065800d3fa40349c21a859d9e2a9aec2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
