@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://drw5f7ms40bly"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_5uwgx"]
+[ext_resource type="Texture2D" uid="uid://1ndcy6xmmbj2" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/Docks/18 - Cod.png" id="2_5uwgx"]
+
+[resource]
+script = ExtResource("1_5uwgx")
+name = "Cod"
+texture = ExtResource("2_5uwgx")
+max_stack = 20
+amount = 1

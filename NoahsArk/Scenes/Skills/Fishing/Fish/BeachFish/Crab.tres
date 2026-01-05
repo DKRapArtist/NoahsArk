@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://dobjltnostbgf"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_iaun6"]
+[ext_resource type="Texture2D" uid="uid://y8ry3g86hhsu" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/Beach/39 - Crab.png" id="2_iaun6"]
+
+[resource]
+script = ExtResource("1_iaun6")
+name = "Crab"
+texture = ExtResource("2_iaun6")
+max_stack = 20
+amount = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=4 uid="uid://btrhhyiun1g4r"]
+[gd_scene load_steps=83 format=4 uid="uid://btrhhyiun1g4r"]
 
 [ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scenes/Areas/StartingArea/StartingArea.gd" id="1_ejlk6"]
 [ext_resource type="Texture2D" uid="uid://iehyyh7pqbn6" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/trees & stuff.png" id="2_csbud"]
@@ -28,7 +28,10 @@
 [ext_resource type="Resource" uid="uid://cfqk06t2jxgmk" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Sea Horse.tres" id="26_jwjmo"]
 [ext_resource type="Resource" uid="uid://bnr8qio1g3ftv" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Lionfish.tres" id="27_5h5c8"]
 [ext_resource type="Resource" uid="uid://bb1ujsl3nnh40" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Cowfish.tres" id="28_s33rv"]
+[ext_resource type="Resource" uid="uid://dhnp5p0cnwndf" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Shrimp.tres" id="29_g6y1v"]
 [ext_resource type="Script" uid="uid://bqsui7fub84oe" path="res://Scenes/Skills/Fishing/FishingScripts/FishTable.gd" id="30_2i6aa"]
+[ext_resource type="Resource" uid="uid://dev88an8an1ik" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Squid.tres" id="30_utfnq"]
+[ext_resource type="Resource" uid="uid://53vrymfbvicy" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Dumbo Octopus.tres" id="31_aa82x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsau2"]
 size = Vector2(578, 498)
@@ -5841,9 +5844,33 @@ weight = 8.5
 item = ExtResource("28_s33rv")
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
+[sub_resource type="Resource" id="Resource_utfnq"]
+script = ExtResource("20_utfnq")
+display_name = "Shrimp"
+base_value = 25
+weight = 35.0
+item = ExtResource("29_g6y1v")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_aa82x"]
+script = ExtResource("20_utfnq")
+display_name = "Squid"
+base_value = 120
+weight = 14.0
+item = ExtResource("30_utfnq")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_hjo4u"]
+script = ExtResource("20_utfnq")
+display_name = "Dumbo Octopus"
+base_value = 420
+weight = 3.0
+item = ExtResource("31_aa82x")
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
 [sub_resource type="Resource" id="Resource_gk7a1"]
 script = ExtResource("30_2i6aa")
-fish = Array[ExtResource("20_utfnq")]([SubResource("Resource_gtdqs"), SubResource("Resource_db521"), SubResource("Resource_s2vn6"), SubResource("Resource_qyb0v"), SubResource("Resource_24xw0"), SubResource("Resource_by0ys"), SubResource("Resource_wwaei"), SubResource("Resource_i7tml")])
+fish = Array[ExtResource("20_utfnq")]([SubResource("Resource_gtdqs"), SubResource("Resource_db521"), SubResource("Resource_s2vn6"), SubResource("Resource_qyb0v"), SubResource("Resource_24xw0"), SubResource("Resource_by0ys"), SubResource("Resource_wwaei"), SubResource("Resource_i7tml"), SubResource("Resource_utfnq"), SubResource("Resource_aa82x"), SubResource("Resource_hjo4u")])
 metadata/_custom_type_script = "uid://bqsui7fub84oe"
 
 [node name="StartingArea" type="Node2D" node_paths=PackedStringArray("water_tilemap")]
