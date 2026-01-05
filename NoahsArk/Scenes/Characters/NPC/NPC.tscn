@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo7oe63sovwpw"]
+
+[ext_resource type="Script" uid="uid://1qap5ivpc8ul" path="res://Scenes/Characters/NPC/NPC.gd" id="1_jswd4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_376eo"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="NPC" type="CharacterBody2D" groups=["npc"]]
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_jswd4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_376eo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://bquafem4h4x7f"]
 
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_4js0g"]
-[ext_resource type="Texture2D" uid="uid://sc1muxi10lxn" path="res://Assets/TileSets/fishing_full/Fish/16 - Bream.png" id="2_10tas"]
+[ext_resource type="Texture2D" uid="uid://b8j3xnkf6wxh7" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/Beach/16 - Bream.png" id="2_btlao"]
 
 [resource]
 script = ExtResource("1_4js0g")
 name = "Bream"
-texture = ExtResource("2_10tas")
+texture = ExtResource("2_btlao")
 max_stack = 20
 amount = 1

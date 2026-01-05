@@ -54,34 +54,51 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 		TransitionScene.transition()
 		await TransitionScene.on_transition_finished
 
-	# Remove old area
+	# ===============================
+	# CLEAN UP OLD AREA
+	# ===============================
+
+	# Remove old area scene
 	for child in current_area.get_children():
 		child.queue_free()
 
-# Remove world objects from YSort (trees + houses + grass)
+	# ✅ REMOVE OLD FENCES (FIX)
+	for fence in get_tree().get_nodes_in_group("fence_occluder"):
+		fence.queue_free()
+
+	# Remove world objects from YSort
 	for node in $YSort.get_children():
 		if node.is_in_group("trees") \
 		or node.is_in_group("house_base") \
 		or node.is_in_group("house_roof") \
+		or node.is_in_group("npc") \
 		or node.is_in_group("tall_grass"):
 			node.queue_free()
 
-
 	await get_tree().process_frame
 
-	# Load new area
+	# ===============================
+	# LOAD NEW AREA
+	# ===============================
+
 	var area: Node2D = load(scene_path).instantiate()
 	current_area.add_child(area)
 
 	await get_tree().process_frame
 
-# Move buildings (base + roof) into YSort
+	# ===============================
+	# MOVE WORLD OBJECTS INTO YSORT
+	# ===============================
+
 	_move_buildings_to_world(area)
 
-# Move Y-sorted world objects out of the area
 	move_group_to_ysort("trees")
 	move_group_to_ysort("tall_grass")
+	move_group_to_ysort("npc")
 
+	# ===============================
+	# PLACE PLAYER
+	# ===============================
 
 	var player := get_tree().get_first_node_in_group("player")
 	var spawn := _find_spawn_in_area(area, spawn_id)

@@ -30,6 +30,8 @@ func _spawn_fences() -> void:
 			continue
 
 		var fence = fence_scenes[atlas_coords].instantiate()
+		fence.add_to_group("fence_occluder") # ✅ ADD THIS LINE
+
 		var base_pos := to_global(map_to_local(cell))
 		fence.global_position = base_pos + Vector2(0, tile_size.y * 0.5)
 		ysort.add_child(fence)

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://doavue673ts6f"]
 
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_q1kq4"]
-[ext_resource type="Texture2D" uid="uid://cuugy52evbrl5" path="res://Assets/TileSets/fishing_full/Fish/10 - Banded Butterflyfish.png" id="2_gjn6n"]
+[ext_resource type="Texture2D" uid="uid://0ymbni3dinsp" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/Beach/10 - Banded Butterflyfish.png" id="2_wcm3f"]
 
 [resource]
 script = ExtResource("1_q1kq4")
 name = "Banded Butterflyfish"
-texture = ExtResource("2_gjn6n")
+texture = ExtResource("2_wcm3f")
 max_stack = 20
 amount = 1

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://bb1q67hgrrr2k"]
 
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_n3g5e"]
-[ext_resource type="Texture2D" uid="uid://cqq0gbofddl3h" path="res://Assets/TileSets/fishing_full/Fish/17 - Pufferfish.png" id="2_8dp27"]
+[ext_resource type="Texture2D" uid="uid://dkhp8w3bawk4f" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/Beach/17 - Pufferfish.png" id="2_wxibr"]
 
 [resource]
 script = ExtResource("1_n3g5e")
 name = "Pufferfish"
-texture = ExtResource("2_8dp27")
+texture = ExtResource("2_wxibr")
 max_stack = 20
 amount = 1

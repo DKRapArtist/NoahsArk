@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://bsvffpmchws3o"]
+[gd_scene load_steps=70 format=4 uid="uid://bsvffpmchws3o"]
 
 [ext_resource type="Texture2D" uid="uid://crtkccgfck1i8" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/tilesetV2.png" id="1_4ydj8"]
 [ext_resource type="Script" uid="uid://dd56u2uku5x7d" path="res://Scenes/Areas/Beach/Beach.gd" id="1_bhb5r"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://coopkn2nxaaj1" path="res://Assets/TileSets/Home Made Assets/tilesetBEACH.png" id="3_wa7n5"]
 [ext_resource type="Texture2D" uid="uid://c7f1d18ivlr8" path="res://Assets/TileSets/Dungeon Asset Pack/Set 4.4.png" id="4_8wu2g"]
 [ext_resource type="Texture2D" uid="uid://iehyyh7pqbn6" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/trees & stuff.png" id="4_o6n08"]
+[ext_resource type="Script" uid="uid://dvj7f44od4114" path="res://Scenes/Functionalities/Exits/Door.gd" id="4_r37jn"]
 [ext_resource type="Script" uid="uid://c223dphhm6648" path="res://Scenes/Functionalities/SpawnPoints/SpawnPoint.gd" id="6_2jw0k"]
 [ext_resource type="Texture2D" uid="uid://myrn8a103i0i" path="res://Assets/TileSets/Home Made Assets/ArkV2.png" id="6_o6n08"]
 [ext_resource type="Script" uid="uid://1ydq6hngbqq0" path="res://Scenes/Functionalities/Exits/Exits.gd" id="6_wa7n5"]
@@ -4957,7 +4958,7 @@ spawn_id = "FromArk"
 
 [node name="FromFishShop" type="Marker2D" parent="SpawnPoints"]
 z_index = 1
-position = Vector2(920, -338)
+position = Vector2(920, -325.155)
 script = ExtResource("6_2jw0k")
 spawn_id = "FromFishShop"
 
@@ -4984,7 +4985,8 @@ position = Vector2(348, -408)
 shape = SubResource("RectangleShape2D_wa7n5")
 
 [node name="ToFishShop" type="Area2D" parent="Exits"]
-script = ExtResource("6_wa7n5")
+script = ExtResource("4_r37jn")
+target_scene_path = "res://Scenes/Buildings/Beach/FishingShopInterior.tscn"
 target_spawn_name = "FromBeach"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToFishShop"]

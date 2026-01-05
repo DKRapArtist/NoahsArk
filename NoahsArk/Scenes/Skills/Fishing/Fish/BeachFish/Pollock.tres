@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://32erei4mvocy"]
 
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_nqsn4"]
-[ext_resource type="Texture2D" uid="uid://gj8b33edme7i" path="res://Assets/TileSets/fishing_full/Fish/13 - Pollock.png" id="2_bvp7c"]
+[ext_resource type="Texture2D" uid="uid://do0xguwx3wp3g" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/Beach/13 - Pollock.png" id="2_wfcfb"]
 
 [resource]
 script = ExtResource("1_nqsn4")
 name = "Pollock"
-texture = ExtResource("2_bvp7c")
+texture = ExtResource("2_wfcfb")
 max_stack = 20
 amount = 1

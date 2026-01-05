@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://rfwtb6bvcuon"]
 
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_tpyfq"]
-[ext_resource type="Texture2D" uid="uid://b6eqni444h5o0" path="res://Assets/TileSets/fishing_full/Fish/04 - Plaice.png" id="2_w6v30"]
+[ext_resource type="Texture2D" uid="uid://c20ndikaxcn2f" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/StartingArea/04 - Plaice.png" id="2_w6v30"]
 
 [resource]
 script = ExtResource("1_tpyfq")
