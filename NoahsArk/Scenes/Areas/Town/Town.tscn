@@ -1,9 +1,10 @@
-[gd_scene load_steps=71 format=4 uid="uid://ceuis1bnsebvl"]
+[gd_scene load_steps=73 format=4 uid="uid://ceuis1bnsebvl"]
 
 [ext_resource type="Texture2D" uid="uid://crtkccgfck1i8" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/tilesetV2.png" id="1_74r3k"]
 [ext_resource type="Script" uid="uid://ba424ealqsn5r" path="res://Scenes/Areas/Town/Town.gd" id="1_hcwu3"]
 [ext_resource type="Texture2D" uid="uid://iehyyh7pqbn6" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/trees & stuff.png" id="2_pbsel"]
 [ext_resource type="Texture2D" uid="uid://brg2qcmno2aet" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/cliff_high.png" id="3_pbsel"]
+[ext_resource type="Script" uid="uid://dvj7f44od4114" path="res://Scenes/Functionalities/Exits/Door.gd" id="4_8g2cq"]
 [ext_resource type="Texture2D" uid="uid://dotd1awtutto3" path="res://Assets/TileSets/Dungeon Asset Pack/Set 1.1 V2.png" id="4_oq6rk"]
 [ext_resource type="Texture2D" uid="uid://bf4xnmcvser75" path="res://Assets/TileSets/pixel 16 woods v2.0/summer/summer_tileset.png" id="5_6l1oh"]
 [ext_resource type="Texture2D" uid="uid://bdbaa6q8yjjcy" path="res://Assets/TileSets/Dungeon Asset Pack/Set 1.2.png" id="5_e5o4w"]
@@ -33,6 +34,9 @@ size = Vector2(48, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8g2cq"]
 size = Vector2(46, 112.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f46o4"]
+size = Vector2(25, 29)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdxtg"]
 texture = ExtResource("1_74r3k")
@@ -9195,6 +9199,11 @@ position = Vector2(463, -1531)
 script = ExtResource("10_oq6rk")
 spawn_id = "FromDocks"
 
+[node name="FromChefs" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-360, -1249)
+script = ExtResource("10_oq6rk")
+spawn_id = "FromChefs"
+
 [node name="Exits" type="Node2D" parent="."]
 
 [node name="ToFarm" type="Area2D" parent="Exits"]
@@ -9214,6 +9223,15 @@ target_spawn_name = "FromTown"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToDocks"]
 position = Vector2(521, -1527.75)
 shape = SubResource("RectangleShape2D_8g2cq")
+
+[node name="ToChefs" type="Area2D" parent="Exits"]
+script = ExtResource("4_8g2cq")
+target_scene_path = "res://Scenes/Buildings/Town/ChefHouseInterior.tscn"
+target_spawn_name = "FromTown"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToChefs"]
+position = Vector2(-360.5, -1290.5)
+shape = SubResource("RectangleShape2D_f46o4")
 
 [node name="YSort" type="Node2D" parent="."]
 

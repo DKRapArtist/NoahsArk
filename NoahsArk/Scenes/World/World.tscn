@@ -48,3 +48,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 stretch_mode = 3
+
+[node name="AmountLabel" type="Label" parent="UIRoot/DragIcon"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

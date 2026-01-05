@@ -2,6 +2,7 @@ extends CanvasLayer
 class_name UIRoot
 
 @onready var drag_icon: TextureRect = $DragIcon
+@onready var drag_amount_label: Label = $DragIcon/AmountLabel
 
 var is_dragging: bool = false
 var picked_slot_index: int = -1
@@ -18,6 +19,8 @@ func start_drag(slot_index: int, slot: InvSlot) -> void:
 	drag_icon.texture = slot.item.texture
 	drag_icon.visible = true
 	is_dragging = true
+
+	set_drag_amount(1)
 	_update_drag_icon_position()
 
 func stop_drag() -> void:
@@ -32,3 +35,8 @@ func _process(_delta: float) -> void:
 func _update_drag_icon_position() -> void:
 	var mouse_pos = get_viewport().get_mouse_position()
 	drag_icon.global_position = mouse_pos - drag_icon.size * 0.5
+
+func set_drag_amount(amount: int) -> void:
+	if drag_amount_label:
+		drag_amount_label.visible = amount > 1
+		drag_amount_label.text = str(amount)

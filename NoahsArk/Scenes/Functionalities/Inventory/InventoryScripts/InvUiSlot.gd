@@ -12,10 +12,11 @@ func _ready() -> void:
 		hotkey_label.text = hotkey_text
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton \
-	and event.button_index == MOUSE_BUTTON_LEFT \
-	and event.pressed:
-		_on_left_click()
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			_on_left_click()
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			_on_right_click()
 
 func _on_left_click() -> void:
 	var inv_ui := get_tree().get_first_node_in_group("inventory_ui") as InventoryUI
@@ -23,6 +24,11 @@ func _on_left_click() -> void:
 		return
 
 	inv_ui.on_slot_clicked(index)
+
+func _on_right_click() -> void:
+	var inv_ui := get_tree().get_first_node_in_group("inventory_ui") as InventoryUI
+	if inv_ui:
+		inv_ui.on_slot_right_clicked(index)
 
 func update(slot: InvSlot):
 	if slot == null or slot.item == null or slot.amount <= 0:
