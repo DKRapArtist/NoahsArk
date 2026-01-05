@@ -21,6 +21,7 @@ class_name BaseTree
 @export var can_respawn := true
 @export var shake_strength := 2.0
 @export var shake_duration := 0.08
+@export var woodcutting_xp := 10
 
 const FADE_ALPHA := 0.35
 const FADE_SPEED := 8.0
@@ -113,6 +114,8 @@ func chop_down() -> void:
 				global_position,
 				respawn_time
 			)
+
+	PlayerProgressionGlobal.add_xp("woodcutting", woodcutting_xp)  # ← Single line
 
 	for i in range(wood_amount):
 		_spawn_wood()

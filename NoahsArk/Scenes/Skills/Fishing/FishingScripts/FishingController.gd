@@ -6,6 +6,7 @@ class_name FishingController
 @export var bite_window_duration := 0.45
 @export var fishing_sfx_min_delay := 0.5
 @export var fishing_sfx_max_delay := 3.0
+@export var fishing_xp := 8
 
 @onready var bite_window_timer: Timer = $BiteWindowTimer
 @onready var bite_timer: Timer = $BiteTimer
@@ -98,7 +99,7 @@ func _on_bite_window_timeout():
 	if state == State.BITE_WINDOW:
 		_fail()
 
-func _catch():
+func _catch() -> void:
 	_stop_fishing_sfx_loop()
 	state = State.IDLE
 
@@ -114,6 +115,8 @@ func _catch():
 	if fish and fish.item:
 		_add_item_to_inventory(fish.item, 1)
 		_play_random("pickup", 4)
+
+		PlayerProgressionGlobal.add_xp("fishing", fish.fishing_xp)
 
 	player.anim.play("FishCaught" + player.last_direction)
 	await player.anim.animation_finished

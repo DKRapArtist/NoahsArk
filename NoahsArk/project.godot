@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.5", "Mobile")
 TransitionScene="*res://Scenes/Functionalities/Transitions/TransitionScene.tscn"
 MusicManagerGlobal="*res://Scenes/Globals/GlobalScripts/MusicManagerGlobal.gd"
 SFXManagerGlobal="*res://Scenes/Globals/GlobalScripts/SFXManager.gd"
+PlayerProgressionGlobal="*res://Scenes/Globals/GlobalScripts/PlayerProgressionGlobal.gd"
 
 [display]
 
