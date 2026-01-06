@@ -86,6 +86,14 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 
 	await get_tree().process_frame
 
+# ===============================
+# SPAWN CROPS FOR THIS AREA
+# ===============================
+	var crop_registry := get_node_or_null("CropRegistry") as CropRegistry
+	if crop_registry:
+		crop_registry.spawn_crops_for_area(area)
+
+
 	# ===============================
 	# MOVE WORLD OBJECTS INTO YSORT
 	# ===============================

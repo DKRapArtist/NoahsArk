@@ -18,6 +18,7 @@ var split_total: int = 0
 var split_preview_remainder
 
 func _ready() -> void:
+	inv.ensure_clean_slots()
 	slots.clear()
 	slots.append_array($TextureRect/GridContainer.get_children())
 	slots.append_array($TextureRect/GridContainer2.get_children())
@@ -101,9 +102,9 @@ func on_slot_clicked(slot_index: int) -> void:
 
 	var clicked_slot: InvSlot = inv.slots[slot_index]
 
-# 1) NOTHING IN HAND → PICK UP FULL STACK
+	# 1️⃣ NOTHING IN HAND → PICK UP
 	if picked_slot_index == -1:
-		if clicked_slot == null or clicked_slot.item == null or clicked_slot.amount <= 0:
+		if clicked_slot == null:
 			return
 
 		picked_slot_index = slot_index
@@ -111,61 +112,79 @@ func on_slot_clicked(slot_index: int) -> void:
 		held_total = clicked_slot.amount
 		held_amount = held_total
 
-		# 🔒 HARD RESET SPLIT STATE
-		is_split_drag = false
-		split_total = 0
-		split_preview_remainder = -1
-
 		inv.slots[slot_index] = null
-
 		ui_root.start_drag(slot_index, clicked_slot)
 		ui_root.set_drag_amount(held_amount)
 		inv.notify_changed()
 		return
 
-	# If we get here, we are holding something
+	# 2️⃣ HOLDING SOMETHING
 	if held_item == null or held_total <= 0:
 		return
 
-	var target_slot: InvSlot = inv.slots[slot_index]
+	var target_slot := inv.slots[slot_index]
 
-	# 2) CLICK SAME SLOT OR ANY SLOT → STACK / PLACE
-	# Create slot if empty
-	if target_slot == null or target_slot.item == null:
-		target_slot = InvSlot.new()
-		target_slot.item = held_item
-		target_slot.amount = 0
-		inv.slots[slot_index] = target_slot
+	# 🟩 EMPTY SLOT → PLACE
+	if target_slot == null:
+		var new_slot := InvSlot.new()
+		new_slot.item = held_item
+		new_slot.amount = held_total
+		inv.slots[slot_index] = new_slot
 
-	# If different item, do nothing (no swap implemented)
-	if target_slot.item != held_item:
-		return
-
-	# Stack into target
-	var max_stack := held_item.max_stack
-	var space := max_stack - target_slot.amount
-	if space <= 0:
-		return
-
-	var move = min(space, held_amount)   # place selected amount
-	move = min(move, held_total)          # never exceed what we have
-
-	target_slot.amount += move
-	held_total -= move
-
-	# adjust selected amount after placing
-	if held_total <= 0:
-		# hand empty → end drag
 		ui_root.stop_drag()
 		picked_slot_index = -1
 		held_item = null
 		held_total = 0
 		held_amount = 0
-	else:
-		held_amount = clamp(held_amount, 1, held_total)
-		ui_root.set_drag_amount(held_amount)
+
+		inv.notify_changed()
+		return
+
+	# 🟨 SAME ITEM → STACK
+	if target_slot.item == held_item:
+		var space := held_item.max_stack - target_slot.amount
+		if space > 0:
+			var move = min(space, held_total)
+			target_slot.amount += move
+			held_total -= move
+
+			if held_total <= 0:
+				ui_root.stop_drag()
+				picked_slot_index = -1
+				held_item = null
+				held_total = 0
+				held_amount = 0
+			else:
+				held_amount = held_total
+				ui_root.set_drag_amount(held_amount)
+
+			inv.notify_changed()
+		return
+
+	# 🔁 TRUE SLOT-TO-SLOT SWAP (instant, no hand left)
+	# Recreate the original slot from what was in hand
+	var original_slot := InvSlot.new()
+	original_slot.item = held_item
+	original_slot.amount = held_total
+
+	# target_slot already exists earlier in the function
+	var temp_slot := target_slot
+
+	# Perform the swap
+	inv.slots[picked_slot_index] = temp_slot
+	inv.slots[slot_index] = original_slot
+
+	# Clear hand completely
+	picked_slot_index = -1
+	held_item = null
+	held_total = 0
+	held_amount = 0
+
+	if ui_root:
+		ui_root.stop_drag()
 
 	inv.notify_changed()
+	return
 
 func drop_held_item_to_world() -> void:
 	if held_item == null or held_total <= 0 or held_amount <= 0:
@@ -289,3 +308,53 @@ func on_slot_right_clicked(slot_index: int) -> void:
 	drag_slot.amount = held_total
 	ui_root.start_drag(slot_index, drag_slot)
 	ui_root.set_drag_amount(held_amount)
+
+func combine_item_stacks(slot_index: int) -> void:
+	# Don’t allow while dragging
+	if picked_slot_index != -1:
+		return
+
+	if slot_index < 0 or slot_index >= inv.slots.size():
+		return
+
+	var base_slot := inv.slots[slot_index]
+	if base_slot == null:
+		return
+
+	var item := base_slot.item
+	var max_stack := item.max_stack
+
+	# 1️⃣ Collect total amount of this item
+	var total := 0
+	for i in range(inv.slots.size()):
+		var slot := inv.slots[i]
+		if slot != null and slot.item == item:
+			total += slot.amount
+			inv.slots[i] = null
+
+	# 2️⃣ Refill starting from the clicked slot
+	var remaining := total
+
+	# Fill clicked slot first
+	var first_amount = min(max_stack, remaining)
+	var new_base := InvSlot.new()
+	new_base.item = item
+	new_base.amount = first_amount
+	inv.slots[slot_index] = new_base
+	remaining -= first_amount
+
+	# 3️⃣ Fill ONLY empty slots (skip occupied ones)
+	for i in range(inv.slots.size()):
+		if remaining <= 0:
+			break
+		if inv.slots[i] != null:
+			continue
+
+		var to_add = min(max_stack, remaining)
+		var new_slot := InvSlot.new()
+		new_slot.item = item
+		new_slot.amount = to_add
+		inv.slots[i] = new_slot
+		remaining -= to_add
+
+	inv.notify_changed()

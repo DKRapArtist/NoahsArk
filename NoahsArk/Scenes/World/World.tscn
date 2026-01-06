@@ -1,15 +1,40 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwjcltlvvv3sh"]
+[gd_scene load_steps=15 format=3 uid="uid://dwjcltlvvv3sh"]
 
 [ext_resource type="Script" uid="uid://ckox3i4862uu1" path="res://Scenes/World/World.gd" id="1_5nsto"]
 [ext_resource type="PackedScene" uid="uid://bg60q61fxbuyh" path="res://Scenes/Characters/Player/Player.tscn" id="1_j0p05"]
+[ext_resource type="Script" uid="uid://jgqe2ypmmseh" path="res://Scenes/Skills/Farming/FarmingScripts/FarmTileInteractor.gd" id="2_87yka"]
 [ext_resource type="Script" uid="uid://rw2s1yc2oodr" path="res://Scenes/Functionalities/Inventory/InventoryScripts/UIRoot.gd" id="3_45d1s"]
+[ext_resource type="Script" uid="uid://bf67s3xn3qyu4" path="res://Scenes/Skills/Farming/FarmingScripts/CropRegistry.gd" id="3_kjd5s"]
+[ext_resource type="PackedScene" uid="uid://dlfehfgw5htxj" path="res://Scenes/Skills/Farming/FarmingScenes/CropVisual.tscn" id="4_0d0er"]
 [ext_resource type="PackedScene" uid="uid://creebnybkq5g7" path="res://Scenes/Functionalities/Inventory/InventoryScenes/InventoryUI.tscn" id="4_gjpho"]
+[ext_resource type="Script" uid="uid://jhoi24cdf8xh" path="res://Scenes/Skills/Farming/FarmingScripts/CropDataBase.gd" id="4_p7pgw"]
 [ext_resource type="PackedScene" uid="uid://c0xgbc86q818s" path="res://Scenes/Functionalities/Inventory/Hotbar/Hotbar Scenes/HotbarUI.tscn" id="4_p70al"]
+[ext_resource type="Script" uid="uid://blkyrl541j4lo" path="res://Scenes/Skills/Farming/FarmingScripts/CropData.gd" id="5_ng1ea"]
 [ext_resource type="Resource" uid="uid://fvmnrqbmwkx4" path="res://Scenes/Functionalities/Inventory/PlayerInventory.tres" id="5_p70al"]
+[ext_resource type="Resource" uid="uid://bqe76yi8mupau" path="res://Scenes/Skills/Farming/Items/HarvestedCrops/Chilli.tres" id="5_x5sp8"]
+[ext_resource type="Resource" uid="uid://dwgbc82s02r0o" path="res://Scenes/Skills/Farming/FarmingCrops/ChilliCrop.tres" id="6_0d0er"]
+[ext_resource type="PackedScene" uid="uid://dpk31aty8apqm" path="res://Scenes/Skills/Farming/FarmingScenes/SeedTilePreview.tscn" id="9_lp0bp"]
 
 [node name="World" type="Node2D" groups=["world"]]
 y_sort_enabled = true
 script = ExtResource("1_5nsto")
+
+[node name="FarmTileInteractor" type="Node" parent="."]
+script = ExtResource("2_87yka")
+
+[node name="CropRegistry" type="Node" parent="."]
+script = ExtResource("3_kjd5s")
+crop_visual_scene = ExtResource("4_0d0er")
+crop_items = {
+"Chilli": ExtResource("5_x5sp8")
+}
+
+[node name="CropDataBase" type="Node" parent="." groups=["crop_database"]]
+script = ExtResource("4_p7pgw")
+crops = Array[ExtResource("5_ng1ea")]([ExtResource("6_0d0er")])
+
+[node name="SeedTilePreview" parent="." groups=["seed_preview"] instance=ExtResource("9_lp0bp")]
+visible = false
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -50,6 +75,16 @@ mouse_filter = 2
 stretch_mode = 3
 
 [node name="AmountLabel" type="Label" parent="UIRoot/DragIcon"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -20.0
+offset_right = 30.0
+offset_bottom = 3.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.3, 0.3)

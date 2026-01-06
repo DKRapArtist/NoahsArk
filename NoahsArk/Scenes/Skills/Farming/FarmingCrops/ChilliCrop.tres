@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CropData" load_steps=8 format=3 uid="uid://dwgbc82s02r0o"]
+
+[ext_resource type="Script" uid="uid://blkyrl541j4lo" path="res://Scenes/Skills/Farming/FarmingScripts/CropData.gd" id="1_xxswe"]
+[ext_resource type="Texture2D" uid="uid://baj6clna713vd" path="res://Assets/TileSets/Mana Seed Farming Crops/Crops/ChilliCrop/ChilliCropResources/ChilliSeeds.png" id="2_d6f8k"]
+[ext_resource type="Texture2D" uid="uid://b10xf3648xrhc" path="res://Assets/TileSets/Mana Seed Farming Crops/Crops/ChilliCrop/ChilliCropResources/ChilliCropStage1.png" id="2_kx413"]
+[ext_resource type="Texture2D" uid="uid://dbyheys44g6ae" path="res://Assets/TileSets/Mana Seed Farming Crops/Crops/ChilliCrop/ChilliCropResources/ChilliCropStage2.png" id="3_d6f8k"]
+[ext_resource type="Texture2D" uid="uid://57pj1io3lacf" path="res://Assets/TileSets/Mana Seed Farming Crops/Crops/ChilliCrop/ChilliCropResources/ChilliCropStage3.png" id="4_uef5x"]
+[ext_resource type="Texture2D" uid="uid://lhl4l5flvngj" path="res://Assets/TileSets/Mana Seed Farming Crops/Crops/ChilliCrop/ChilliCropResources/ChilliCropStage4.png" id="5_6po7m"]
+[ext_resource type="Texture2D" uid="uid://s5q1tbxgwxsk" path="res://Assets/TileSets/Mana Seed Farming Crops/Crops/ChilliCrop/ChilliCropResources/ChilliCropStage5.png" id="6_l2w7p"]
+
+[resource]
+script = ExtResource("1_xxswe")
+id = "Chilli"
+display_name = "Chilli Plant"
+stage_textures = Array[Texture2D]([ExtResource("2_d6f8k"), ExtResource("2_kx413"), ExtResource("3_d6f8k"), ExtResource("4_uef5x"), ExtResource("5_6po7m"), ExtResource("6_l2w7p")])

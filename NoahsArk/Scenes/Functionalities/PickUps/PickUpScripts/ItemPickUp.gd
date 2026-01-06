@@ -73,49 +73,41 @@ func try_pickup() -> void:
 
 	var inv_ui := get_tree().get_first_node_in_group("inventory_ui")
 	if inv_ui == null:
-		print("No inventory_ui found")
 		return
 
 	var inv: Inv = inv_ui.inv
 	var remaining := amount
 
-	# 1️⃣ Try stacking first
-	for slot_data in inv.slots:
+	# 1️⃣ STACK INTO EXISTING STACKS
+	for i in range(inv.slots.size()):
 		if remaining <= 0:
 			break
 
-		var slot: InvSlot = slot_data as InvSlot
+		var slot := inv.slots[i]
 		if slot == null:
 			continue
 
 		if slot.item == item:
-			var max_stack := item.max_stack
-			var space := max_stack - slot.amount
+			var space := item.max_stack - slot.amount
 			if space > 0:
-				var to_add: int = min(space, remaining)
+				var to_add = min(space, remaining)
 				slot.amount += to_add
 				remaining -= to_add
 
-	# 2️⃣ Use empty slots
-	for slot_data in inv.slots:
+	# 2️⃣ FIRST AVAILABLE EMPTY SLOT
+	for i in range(inv.slots.size()):
 		if remaining <= 0:
 			break
 
-		var slot: InvSlot = slot_data as InvSlot
-		if slot == null:
-			continue
+		if inv.slots[i] == null:
+			var new_slot := InvSlot.new()
+			new_slot.item = item
+			new_slot.amount = min(item.max_stack, remaining)
+			inv.slots[i] = new_slot
+			remaining -= new_slot.amount
 
-		if slot.item == null:
-			slot.item = item
-			var to_add: int = min(item.max_stack, remaining)
-			slot.amount = to_add
-			remaining -= to_add
-
-	# 3️⃣ Finish
+	# 3️⃣ FINISH UP
 	if remaining <= 0:
-		print("Picked up", amount, item.name)
-
-		# 🔊 Pickup sound (random variant + slight pitch variation)
 		SFXManagerGlobal.play(
 			"pickup" + str(randi_range(1, 4)),
 			-4.0,
@@ -127,4 +119,3 @@ func try_pickup() -> void:
 	else:
 		amount = remaining
 		inv.notify_changed()
-		print("Inventory full; still", remaining, "of", item.name, "left on ground")

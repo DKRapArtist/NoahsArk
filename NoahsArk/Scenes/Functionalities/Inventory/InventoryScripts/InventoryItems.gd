@@ -10,3 +10,6 @@ enum ItemType { GENERIC, TOOL, CONSUMABLE }
 @export var item_type: ItemType = ItemType.GENERIC
 @export var tool_type: String = ""
 @export var power: int = 1
+
+#Seeds (Empty string = not a seed)
+@export var seed_crop_id: String = ""

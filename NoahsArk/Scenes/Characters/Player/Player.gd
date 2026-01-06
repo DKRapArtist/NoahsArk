@@ -8,12 +8,13 @@ signal player_stopped
 @export var inv: Inv
 @export var step_interval := 0.35
 @export var step_start_delay := 0.15
+@export var max_plant_distance := 32.0
 
 var last_direction: String = "Down"
 var hold_time: float = 0.0
 var last_input_dir: Vector2 = Vector2.ZERO
 var active_hotbar_index: int = -1
-
+var block_planting_this_frame := false
 var is_swinging := false
 var pending_tool: InvItem = null
 var has_hit_this_swing := false
@@ -21,7 +22,6 @@ var was_moving := false
 var grass_overlap_count := 0
 var grass_overlay: Sprite2D
 var step_timer := step_start_delay
-
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interact_ray: RayCast2D = $InteractRay
@@ -99,6 +99,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		step_timer = step_start_delay
 
+
 func _play_footstep() -> void:
 	var sound_prefix := "walkgrass"
 
@@ -116,14 +117,82 @@ func _play_footstep() -> void:
 # AXE HIT CHECK
 # --------------------
 func _process(_delta: float) -> void:
-	if not is_swinging:
-		return
-	if has_hit_this_swing:
+	# --------------------------------
+	# RESET PER-FRAME FLAGS
+	# --------------------------------
+	block_planting_this_frame = false
+
+	# --------------------------------
+	# AXE HIT CHECK (UNCHANGED)
+	# --------------------------------
+	if is_swinging and not has_hit_this_swing:
+		# 🔧 Change this number to match your animation
+		if anim.frame >= 2:
+			_apply_axe_hit()
+
+	# --------------------------------
+	# SEED TILE PREVIEW
+	# --------------------------------
+	var preview := get_tree().get_first_node_in_group("seed_preview")
+	if preview == null:
 		return
 
-	# 🔧 Change this number to match your animation
-	if anim.frame >= 2:
-		_apply_axe_hit()
+	# Hide preview if we shouldn't show it
+	if block_planting_this_frame or not _is_holding_seeds():
+		preview.hide_preview()
+		return
+
+	var world := get_tree().get_first_node_in_group("world")
+	if world == null or world.current_area == null:
+		preview.hide_preview()
+		return
+
+	var area = world.current_area
+	var mouse_pos := get_global_mouse_position()
+
+	var tilemap: TileMapLayer = null
+	var cell: Vector2i
+
+	# --------------------------------
+	# FIND FARM TILE UNDER MOUSE
+	# --------------------------------
+	for tm in area.find_children("*", "TileMapLayer", true, false):
+		var local_pos = tm.to_local(mouse_pos)
+		var test_cell = tm.local_to_map(local_pos)
+		var data = tm.get_cell_tile_data(test_cell)
+
+		if data == null:
+			continue
+
+		if data.has_custom_data("tile_type") and data.get_custom_data("tile_type") == "farm":
+			tilemap = tm
+			cell = test_cell
+			break
+
+	if tilemap == null:
+		preview.hide_preview()
+		return
+
+	# --------------------------------
+	# CHECK IF TILE IS EMPTY + IN RANGE
+	# --------------------------------
+	var crop_registry := world.get_node_or_null("CropRegistry")
+	if crop_registry == null:
+		preview.hide_preview()
+		return
+
+	var key := "%s|%s,%s" % [tilemap.get_path(), cell.x, cell.y]
+	var in_range := _is_within_plant_distance(tilemap, cell)
+	var is_empty = not crop_registry.planted_crops.has(key)
+
+	# Can plant ONLY if empty AND in range
+	var can_plant = is_empty and in_range
+
+	# --------------------------------
+	# SHOW PREVIEW
+	# --------------------------------
+	# Always show preview on farm tiles
+	preview.show_at(tilemap, cell, can_plant)
 
 # --------------------
 # INPUT
@@ -157,8 +226,12 @@ func _input(event: InputEvent) -> void:
 # --------------------
 # UseTool
 # --------------------
-
 func try_use_tool() -> void:
+	print("🟡 try_use_tool called")
+
+	if block_planting_this_frame:
+		return
+
 	if is_swinging:
 		return
 
@@ -175,33 +248,116 @@ func try_use_tool() -> void:
 	if slot == null or slot.item == null:
 		return
 
-	if slot.item.item_type != InvItem.ItemType.TOOL:
+	var item := slot.item
+
+	# -------------------------------------------------
+	# 🌱 FARM / SEED INTERACTION  (FIXED + COMPLETE)
+	# -------------------------------------------------
+	var world := get_tree().get_first_node_in_group("world") as World
+	print("🌍 world =", world)
+
+	if world != null:
+		var area := world.current_area.get_child(0) as Node2D
+		if area == null:
+			print("❌ No current area found")
+			return
+
+		var farm := world.get_node_or_null("FarmTileInteractor")
+		print("🌱 farm interactor =", farm)
+
+		if farm != null:
+			var farm_target: Dictionary
+
+			# 🌱 SEEDS → mouse-based targeting
+			if item.item_type == InvItem.ItemType.CONSUMABLE and item.seed_crop_id != "":
+				farm_target = _get_mouse_farm_cell()
+			else:
+				# 🛠️ TOOLS → facing-based targeting
+				farm_target = farm.get_facing_farm_cell(self)
+
+			print("🌾 farm_target =", farm_target)
+
+			# ⛔ If you're not facing a farm tile, we simply don't plant.
+			# We DO NOT return here, because you might be using a tool (axe/fishing) elsewhere.
+			if not farm_target.is_empty():
+				print("🌱 Facing farm tile:", farm_target["cell"])
+
+				# 🌱 SEED CHECK (only attempt planting if facing farm tile)
+				if item.item_type == InvItem.ItemType.CONSUMABLE \
+				and item.seed_crop_id != "":
+
+					var tilemap: TileMapLayer = farm_target["tilemap"]
+					var cell: Vector2i = farm_target["cell"]
+
+					if not _is_within_plant_distance(tilemap, cell):
+						print("❌ Too far away to plant")
+						return
+
+
+					var crop_registry := world.get_node_or_null("CropRegistry") as CropRegistry
+					if crop_registry == null:
+						print("❌ CropRegistry missing")
+						return
+
+					var planted: bool = crop_registry.plant_seed(
+						area,
+						tilemap,
+						cell,
+						item.seed_crop_id
+					)
+
+					if planted:
+						# 🔻 Consume seed
+						slot.amount -= 1
+						if slot.amount <= 0:
+							inv.slots[active_hotbar_index] = null
+
+						inv.notify_changed()
+						print("🌾 Seed consumed, planting successful")
+
+						# 🌱 IMMEDIATE VISUAL FEEDBACK (STAGE 0)
+						var key := crop_registry._make_key(tilemap, cell)
+						var data = crop_registry.planted_crops[key]
+
+						crop_registry.spawn_single_crop_visual(
+							area,
+							tilemap,
+							cell,
+							data
+						)
+
+						print("🌱 Seed visual spawned immediately")
+					else:
+						print("⚠️ Tile already planted")
+
+					return  # ⛔ stop further tool logic ONLY when we attempted planting
+
+	# -------------------------------------------------
+	# 🛠️ TOOL INTERACTION (AXE / FISHING)
+	# -------------------------------------------------
+	if item.item_type != InvItem.ItemType.TOOL:
 		return
 
 	var fishing := $FishingController as FishingController
 
 	print(
 		"[PLAYER] Using tool:",
-		slot.item.tool_type,
+		item.tool_type,
 		"is_fishing=",
 		fishing != null and fishing.is_fishing
 	)
 
 	if fishing and fishing.is_fishing:
-		if slot.item.tool_type != "FishingRod":
+		if item.tool_type != "FishingRod":
 			return
 
-
-	match slot.item.tool_type.to_lower():
+	match item.tool_type.to_lower():
 		"axe":
-			_start_axe_swing(slot.item)
-
+			_start_axe_swing(item)
 		"fishingrod":
 			_start_fishing()
-
 		_:
-			print("[PLAYER] Unknown tool type:", slot.item.tool_type)
-
+			print("[PLAYER] Unknown tool type:", item.tool_type)
 
 func _start_axe_swing(tool: InvItem) -> void:
 	print("[PLAYER] Starting axe swing")
@@ -224,6 +380,7 @@ func _start_fishing() -> void:
 
 	anim.play("FishingCast" + last_direction)
 	fishing.start_fishing()
+
 # --------------------
 # APPLY DAMAGE
 # --------------------
@@ -326,3 +483,47 @@ func _on_grass_detector_area_entered(_area: Area2D) -> void:
 func _on_grass_detector_area_exited(_area: Area2D) -> void:
 	print("PLAYER: grass exited")
 	grass_overlap_count = max(grass_overlap_count - 1, 0)
+
+func _is_holding_seeds() -> bool:
+	if inv == null:
+		return false
+
+	if active_hotbar_index < 0 or active_hotbar_index >= inv.slots.size():
+		return false
+
+	var slot := inv.slots[active_hotbar_index]
+	if slot == null or slot.item == null:
+		return false
+
+	return (
+		slot.item.item_type == InvItem.ItemType.CONSUMABLE
+		and slot.item.seed_crop_id != ""
+	)
+
+func _get_mouse_farm_cell() -> Dictionary:
+	var world := get_tree().get_first_node_in_group("world")
+	if world == null or world.current_area == null:
+		return {}
+
+	var area = world.current_area
+	var mouse_pos := get_global_mouse_position()
+
+	for tm in area.find_children("*", "TileMapLayer", true, false):
+		var local_pos = tm.to_local(mouse_pos)
+		var cell = tm.local_to_map(local_pos)
+		var data = tm.get_cell_tile_data(cell)
+
+		if data == null:
+			continue
+
+		if data.has_custom_data("tile_type") and data.get_custom_data("tile_type") == "farm":
+			return {
+				"tilemap": tm,
+				"cell": cell
+			}
+
+	return {}
+
+func _is_within_plant_distance(tilemap: TileMapLayer, cell: Vector2i) -> bool:
+	var tile_pos := tilemap.to_global(tilemap.map_to_local(cell))
+	return global_position.distance_to(tile_pos) <= max_plant_distance

@@ -1,10 +1,12 @@
-[gd_scene load_steps=25 format=4 uid="uid://bek7driay8hpo"]
+[gd_scene load_steps=32 format=4 uid="uid://bek7driay8hpo"]
 
 [ext_resource type="Texture2D" uid="uid://uywoi7fs2ra7" path="res://Assets/TileSets/Home Made Assets/Exported/FarmingHouseInt.png" id="1_bttnr"]
 [ext_resource type="Texture2D" uid="uid://mx4qe13a84d2" path="res://Assets/TileSets/Home Made Assets/Exported/FishingShopInt.png" id="2_n5oud"]
 [ext_resource type="Texture2D" uid="uid://cdbbqwxe0oi2q" path="res://Assets/TileSets/Home Made Assets/Exported/HouseInt.png" id="3_4a06k"]
 [ext_resource type="Script" uid="uid://dvj7f44od4114" path="res://Scenes/Functionalities/Exits/Door.gd" id="4_n5oud"]
 [ext_resource type="Script" uid="uid://c223dphhm6648" path="res://Scenes/Functionalities/SpawnPoints/SpawnPoint.gd" id="5_4a06k"]
+[ext_resource type="PackedScene" uid="uid://bo7oe63sovwpw" path="res://Scenes/Characters/NPC/NPC.tscn" id="6_4mrwh"]
+[ext_resource type="Texture2D" uid="uid://nx7jj5rfu3a1" path="res://Assets/PlayerSpriteSheets/NPC's/ChefIdleSpriteSheet.png" id="7_mfit2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q4axx"]
 size = Vector2(316, 220)
@@ -2065,10 +2067,430 @@ sources/0 = SubResource("TileSetAtlasSource_e4ivn")
 sources/1 = SubResource("TileSetAtlasSource_85qpw")
 sources/2 = SubResource("TileSetAtlasSource_otri4")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4mrwh"]
+texture = ExtResource("3_4a06k")
+1:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+6:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+11:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+16:0/0 = 0
+18:0/0 = 0
+19:0/0 = 0
+21:0/0 = 0
+23:0/0 = 0
+24:0/0 = 0
+26:0/0 = 0
+28:0/0 = 0
+29:0/0 = 0
+1:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+6:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+11:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+16:1/0 = 0
+18:1/0 = 0
+19:1/0 = 0
+21:1/0 = 0
+23:1/0 = 0
+24:1/0 = 0
+26:1/0 = 0
+28:1/0 = 0
+29:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+21:2/0 = 0
+22:2/0 = 0
+23:2/0 = 0
+26:2/0 = 0
+27:2/0 = 0
+28:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+18:3/0 = 0
+21:3/0 = 0
+22:3/0 = 0
+23:3/0 = 0
+26:3/0 = 0
+27:3/0 = 0
+28:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+18:5/0 = 0
+19:5/0 = 0
+20:5/0 = 0
+21:5/0 = 0
+22:5/0 = 0
+23:5/0 = 0
+24:5/0 = 0
+25:5/0 = 0
+26:5/0 = 0
+27:5/0 = 0
+28:5/0 = 0
+29:5/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+18:6/0 = 0
+19:6/0 = 0
+20:6/0 = 0
+21:6/0 = 0
+22:6/0 = 0
+23:6/0 = 0
+24:6/0 = 0
+25:6/0 = 0
+26:6/0 = 0
+27:6/0 = 0
+28:6/0 = 0
+29:6/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+18:7/0 = 0
+19:7/0 = 0
+20:7/0 = 0
+21:7/0 = 0
+22:7/0 = 0
+23:7/0 = 0
+24:7/0 = 0
+25:7/0 = 0
+26:7/0 = 0
+27:7/0 = 0
+28:7/0 = 0
+29:7/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+15:8/0 = 0
+18:8/0 = 0
+19:8/0 = 0
+20:8/0 = 0
+21:8/0 = 0
+22:8/0 = 0
+23:8/0 = 0
+24:8/0 = 0
+25:8/0 = 0
+26:8/0 = 0
+27:8/0 = 0
+28:8/0 = 0
+29:8/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+14:9/0 = 0
+15:9/0 = 0
+18:9/0 = 0
+19:9/0 = 0
+20:9/0 = 0
+21:9/0 = 0
+22:9/0 = 0
+23:9/0 = 0
+24:9/0 = 0
+25:9/0 = 0
+26:9/0 = 0
+27:9/0 = 0
+28:9/0 = 0
+29:9/0 = 0
+18:10/0 = 0
+19:10/0 = 0
+20:10/0 = 0
+21:10/0 = 0
+22:10/0 = 0
+23:10/0 = 0
+24:10/0 = 0
+25:10/0 = 0
+26:10/0 = 0
+27:10/0 = 0
+28:10/0 = 0
+29:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+5:11/0 = 0
+6:11/0 = 0
+7:11/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+12:11/0 = 0
+13:11/0 = 0
+14:11/0 = 0
+18:11/0 = 0
+19:11/0 = 0
+20:11/0 = 0
+21:11/0 = 0
+22:11/0 = 0
+23:11/0 = 0
+24:11/0 = 0
+25:11/0 = 0
+26:11/0 = 0
+27:11/0 = 0
+28:11/0 = 0
+29:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+5:12/0 = 0
+6:12/0 = 0
+7:12/0 = 0
+8:12/0 = 0
+9:12/0 = 0
+10:12/0 = 0
+11:12/0 = 0
+12:12/0 = 0
+13:12/0 = 0
+14:12/0 = 0
+18:12/0 = 0
+19:12/0 = 0
+20:12/0 = 0
+21:12/0 = 0
+22:12/0 = 0
+23:12/0 = 0
+24:12/0 = 0
+25:12/0 = 0
+26:12/0 = 0
+27:12/0 = 0
+28:12/0 = 0
+29:12/0 = 0
+0:13/0 = 0
+1:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+17:29/0 = 0
+18:29/0 = 0
+19:29/0 = 0
+20:29/0 = 0
+21:29/0 = 0
+22:29/0 = 0
+23:29/0 = 0
+24:29/0 = 0
+25:29/0 = 0
+26:29/0 = 0
+27:29/0 = 0
+28:29/0 = 0
+29:29/0 = 0
+17:30/0 = 0
+19:30/0 = 0
+20:30/0 = 0
+21:30/0 = 0
+22:30/0 = 0
+23:30/0 = 0
+24:30/0 = 0
+25:30/0 = 0
+26:30/0 = 0
+27:30/0 = 0
+28:30/0 = 0
+29:30/0 = 0
+30:30/0 = 0
+17:31/0 = 0
+18:31/0 = 0
+19:31/0 = 0
+20:31/0 = 0
+21:31/0 = 0
+22:31/0 = 0
+23:31/0 = 0
+24:31/0 = 0
+25:31/0 = 0
+26:31/0 = 0
+27:31/0 = 0
+28:31/0 = 0
+18:13/0 = 0
+18:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -3.956891, 8, -3.956891, 8, 8, -8, 8)
+18:14/0 = 0
+18:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.2590122, -8, -0.8992939, 4.136751, 8, 3.956892, 8, -8)
+19:14/0 = 0
+19:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(1.2590122, -8, 1.4388695, 4.136751, -8, 4.4964695, -8, -8)
+20:14/0 = 0
+20:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.136751, -8, -3.956892, 5.036045, 8, 4.856186, 8, -8)
+21:14/0 = 0
+21:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.136751, -8, 3.956892, 5.036045, -8, 4.856186, -8, -8)
+22:15/0 = 0
+22:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(1.7985878, -8, 1.7985878, 1.2590122, -2.6978807, 2.3381634, -8, 4.3166103, -8, 8, 8, 8, 8, -8)
+23:15/0 = 0
+23:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.7985878, -8, -1.7985878, 1.2590122, 2.6978807, 2.3381634, 8, 4.3166103, 8, 8, -8, 8, -8, -8)
+18:15/0 = 0
+18:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 2.6978817, 3.5971737, 2.8777409, 3.2374573, 8, 8, 8, 8, 2.3381634, 8, 1.978447, 8, -8)
+19:15/0 = 0
+19:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 3.7770348, -8, 3.5971756, -8, -8)
+20:15/0 = 0
+20:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.5971746, -8, -3.2374573, 1.0791531, 8, 1.2590122, 8, -8)
+21:15/0 = 0
+21:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(3.5971746, -8, 3.2374573, 1.0791531, -8, 1.2590122, -8, -8)
+24:15/0 = 0
+25:15/0 = 0
+26:15/0 = 0
+27:15/0 = 0
+28:15/0 = 0
+29:15/0 = 0
+29:14/0 = 0
+29:13/0 = 0
+28:13/0 = 0
+27:13/0 = 0
+26:13/0 = 0
+25:13/0 = 0
+24:13/0 = 0
+23:13/0 = 0
+22:13/0 = 0
+22:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 4.4964695, -8, 4.6763268)
+21:13/0 = 0
+21:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+20:13/0 = 0
+20:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.3166094, -8, 4.3166094, 8, -8, 8, -8, -8)
+19:13/0 = 0
+19:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.3166094, -8, -4.3166094, 8, 8, 8, 8, -8)
+22:14/0 = 0
+22:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.5756207, -8, -5.5756207, 8, 4.6763268, 8, 4.6763268, -8)
+23:14/0 = 0
+24:14/0 = 0
+25:14/0 = 0
+26:14/0 = 0
+27:14/0 = 0
+28:14/0 = 0
+18:16/0 = 0
+18:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(3.057598, -8, 3.4173164, -0.35971642, 8, -0.35971642, 8, -8)
+19:16/0 = 0
+19:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.057598, -8, -3.4173164, -0.35971642, -8, -0.35971642, -8, -8)
+20:16/0 = 0
+20:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 2.6978817, -3.5971737, 2.8777409, -3.2374573, 8, -8, 8, -8, 2.3381634, -8, 1.978447, -8, -8)
+21:16/0 = 0
+21:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.87774, 8, -2.6978807, 8, -2.3381634, 0.35971832, -0.17985916, 0, -0.17985916, 8)
+22:16/0 = 0
+22:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(2.87774, 8, 2.6978807, 8, 2.3381634, 0.35971832, 0.17985916, 0, 0.17985916, 8)
+23:16/0 = 0
+23:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 3.7770348, 3.057598, 4.4964695, 2.3381634, 8, 8, 8)
+24:16/0 = 0
+24:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 3.7770348, -3.057598, 4.4964695, -2.3381634, 8, -8, 8)
+25:16/0 = 0
+26:16/0 = 0
+27:16/0 = 0
+28:16/0 = 0
+29:16/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_q8tob"]
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_4mrwh")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bttnr"]
 size = Vector2(18, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fwhf"]
+atlas = ExtResource("7_mfit2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2b5d"]
+atlas = ExtResource("7_mfit2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bnuo8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fwhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2b5d")
+}],
+"loop": true,
+"name": &"IdleDown",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3o8o"]
+size = Vector2(12.5, 7)
 
 [node name="ChefHouse" type="Node2D"]
 
@@ -2105,6 +2527,7 @@ tile_map_data = PackedByteArray("AAD3//r/AAAMAAEAAAD3//v/AAAMAAIAAAD5//r/AgAIAAs
 tile_set = SubResource("TileSet_txhna")
 
 [node name="Collision" type="TileMapLayer" parent="YSort/TileMapLayers"]
+tile_map_data = PackedByteArray("AAD+/wIAAAASAA0AAAD9/wIAAAASAA0AAAD8/wIAAAASAA0AAAD7/wIAAAASAA0AAAD6/wIAAAASAA0AAAD5/wIAAAASAA0AAAD4/wIAAAASAA0AAAD3/wIAAAASAA0AAAD2/wIAAAATAA0AAAD2/wEAAAATAA0AAAD2/wAAAAATAA0AAAD2////AAATAA0AAAD2//7/AAATAA0AAAD2//3/AAATAA0AAAD2//z/AAATAA0AAAD2//v/AAATAA0AAAD2//r/AAATAA0AAAD2//n/AAATAA0AAAD2//j/AAATAA0AAAD2//f/AAATAA0AAAD3//f/AAASAA0AAAD4//f/AAASAA0AAAD5//f/AAASAA0AAAD6//f/AAASAA0AAAD7//f/AAASAA0AAAD8//f/AAASAA0AAAD9//f/AAASAA0AAAD+//f/AAASAA0AAAD///f/AAASAA0AAAAAAPf/AAASAA0AAAABAPf/AAASAA0AAAACAPf/AAASAA0AAAADAPf/AAASAA0AAAAEAPf/AAASAA0AAAAFAPf/AAASAA0AAAAGAPf/AAASAA0AAAAHAPf/AAASAA0AAAAIAPf/AAASAA0AAAAIAPj/AAAUAA0AAAAIAPn/AAAUAA0AAAAIAPr/AAAUAA0AAAAIAPv/AAAUAA0AAAAIAPz/AAAUAA0AAAAIAP3/AAAUAA0AAAAIAP7/AAAUAA0AAAAIAP//AAAUAA0AAAAIAAAAAAAUAA0AAAAIAAEAAAAUAA0AAAAIAAIAAAAUAA0AAAAAAAIAAAASAA0AAAABAAIAAAASAA0AAAACAAIAAAASAA0AAAADAAIAAAASAA0AAAAEAAIAAAASAA0AAAAFAAIAAAASAA0AAAAGAAIAAAASAA0AAAAHAAIAAAASAA0AAAAAAAMAAAAUAA0AAAD+/wMAAAATAA0AAAD3//r/AAAVAA0AAAD4//r/AAAVAA0AAAD5//r/AAAVAA0AAAD6//r/AAAVAA0AAAD7//r/AAAVAA0AAAD8//r/AAAVAA0AAAD9//r/AAAVAA0AAAD+//r/AAAVAA0AAAD///r/AAAVAA0AAAAAAPr/AAAVAA0AAAABAPr/AAAVAA0AAAACAPr/AAAVAA0AAAADAPr/AAAVAA0AAAAEAPr/AAAVAA0AAAAFAPr/AAAVAA0AAAAGAPr/AAAVAA0AAAAHAPr/AAAVAA0AAAD3//v/AAAWAA0AAAD4//v/AAAWAA0AAAD5//v/AAAWAA0AAAD6//v/AAAWAA0AAAD7//v/AAAWAA0AAAD8//v/AAAWAA0AAAD9//v/AAASAA4AAAD+//v/AAATAA4AAAAAAPv/AAAUAA4AAAABAPv/AAAVAA4AAAD3/wEAAAAWAA4AAAD3/wAAAAAWAA4AAAD3////AAAWAA4AAAAAAP7/AAASAA8AAAABAP7/AAAUABAAAAAEAPz/AAASAA8AAAAFAPz/AAAUABAAAAAEAAAAAAASAA8AAAAFAAAAAAAUABAAAAD///7/AAAUAA8AAAADAAAAAAAUAA8AAAADAPz/AAAUAA8AAAACAP7/AAAVAA8AAAAGAPz/AAAVAA8AAAAGAAAAAAAVAA8AAAAAAP3/AAAWAA8AAAAEAPv/AAAWAA8AAAAEAP//AAAWAA8AAAABAP3/AAAXAA8AAAAFAPv/AAAXAA8AAAAFAP//AAAXAA8AAAAAAP//AAASABAAAAAEAAEAAAASABAAAAAEAP3/AAASABAAAAAFAAEAAAATABAAAAABAP//AAATABAAAAAFAP3/AAATABAAAAD///3/AAAVABAAAAADAPv/AAAVABAAAAADAP//AAAVABAAAAAGAP//AAAWABAAAAACAP3/AAAWABAAAAAGAPv/AAAWABAAAAAAAPz/AAAXABAAAAAEAP7/AAAXABAAAAABAPz/AAAYABAAAAAFAP7/AAAYABAAAAA=")
 tile_set = SubResource("TileSet_q8tob")
 
 [node name="Exits" type="Node2D" parent="."]
@@ -2124,3 +2547,18 @@ shape = SubResource("RectangleShape2D_bttnr")
 position = Vector2(-8, 13)
 script = ExtResource("5_4a06k")
 spawn_id = "FromTown"
+
+[node name="NPC" parent="." instance=ExtResource("6_4mrwh")]
+collision_layer = 2
+npc_name = "Chef"
+
+[node name="AnimatedSprite2D" parent="NPC" index="0"]
+position = Vector2(-88, -31)
+sprite_frames = SubResource("SpriteFrames_bnuo8")
+animation = &"IdleDown"
+
+[node name="CollisionShape2D" parent="NPC" index="1"]
+position = Vector2(-88.25, -23)
+shape = SubResource("RectangleShape2D_w3o8o")
+
+[editable path="NPC"]

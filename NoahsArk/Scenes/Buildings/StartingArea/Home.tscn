@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dvmiixnjbclps"]
+[gd_scene load_steps=29 format=4 uid="uid://dvmiixnjbclps"]
 
 [ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scenes/Areas/StartingArea/StartingArea.gd" id="1_k4x5e"]
 [ext_resource type="Texture2D" uid="uid://cdbbqwxe0oi2q" path="res://Assets/TileSets/Home Made Assets/Exported/HouseInt.png" id="1_qk4ws"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d02h8cwyppt1t" path="res://Assets/TileSets/DG Fire Zone Asset Pack/Items/Axe.png" id="6_k4x5e"]
 [ext_resource type="Resource" uid="uid://mirlg0te7dns" path="res://Scenes/Skills/Fishing/Items/FishingRods/BeginnerRod.tres" id="7_j4lkw"]
 [ext_resource type="Texture2D" uid="uid://uywoi7fs2ra7" path="res://Assets/TileSets/Home Made Assets/Exported/FarmingHouseInt.png" id="8_l3hyo"]
+[ext_resource type="Resource" uid="uid://bmwi83cgv4iuv" path="res://Scenes/Skills/Farming/Items/Seeds/ChilliPacket.tres" id="8_r6b7a"]
 [ext_resource type="Texture2D" uid="uid://mx4qe13a84d2" path="res://Assets/TileSets/Home Made Assets/Exported/FishingShopInt.png" id="10_r6b7a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq36m"]
@@ -1968,6 +1969,11 @@ item = SubResource("Resource_s2keo")
 [node name="Rod" parent="Items" instance=ExtResource("4_ukdna")]
 position = Vector2(58, 93)
 item = ExtResource("7_j4lkw")
+
+[node name="ChilliPacket" parent="Items" instance=ExtResource("4_ukdna")]
+position = Vector2(12.725, 74.535)
+item = ExtResource("8_r6b7a")
+amount = 5
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true

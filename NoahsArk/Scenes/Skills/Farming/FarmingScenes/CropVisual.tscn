@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlfehfgw5htxj"]
+
+[ext_resource type="Script" uid="uid://dc136wj5jtnfn" path="res://Scenes/Skills/Farming/FarmingScripts/CropVisual.gd" id="1_oq6jr"]
+[ext_resource type="Texture2D" uid="uid://b10xf3648xrhc" path="res://Assets/TileSets/Mana Seed Farming Crops/Crops/ChilliCrop/ChilliCropResources/ChilliCropStage1.png" id="2_agvwn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvfi3"]
+size = Vector2(9, 26)
+
+[node name="CropVisual" type="Node2D"]
+script = ExtResource("1_oq6jr")
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2(0.5, -9)
+shape = SubResource("RectangleShape2D_nvfi3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, -9)
+texture = ExtResource("2_agvwn")

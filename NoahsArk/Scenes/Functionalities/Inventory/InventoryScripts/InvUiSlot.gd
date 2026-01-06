@@ -14,9 +14,17 @@ func _ready() -> void:
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			_on_left_click()
+			if event.double_click:
+				_on_double_click()
+			else:
+				_on_left_click()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			_on_right_click()
+
+func _on_double_click() -> void:
+	var inv_ui := get_tree().get_first_node_in_group("inventory_ui") as InventoryUI
+	if inv_ui:
+		inv_ui.combine_item_stacks(index)
 
 func _on_left_click() -> void:
 	var inv_ui := get_tree().get_first_node_in_group("inventory_ui") as InventoryUI
