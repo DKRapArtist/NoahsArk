@@ -1973,7 +1973,7 @@ item = ExtResource("7_j4lkw")
 [node name="ChilliPacket" parent="Items" instance=ExtResource("4_ukdna")]
 position = Vector2(12.725, 74.535)
 item = ExtResource("8_r6b7a")
-amount = 5
+amount = 100
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true

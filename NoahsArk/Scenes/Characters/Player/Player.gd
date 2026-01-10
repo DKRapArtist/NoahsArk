@@ -22,6 +22,7 @@ var was_moving := false
 var grass_overlap_count := 0
 var grass_overlay: Sprite2D
 var step_timer := step_start_delay
+var nearby_npc: NPC = null
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interact_ray: RayCast2D = $InteractRay
@@ -194,10 +195,22 @@ func _process(_delta: float) -> void:
 	# Always show preview on farm tiles
 	preview.show_at(tilemap, cell, can_plant)
 
-# --------------------
-# INPUT
-# --------------------
 func _input(event: InputEvent) -> void:
+	if DialogueManager.active_dialogue != null:
+		return  # ⛔ player input locked during dialogue
+
+	if event.is_action_pressed("interact"):
+		print("🔥 INTERACT PRESSED - raycasting NPCs...")
+		var space_state = get_world_2d().direct_space_state
+		var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(100, 0).rotated(global_rotation))  # Forward 100px
+		var result = space_state.intersect_ray(query)
+		if result and result.collider.has_method("interact"):
+			result.collider.interact()
+			return
+
+	# --------------------
+	# HOTBAR KEYS (UNCHANGED)
+	# --------------------
 	if event is InputEventKey and event.pressed and not event.echo:
 		if Input.is_action_just_pressed("hotbar_1"):
 			select_hotbar_slot(0)
@@ -220,8 +233,23 @@ func _input(event: InputEvent) -> void:
 		elif Input.is_action_just_pressed("hotbar_0"):
 			select_hotbar_slot(9)
 
-	if event.is_action_pressed("interact"):
+	# --------------------
+	# 🖱️ LEFT MOUSE → TOOLS + FARMING ONLY
+	# --------------------
+	if event is InputEventMouseButton \
+	and event.button_index == MOUSE_BUTTON_LEFT \
+	and event.pressed:
 		try_use_tool()
+		return
+
+	# --------------------
+	# 🗣️ E KEY → NPC INTERACTION ONLY
+	# --------------------
+	if event.is_action_pressed("interact"):
+		if nearby_npc != null:
+			nearby_npc.interact()
+		return
+
 
 # --------------------
 # UseTool
@@ -527,3 +555,13 @@ func _get_mouse_farm_cell() -> Dictionary:
 func _is_within_plant_distance(tilemap: TileMapLayer, cell: Vector2i) -> bool:
 	var tile_pos := tilemap.to_global(tilemap.map_to_local(cell))
 	return global_position.distance_to(tile_pos) <= max_plant_distance
+
+
+func _on_interaction_area_body_entered(body: Node2D) -> void:
+	if body is NPC:
+		nearby_npc = body
+
+
+func _on_interaction_area_body_exited(body: Node2D) -> void:
+	if nearby_npc == body:
+		nearby_npc = null

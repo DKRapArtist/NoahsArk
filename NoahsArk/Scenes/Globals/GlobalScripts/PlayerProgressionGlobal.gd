@@ -7,7 +7,7 @@ signal xp_changed(skill: String, xp: int)
 # ===============================
 # SKILLS
 # ===============================
-const SKILLS := ["fishing", "woodcutting"]
+const SKILLS := ["combat", "mining", "smithing", "fishing", "cooking", "farming", "crafting", "woodcutting", "alchemy", "enchantment"]
 
 # ===============================
 # DATA

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3 uid="uid://6ubfntgdepiy"]
+
+[ext_resource type="Script" uid="uid://cdlrjmdnh8xu3" path="res://Scenes/Characters/NPCDialogue/DialogueData.gd" id="1_fncdu"]
+
+[resource]
+script = ExtResource("1_fncdu")
+id = "farmer_intro"
+lines = Array[String](["Hello Jay The Gay, You Wanna Farm These Nuts?"])
+metadata/_custom_type_script = "uid://cdlrjmdnh8xu3"

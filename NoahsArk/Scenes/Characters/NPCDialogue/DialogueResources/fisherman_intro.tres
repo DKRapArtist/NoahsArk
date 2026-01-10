@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3 uid="uid://7owv0vx3lpxb"]
+
+[ext_resource type="Script" uid="uid://cdlrjmdnh8xu3" path="res://Scenes/Characters/NPCDialogue/DialogueData.gd" id="1_k4gll"]
+
+[resource]
+script = ExtResource("1_k4gll")
+id = "fisherman_intro"
+lines = Array[String](["if your name is jay and you read this youre gay!"])
+metadata/_custom_type_script = "uid://cdlrjmdnh8xu3"

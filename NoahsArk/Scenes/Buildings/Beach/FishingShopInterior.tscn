@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://b8tavjgjmeuow"]
+[gd_scene load_steps=27 format=4 uid="uid://b8tavjgjmeuow"]
 
 [ext_resource type="Texture2D" uid="uid://mx4qe13a84d2" path="res://Assets/TileSets/Home Made Assets/Exported/FishingShopInt.png" id="1_a6yvy"]
 [ext_resource type="Script" uid="uid://dvj7f44od4114" path="res://Scenes/Functionalities/Exits/Door.gd" id="1_mpwow"]
@@ -1379,6 +1379,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vx03p"]
 size = Vector2(9.25, 7.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nugs6"]
+size = Vector2(14, 26)
+
 [node name="FishingShop" type="Node2D"]
 
 [node name="CameraBounds" type="Node2D" parent="."]
@@ -1438,6 +1441,8 @@ tile_set = SubResource("TileSet_vx03p")
 
 [node name="NPC" parent="." instance=ExtResource("5_vx03p")]
 collision_layer = 2
+npc_id = "fisherman"
+dialogue_id = "fisherman_intro"
 npc_name = "Fisherman"
 
 [node name="AnimatedSprite2D" parent="NPC" index="0"]
@@ -1450,5 +1455,9 @@ frame_progress = 0.46766642
 [node name="CollisionShape2D" parent="NPC" index="1"]
 position = Vector2(31, -22)
 shape = SubResource("RectangleShape2D_vx03p")
+
+[node name="CollisionShape2D" parent="NPC/InteractArea" index="0"]
+position = Vector2(31, -31)
+shape = SubResource("RectangleShape2D_nugs6")
 
 [editable path="NPC"]

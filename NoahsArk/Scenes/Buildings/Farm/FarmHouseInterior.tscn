@@ -1224,6 +1224,8 @@ tile_set = SubResource("TileSet_q8q2b")
 
 [node name="NPC" parent="." instance=ExtResource("5_0hw3h")]
 collision_layer = 2
+npc_id = "farmer"
+dialogue_id = "farmer_intro"
 npc_name = "Farmer"
 
 [node name="AnimatedSprite2D" parent="NPC" index="0"]
@@ -1237,5 +1239,8 @@ frame_progress = 0.18172699
 [node name="CollisionShape2D" parent="NPC" index="1"]
 position = Vector2(86, -32.5)
 shape = SubResource("RectangleShape2D_0hw3h")
+
+[node name="CollisionShape2D" parent="NPC/InteractArea" index="0"]
+position = Vector2(86, -41)
 
 [editable path="NPC"]

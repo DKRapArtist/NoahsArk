@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dwjcltlvvv3sh"]
+[gd_scene load_steps=19 format=3 uid="uid://dwjcltlvvv3sh"]
 
 [ext_resource type="Script" uid="uid://ckox3i4862uu1" path="res://Scenes/World/World.gd" id="1_5nsto"]
 [ext_resource type="PackedScene" uid="uid://bg60q61fxbuyh" path="res://Scenes/Characters/Player/Player.tscn" id="1_j0p05"]
@@ -13,7 +13,11 @@
 [ext_resource type="Resource" uid="uid://fvmnrqbmwkx4" path="res://Scenes/Functionalities/Inventory/PlayerInventory.tres" id="5_p70al"]
 [ext_resource type="Resource" uid="uid://bqe76yi8mupau" path="res://Scenes/Skills/Farming/Items/HarvestedCrops/Chilli.tres" id="5_x5sp8"]
 [ext_resource type="Resource" uid="uid://dwgbc82s02r0o" path="res://Scenes/Skills/Farming/FarmingCrops/ChilliCrop.tres" id="6_0d0er"]
+[ext_resource type="Script" uid="uid://4leh6mdmuqmm" path="res://Scenes/Characters/NPCDialogue/DialogueDatabase.gd" id="9_liy54"]
 [ext_resource type="PackedScene" uid="uid://dpk31aty8apqm" path="res://Scenes/Skills/Farming/FarmingScenes/SeedTilePreview.tscn" id="9_lp0bp"]
+[ext_resource type="Script" uid="uid://cdlrjmdnh8xu3" path="res://Scenes/Characters/NPCDialogue/DialogueData.gd" id="10_c1bjq"]
+[ext_resource type="Resource" uid="uid://6ubfntgdepiy" path="res://Scenes/Characters/NPCDialogue/DialogueResources/farmer_intro.tres" id="11_7n4rk"]
+[ext_resource type="Resource" uid="uid://7owv0vx3lpxb" path="res://Scenes/Characters/NPCDialogue/DialogueResources/fisherman_intro.tres" id="12_jclsg"]
 
 [node name="World" type="Node2D" groups=["world"]]
 y_sort_enabled = true
@@ -32,6 +36,10 @@ crop_items = {
 [node name="CropDataBase" type="Node" parent="." groups=["crop_database"]]
 script = ExtResource("4_p7pgw")
 crops = Array[ExtResource("5_ng1ea")]([ExtResource("6_0d0er")])
+
+[node name="DialogueDataBase" type="Node" parent="." groups=["dialogue_database"]]
+script = ExtResource("9_liy54")
+dialogues = Array[ExtResource("10_c1bjq")]([ExtResource("11_7n4rk"), ExtResource("12_jclsg")])
 
 [node name="SeedTilePreview" parent="." groups=["seed_preview"] instance=ExtResource("9_lp0bp")]
 visible = false

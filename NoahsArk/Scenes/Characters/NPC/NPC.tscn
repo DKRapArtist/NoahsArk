@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bo7oe63sovwpw"]
+[gd_scene load_steps=5 format=3 uid="uid://bo7oe63sovwpw"]
 
 [ext_resource type="Script" uid="uid://1qap5ivpc8ul" path="res://Scenes/Characters/NPC/NPC.gd" id="1_jswd4"]
 
@@ -10,6 +10,11 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jswd4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_376eo"]
+size = Vector2(14, 26)
+
 [node name="NPC" type="CharacterBody2D" groups=["npc"]]
 y_sort_enabled = true
 collision_mask = 2
@@ -19,3 +24,9 @@ script = ExtResource("1_jswd4")
 sprite_frames = SubResource("SpriteFrames_376eo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jswd4")
+
+[node name="InteractArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("RectangleShape2D_376eo")

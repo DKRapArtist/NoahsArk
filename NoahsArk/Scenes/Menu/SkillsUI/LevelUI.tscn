@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=3 uid="uid://dx574wn4wv1np"]
+
+[ext_resource type="Texture2D" uid="uid://bwdhn8kvu5owd" path="res://Assets/HomeMadeAssets/UI/LevelUI/SkillsUIBackground.png" id="1_qn2v7"]
+[ext_resource type="Script" uid="uid://bm0s5u3xdwm5i" path="res://Scenes/Menu/SkillsUI/SkillsUIScript/LevelUI.gd" id="1_vl0qg"]
+[ext_resource type="PackedScene" uid="uid://cklned3wu1f0h" path="res://Scenes/Menu/SkillsUI/SkillRow.tscn" id="2_8oc8g"]
+
+[node name="LevelUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vl0qg")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 512.0
+offset_bottom = 288.0
+texture = ExtResource("1_qn2v7")
+stretch_mode = 2
+
+[node name="CombatRow" parent="." instance=ExtResource("2_8oc8g")]
+layout_mode = 1
+offset_left = 252.0
+offset_top = 81.0
+offset_right = 252.0
+offset_bottom = 81.0
+theme_override_constants/separation = -5
+skill_id = "combat"
+
+[node name="MiningRow" parent="." instance=ExtResource("2_8oc8g")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 89.685
+offset_right = 385.0
+offset_bottom = 105.685
+theme_override_constants/separation = -5
+skill_id = "mining"
+
+[node name="SmithingRow" parent="." instance=ExtResource("2_8oc8g")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 99.0
+offset_right = 385.0
+offset_bottom = 115.0
+theme_override_constants/separation = -5
+skill_id = "smithing"
+
+[node name="FishingRow" parent="." instance=ExtResource("2_8oc8g")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 108.0
+offset_right = 385.0
+offset_bottom = 124.0
+theme_override_constants/separation = -5
+skill_id = "fishing"
+
+[node name="CookingRow" parent="." instance=ExtResource("2_8oc8g")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 117.0
+offset_right = 385.0
+offset_bottom = 133.00012
+theme_override_constants/separation = -5
+skill_id = "cooking"
+
+[node name="FarmingRow" parent="." instance=ExtResource("2_8oc8g")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 126.0
+offset_right = 385.0
+offset_bottom = 142.00027
+theme_override_constants/separation = -5
+skill_id = "farming"
+
+[node name="CraftingRow" parent="." instance=ExtResource("2_8oc8g")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 135.0
+offset_right = 385.0
+offset_bottom = 151.00005
+theme_override_constants/separation = -5
+skill_id = "crafting"
+
+[node name="WoodcuttingRow" parent="." instance=ExtResource("2_8oc8g")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 144.0
+offset_right = 385.0
+offset_bottom = 160.0
+theme_override_constants/separation = -5
+skill_id = "woodcutting"
+
+[node name="AlchemyRow" parent="." instance=ExtResource("2_8oc8g")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 153.0
+offset_right = 385.0
+offset_bottom = 169.0
+theme_override_constants/separation = -5
+skill_id = "alchemy"
+
+[node name="EnchantmentRow" parent="." instance=ExtResource("2_8oc8g")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 162.0
+offset_right = 385.0
+offset_bottom = 178.0
+theme_override_constants/separation = -5
+skill_id = "enchantment"
