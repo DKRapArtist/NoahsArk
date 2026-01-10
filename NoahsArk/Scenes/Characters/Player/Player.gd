@@ -8,7 +8,7 @@ signal player_stopped
 @export var inv: Inv
 @export var step_interval := 0.35
 @export var step_start_delay := 0.15
-@export var max_plant_distance := 32.0
+@export var max_plant_distance := 80.0
 
 var last_direction: String = "Down"
 var hold_time: float = 0.0

@@ -3,7 +3,7 @@ class_name CropVisual
 
 const TOTAL_GROW_TIME := 60.0 # seconds (1 minute for testing)
 const STAGE_COUNT := 6
-const HARVEST_RANGE := 24.0
+const HARVEST_RANGE := 80.0
 
 @onready var sprite: Sprite2D = $Sprite2D
 @export var stage_textures: Array[Texture2D] = []
