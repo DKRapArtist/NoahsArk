@@ -14,6 +14,7 @@ var crop_id: String
 var planted_time: float
 var tilemap: TileMapLayer
 var cell: Vector2i
+var crop_data: CropData
 
 func setup(
 	_crop_data: CropData,
@@ -21,6 +22,7 @@ func setup(
 	_tilemap: TileMapLayer,
 	_cell: Vector2i,
 ) -> void:
+	crop_data = _crop_data
 	crop_id = _crop_data.id
 	planted_time = _planted_time
 	tilemap = _tilemap
@@ -108,6 +110,9 @@ func _harvest() -> void:
 	var key := "%s|%s,%s" % [tilemap.get_path(), cell.x, cell.y]
 	crop_registry.planted_crops.erase(key)
 
+	if crop_data:
+		PlayerProgressionGlobal.add_xp("farming", crop_data.farming_xp)
+
 	# Get harvest item
 	if not crop_registry.crop_items.has(crop_id):
 		push_error("❌ No inventory item registered for crop: " + crop_id)
@@ -116,7 +121,7 @@ func _harvest() -> void:
 
 	var item: InvItem = crop_registry.crop_items[crop_id]
 
-	# ✅ SPAWN PICKUP (SAME AS WOOD / FISH)
+	# Spawn pickup
 	var pickup_scene := preload(
 		"res://Scenes/Functionalities/PickUps/PickUpScenes/ItemPickUp.tscn"
 	)

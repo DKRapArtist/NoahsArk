@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cklned3wu1f0h" path="res://Scenes/Menu/SkillsUI/SkillRow.tscn" id="2_8oc8g"]
 
 [node name="LevelUI" type="Control"]
+process_mode = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

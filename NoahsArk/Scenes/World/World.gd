@@ -225,3 +225,11 @@ func move_group_to_ysort(group_name: String) -> void:
 			var pos = node.global_position
 			node.reparent(ysort)
 			node.global_position = pos
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		print("ESCAPE HANDLED BY WORLD")
+
+		var level_ui = $UIRoot/LevelUI
+		if level_ui:
+			level_ui.visible = !level_ui.visible

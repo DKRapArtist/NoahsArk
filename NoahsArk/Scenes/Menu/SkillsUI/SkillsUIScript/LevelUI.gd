@@ -3,16 +3,24 @@ extends Control
 @onready var skill_rows := []
 
 func _ready():
+	# ✅ ADD THESE LINES
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	set_process_input(true)
+
+	visible = false
+
 	# Collect all SkillRow children
 	for child in get_children():
 		if child.has_method("set_level") and child.skill_id != "":
 			skill_rows.append(child)
 
-	# Initial sync
 	update_all_skills()
-
-	# Listen for level-ups
 	PlayerProgressionGlobal.level_up.connect(_on_skill_level_up)
+
+func toggle() -> void:
+	visible = !visible
+	if visible:
+		update_all_skills()
 
 func update_all_skills():
 	for row in skill_rows:
