@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://dhnp5p0cnwndf"]
+[gd_resource type="Resource" script_class="InvItem" load_steps=4 format=3 uid="uid://dhnp5p0cnwndf"]
 
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_dm34v"]
+[ext_resource type="Resource" uid="uid://c2j5bk8b28peo" path="res://Scenes/Skills/Cooking/FishCooked/StartingAreaFishCooked/Shrimp Cooked.tres" id="1_e1q4b"]
 [ext_resource type="Texture2D" uid="uid://cbbcuvktsuhk8" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/StartingArea/36 - Shrimp.png" id="2_dm34v"]
 
 [resource]
@@ -9,6 +10,8 @@ name = "Shrimp"
 texture = ExtResource("2_dm34v")
 max_stack = 20
 amount = 1
+is_cookable = true
+cooked_version = ExtResource("1_e1q4b")
 item_type = 3
 id_type = "raw"
 id = "fish_shrimp_raw"

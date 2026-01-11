@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://cj57nes0fr47g"]
+[gd_resource type="Resource" script_class="InvItem" load_steps=4 format=3 uid="uid://cj57nes0fr47g"]
 
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_4ua8t"]
+[ext_resource type="Resource" uid="uid://t3pv46sq2wjo" path="res://Scenes/Skills/Cooking/FishCooked/DocksCooked/Halibut Cooked.tres" id="1_oi0it"]
 [ext_resource type="Texture2D" uid="uid://bi4lwc6nq6mct" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/Docks/22 - Halibut.png" id="2_4ua8t"]
 
 [resource]
@@ -9,6 +10,8 @@ name = "Halibut"
 texture = ExtResource("2_4ua8t")
 max_stack = 20
 amount = 1
+is_cookable = true
+cooked_version = ExtResource("1_oi0it")
 item_type = 3
 id_type = "raw"
 id = "fish_halibut_raw"

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://bb1ujsl3nnh40"]
+[gd_resource type="Resource" script_class="InvItem" load_steps=4 format=3 uid="uid://bb1ujsl3nnh40"]
 
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_4bva3"]
+[ext_resource type="Resource" uid="uid://212jy80wl0in" path="res://Scenes/Skills/Cooking/FishCooked/StartingAreaFishCooked/Cowfish Cooked.tres" id="1_ud148"]
 [ext_resource type="Texture2D" uid="uid://dr13anvoxxls5" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/StartingArea/08 - Cowfish.png" id="2_ox0dl"]
 
 [resource]
@@ -9,6 +10,8 @@ name = "Cowfish"
 texture = ExtResource("2_ox0dl")
 max_stack = 20
 amount = 1
+is_cookable = true
+cooked_version = ExtResource("1_ud148")
 item_type = 3
 id_type = "raw"
 id = "fish_cowfish_raw"

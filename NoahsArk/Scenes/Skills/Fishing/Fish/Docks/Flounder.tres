@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://ngkk3ecjdrjj"]
+[gd_resource type="Resource" script_class="InvItem" load_steps=4 format=3 uid="uid://ngkk3ecjdrjj"]
 
+[ext_resource type="Resource" uid="uid://nl3juuts5xxo" path="res://Scenes/Skills/Cooking/FishCooked/DocksCooked/Flounder Cooked.tres" id="1_btaro"]
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_xyygr"]
 [ext_resource type="Texture2D" uid="uid://b066hslssupw3" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/Docks/20 - Flounder.png" id="2_xyygr"]
 
@@ -9,6 +10,8 @@ name = "Flounder"
 texture = ExtResource("2_xyygr")
 max_stack = 20
 amount = 1
+is_cookable = true
+cooked_version = ExtResource("1_btaro")
 item_type = 3
 id_type = "raw"
 id = "fish_flounder_raw"

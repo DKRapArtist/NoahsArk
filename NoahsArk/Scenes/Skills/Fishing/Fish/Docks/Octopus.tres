@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://ci35dsfutx38i"]
+[gd_resource type="Resource" script_class="InvItem" load_steps=4 format=3 uid="uid://ci35dsfutx38i"]
 
+[ext_resource type="Resource" uid="uid://dtq3kfkoluhys" path="res://Scenes/Skills/Cooking/FishCooked/DocksCooked/Octopus Cooked.tres" id="1_7w1ml"]
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_iq1cv"]
 [ext_resource type="Texture2D" uid="uid://s54ome8p7x3x" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/Docks/43 - Octopus.png" id="2_iq1cv"]
 
@@ -9,6 +10,8 @@ name = "Octopus"
 texture = ExtResource("2_iq1cv")
 max_stack = 20
 amount = 1
+is_cookable = true
+cooked_version = ExtResource("1_7w1ml")
 item_type = 3
 id_type = "raw"
 id = "fish_octopus_raw"

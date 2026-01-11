@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://byregij85b7g4"]
+[gd_resource type="Resource" script_class="InvItem" load_steps=4 format=3 uid="uid://byregij85b7g4"]
 
+[ext_resource type="Resource" uid="uid://cn50fgk4l0rp1" path="res://Scenes/Skills/Cooking/FishCooked/StartingAreaFishCooked/Parrot Fish Cooked.tres" id="1_c1wny"]
 [ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_pe0e4"]
 [ext_resource type="Texture2D" uid="uid://cfutmrtkwpq4g" path="res://Assets/TileSets/fishing_full/Fish/OceanFish/StartingArea/01 - Parrot Fish.png" id="2_nnd35"]
 
@@ -9,6 +10,8 @@ name = "Parrot Fish"
 texture = ExtResource("2_nnd35")
 max_stack = 20
 amount = 1
+is_cookable = true
+cooked_version = ExtResource("1_c1wny")
 item_type = 3
 id_type = "raw"
 id = "fish_parrotfish_raw"
