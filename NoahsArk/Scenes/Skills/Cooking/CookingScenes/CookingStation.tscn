@@ -1,13 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://yh2by4eyqp7w"]
+[gd_scene load_steps=5 format=3 uid="uid://yh2by4eyqp7w"]
 
 [ext_resource type="Script" uid="uid://f2gasy1ywcyu" path="res://Scenes/Skills/Cooking/CookingScripts/CookingStation.gd" id="1_ei0qg"]
+[ext_resource type="Texture2D" uid="uid://17vbq8fgwl1w" path="res://Assets/TileSets/Home Made Assets/Exported/Range.png" id="2_mnc5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c6mqp"]
-size = Vector2(32, 40)
+size = Vector2(28, 28)
 
-[node name="CookingStation" type="Area2D" groups=["area_cooking"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ei0qg"]
+size = Vector2(28, 38)
+
+[node name="CookingStation" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_ei0qg")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mnc5q")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_c6mqp")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_ei0qg")

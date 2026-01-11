@@ -16,6 +16,11 @@ func _ready() -> void:
 	sounds["fishingbite"] = load("res://Assets/SoundDesign/Arsha SFX Pack/Fishing/FishingBiteSFX.wav")
 	sounds["fishcaught"] = load("res://Assets/SoundDesign/Arsha SFX Pack/Fishing/FishSplash.wav")
 
+	#Cooking SFX
+	sounds["cooking"] = load("res://Assets/SoundDesign/Arsha SFX Pack/Cooking/Sizzle.wav")
+	sounds["burnt"] = load("res://Assets/SoundDesign/Arsha SFX Pack/Cooking/Burnt.wav")
+	sounds["cooked"] = load("res://Assets/SoundDesign/Arsha SFX Pack/Cooking/CookingComplete.wav")
+
 	# 🎁 Pickups
 	sounds["pickup1"] = load("res://Assets/SoundDesign/Arsha SFX Pack/Collecting/Collect (Pitch 1).wav")
 	sounds["pickup2"] = load("res://Assets/SoundDesign/Arsha SFX Pack/Collecting/Collect (Pitch 2).wav")
