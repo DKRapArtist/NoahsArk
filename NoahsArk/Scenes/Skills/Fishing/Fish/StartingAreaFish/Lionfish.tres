@@ -9,3 +9,6 @@ name = "Lionfish"
 texture = ExtResource("2_liggl")
 max_stack = 20
 amount = 1
+item_type = 3
+id_type = "raw"
+id = "fish_lionfish_raw"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://e0le562vlgav"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_faeas"]
+[ext_resource type="Texture2D" uid="uid://bttwxxuqb8jd" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/BeachCooked/39 - CrabCooked.png" id="2_61lsp"]
+
+[resource]
+script = ExtResource("1_faeas")
+name = "Crab Cooked"
+texture = ExtResource("2_61lsp")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_crab_cooked"

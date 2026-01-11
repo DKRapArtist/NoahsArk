@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3 uid="uid://cf4edb3ayncb0"]
+
+[ext_resource type="Script" uid="uid://cdlrjmdnh8xu3" path="res://Scenes/Characters/NPCDialogue/DialogueData.gd" id="1_idjt2"]
+
+[resource]
+script = ExtResource("1_idjt2")
+id = "noah_intro"
+lines = Array[String](["If your DK, your gay and smell like farts."])
+metadata/_custom_type_script = "uid://cdlrjmdnh8xu3"

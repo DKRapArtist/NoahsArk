@@ -9,3 +9,6 @@ name = "Bream"
 texture = ExtResource("2_btlao")
 max_stack = 20
 amount = 1
+item_type = 3
+id_type = "raw"
+id = "fish_bream_raw"

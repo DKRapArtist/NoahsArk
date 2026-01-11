@@ -9,3 +9,6 @@ name = "Sea Horse"
 texture = ExtResource("2_twj56")
 max_stack = 20
 amount = 1
+item_type = 3
+id_type = "raw"
+id = "fish_seahorse_raw"

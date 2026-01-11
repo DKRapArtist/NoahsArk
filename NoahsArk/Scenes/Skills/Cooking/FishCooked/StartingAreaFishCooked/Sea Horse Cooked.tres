@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://b6m0clvl03400"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_16x15"]
+[ext_resource type="Texture2D" uid="uid://drepfubfsfdcg" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/StartingAreaCooked/06 - Sea HorseCooked.png" id="2_6ehoi"]
+
+[resource]
+script = ExtResource("1_16x15")
+name = "Sea Horse Cooked"
+texture = ExtResource("2_6ehoi")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_seahorse_cooked"

@@ -9,3 +9,6 @@ name = "Octopus"
 texture = ExtResource("2_iq1cv")
 max_stack = 20
 amount = 1
+item_type = 3
+id_type = "raw"
+id = "fish_octopus_raw"

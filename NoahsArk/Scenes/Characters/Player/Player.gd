@@ -23,6 +23,7 @@ var grass_overlap_count := 0
 var grass_overlay: Sprite2D
 var step_timer := step_start_delay
 var nearby_npc: NPC = null
+var nearby_cooking_station: CookingStation = null
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interact_ray: RayCast2D = $InteractRay
@@ -35,6 +36,13 @@ func _physics_process(delta: float) -> void:
 
 	# Block movement while fishing
 	if fishing and fishing.is_fishing:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
+	#block movement while cooking
+	var cooking := $CookingController as CookingController
+	if cooking and cooking.is_cooking:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
@@ -196,20 +204,35 @@ func _process(_delta: float) -> void:
 	preview.show_at(tilemap, cell, can_plant)
 
 func _input(event: InputEvent) -> void:
-	if DialogueManager.active_dialogue != null:
-		return  # ⛔ player input locked during dialogue
-
+	# --------------------
+	# 🗣️ INTERACT (E KEY)
+	# --------------------
 	if event.is_action_pressed("interact"):
-		print("🔥 INTERACT PRESSED - raycasting NPCs...")
-		var space_state = get_world_2d().direct_space_state
-		var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(100, 0).rotated(global_rotation))  # Forward 100px
-		var result = space_state.intersect_ray(query)
-		if result and result.collider.has_method("interact"):
-			result.collider.interact()
+		# ⛔ Lock input during dialogue
+		if DialogueManager.active_dialogue != null:
+			return
+
+		var cooking := $CookingController as CookingController
+
+		# ⛔ Ignore interact if already cooking
+		if cooking and cooking.is_cooking:
+			return
+
+		# 🍳 COOKING (highest priority)
+		if nearby_cooking_station != null and cooking:
+			var item := _get_held_item()
+			if item and item.is_cookable and item.cooked_version:
+				anim.play("CookingStart" + last_direction)
+				cooking.start_cooking(item)
+				return
+
+		# 🗣️ NPC interaction
+		if nearby_npc != null:
+			nearby_npc.interact()
 			return
 
 	# --------------------
-	# HOTBAR KEYS (UNCHANGED)
+	# HOTBAR KEYS
 	# --------------------
 	if event is InputEventKey and event.pressed and not event.echo:
 		if Input.is_action_just_pressed("hotbar_1"):
@@ -234,20 +257,12 @@ func _input(event: InputEvent) -> void:
 			select_hotbar_slot(9)
 
 	# --------------------
-	# 🖱️ LEFT MOUSE → TOOLS + FARMING ONLY
+	# 🖱️ LEFT MOUSE → TOOLS
 	# --------------------
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
 	and event.pressed:
 		try_use_tool()
-		return
-
-	# --------------------
-	# 🗣️ E KEY → NPC INTERACTION ONLY
-	# --------------------
-	if event.is_action_pressed("interact"):
-		if nearby_npc != null:
-			nearby_npc.interact()
 		return
 
 
@@ -375,6 +390,10 @@ func try_use_tool() -> void:
 		fishing != null and fishing.is_fishing
 	)
 
+	var cooking := $CookingController as CookingController
+	if cooking and cooking.is_cooking:
+		return
+
 	if fishing and fishing.is_fishing:
 		if item.tool_type != "FishingRod":
 			return
@@ -456,8 +475,10 @@ func _update_direction(input_dir: Vector2) -> void:
 
 func _update_animation(input_dir: Vector2) -> void:
 	var fishing := $FishingController as FishingController
-	if fishing and fishing.is_fishing:
-		print("[PLAYER] Skipping Idle/Walk override (fishing)")
+	var cooking := $CookingController as CookingController
+
+	if (fishing and fishing.is_fishing) or (cooking and cooking.is_cooking):
+		print("[PLAYER] Skipping Idle/Walk override (fishing/cooking)")
 		return
 
 	var target_anim: String
@@ -560,8 +581,24 @@ func _is_within_plant_distance(tilemap: TileMapLayer, cell: Vector2i) -> bool:
 func _on_interaction_area_body_entered(body: Node2D) -> void:
 	if body is NPC:
 		nearby_npc = body
+	elif body is CookingStation:
+		nearby_cooking_station = body
 
 
 func _on_interaction_area_body_exited(body: Node2D) -> void:
 	if nearby_npc == body:
 		nearby_npc = null
+	elif nearby_cooking_station == body:
+		nearby_cooking_station = null
+
+func _get_held_item() -> InvItem:
+	if inv == null:
+		return null
+	if active_hotbar_index < 0 or active_hotbar_index >= inv.slots.size():
+		return null
+
+	var slot := inv.slots[active_hotbar_index]
+	if slot == null or slot.item == null:
+		return null
+
+	return slot.item

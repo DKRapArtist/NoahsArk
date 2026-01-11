@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://2t0btdkyvkte"
+path="res://.godot/imported/CookingComplete.wav-b28091eb33f6951bb98a2956d7e845e5.sample"
+
+[deps]
+
+source_file="res://Assets/SoundDesign/Arsha SFX Pack/Cooking/CookingComplete.wav"
+dest_files=["res://.godot/imported/CookingComplete.wav-b28091eb33f6951bb98a2956d7e845e5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

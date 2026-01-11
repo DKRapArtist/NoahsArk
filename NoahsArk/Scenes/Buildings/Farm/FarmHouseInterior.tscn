@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dvaydnubxoblh"]
+[gd_scene load_steps=27 format=4 uid="uid://dvaydnubxoblh"]
 
 [ext_resource type="Script" uid="uid://dvj7f44od4114" path="res://Scenes/Functionalities/Exits/Door.gd" id="1_004if"]
 [ext_resource type="Texture2D" uid="uid://uywoi7fs2ra7" path="res://Assets/TileSets/Home Made Assets/Exported/FarmingHouseInt.png" id="1_jsblf"]
@@ -1136,30 +1136,33 @@ physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_42f12")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2kt3v"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hw3h"]
 atlas = ExtResource("6_o706i")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h4aw4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o706i"]
 atlas = ExtResource("6_o706i")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_42f12"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_fka7b"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2kt3v")
+"texture": SubResource("AtlasTexture_0hw3h")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h4aw4")
+"texture": SubResource("AtlasTexture_o706i")
 }],
 "loop": true,
 "name": &"IdleDown",
 "speed": 2.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2kt3v"]
+size = Vector2(11, 7.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hw3h"]
-size = Vector2(10, 7)
+size = Vector2(12, 28)
 
 [node name="FarmHouse" type="Node2D"]
 
@@ -1229,18 +1232,17 @@ dialogue_id = "farmer_intro"
 npc_name = "Farmer"
 
 [node name="AnimatedSprite2D" parent="NPC" index="0"]
-position = Vector2(86, -38)
-scale = Vector2(0.75, 0.75)
-sprite_frames = SubResource("SpriteFrames_42f12")
+position = Vector2(84, -36)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_fka7b")
 animation = &"IdleDown"
-frame = 1
-frame_progress = 0.18172699
 
 [node name="CollisionShape2D" parent="NPC" index="1"]
-position = Vector2(86, -32.5)
-shape = SubResource("RectangleShape2D_0hw3h")
+position = Vector2(84, -29)
+shape = SubResource("RectangleShape2D_2kt3v")
 
 [node name="CollisionShape2D" parent="NPC/InteractArea" index="0"]
-position = Vector2(86, -41)
+position = Vector2(84, -39)
+shape = SubResource("RectangleShape2D_0hw3h")
 
 [editable path="NPC"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://bek7driay8hpo"]
+[gd_scene load_steps=34 format=4 uid="uid://bek7driay8hpo"]
 
 [ext_resource type="Texture2D" uid="uid://uywoi7fs2ra7" path="res://Assets/TileSets/Home Made Assets/Exported/FarmingHouseInt.png" id="1_bttnr"]
 [ext_resource type="Texture2D" uid="uid://mx4qe13a84d2" path="res://Assets/TileSets/Home Made Assets/Exported/FishingShopInt.png" id="2_n5oud"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c223dphhm6648" path="res://Scenes/Functionalities/SpawnPoints/SpawnPoint.gd" id="5_4a06k"]
 [ext_resource type="PackedScene" uid="uid://bo7oe63sovwpw" path="res://Scenes/Characters/NPC/NPC.tscn" id="6_4mrwh"]
 [ext_resource type="Texture2D" uid="uid://nx7jj5rfu3a1" path="res://Assets/PlayerSpriteSheets/NPC's/ChefIdleSpriteSheet.png" id="7_mfit2"]
+[ext_resource type="PackedScene" uid="uid://yh2by4eyqp7w" path="res://Scenes/Skills/Cooking/CookingScenes/CookingStation.tscn" id="8_mfit2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q4axx"]
 size = Vector2(316, 220)
@@ -2492,6 +2493,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3o8o"]
 size = Vector2(12.5, 7)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mrwh"]
+size = Vector2(14, 32)
+
 [node name="ChefHouse" type="Node2D"]
 
 [node name="CameraBounds" type="Node2D" parent="."]
@@ -2550,6 +2554,8 @@ spawn_id = "FromTown"
 
 [node name="NPC" parent="." instance=ExtResource("6_4mrwh")]
 collision_layer = 2
+npc_id = "chef"
+dialogue_id = "chef_intro"
 npc_name = "Chef"
 
 [node name="AnimatedSprite2D" parent="NPC" index="0"]
@@ -2560,5 +2566,12 @@ animation = &"IdleDown"
 [node name="CollisionShape2D" parent="NPC" index="1"]
 position = Vector2(-88.25, -23)
 shape = SubResource("RectangleShape2D_w3o8o")
+
+[node name="CollisionShape2D" parent="NPC/InteractArea" index="0"]
+position = Vector2(-88, -35)
+shape = SubResource("RectangleShape2D_4mrwh")
+
+[node name="CookingStation" parent="." instance=ExtResource("8_mfit2")]
+position = Vector2(-113, -80)
 
 [editable path="NPC"]

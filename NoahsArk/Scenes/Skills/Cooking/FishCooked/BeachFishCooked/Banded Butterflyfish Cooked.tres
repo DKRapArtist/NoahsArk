@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://dor8pb1y5ixy2"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_ecend"]
+[ext_resource type="Texture2D" uid="uid://dxhvabs7v5d6v" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/BeachCooked/10 - Banded ButterflyfishCooked.png" id="2_jsyqi"]
+
+[resource]
+script = ExtResource("1_ecend")
+name = "Banded Butterflyfish Cooked"
+texture = ExtResource("2_jsyqi")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_bandedbutterflyfish_cooked"

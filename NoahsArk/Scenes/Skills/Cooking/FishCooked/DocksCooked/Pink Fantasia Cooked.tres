@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://bijbkol3nxdqd"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_vmekq"]
+[ext_resource type="Texture2D" uid="uid://cyf3r504l3cgp" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/DocksCooked/44 - Pink FantasiaCooked.png" id="2_a8gdw"]
+
+[resource]
+script = ExtResource("1_vmekq")
+name = "Pink Fantasia Cooked"
+texture = ExtResource("2_a8gdw")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_pinkfantasia_cooked"

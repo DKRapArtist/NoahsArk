@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://dvmiixnjbclps"]
+[gd_scene load_steps=30 format=4 uid="uid://dvmiixnjbclps"]
 
 [ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scenes/Areas/StartingArea/StartingArea.gd" id="1_k4x5e"]
 [ext_resource type="Texture2D" uid="uid://cdbbqwxe0oi2q" path="res://Assets/TileSets/Home Made Assets/Exported/HouseInt.png" id="1_qk4ws"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://uywoi7fs2ra7" path="res://Assets/TileSets/Home Made Assets/Exported/FarmingHouseInt.png" id="8_l3hyo"]
 [ext_resource type="Resource" uid="uid://bmwi83cgv4iuv" path="res://Scenes/Skills/Farming/Items/Seeds/ChilliPacket.tres" id="8_r6b7a"]
 [ext_resource type="Texture2D" uid="uid://mx4qe13a84d2" path="res://Assets/TileSets/Home Made Assets/Exported/FishingShopInt.png" id="10_r6b7a"]
+[ext_resource type="PackedScene" uid="uid://yh2by4eyqp7w" path="res://Scenes/Skills/Cooking/CookingScenes/CookingStation.tscn" id="12_rcqcf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq36m"]
 size = Vector2(16, 10.5)
@@ -2003,3 +2004,6 @@ tile_set = SubResource("TileSet_vu3nn")
 [node name="Collision" type="TileMapLayer" parent="YSort/TileMapLayers"]
 tile_map_data = PackedByteArray("AAADAAIAAAAPAB8AAAAEAAIAAAAOAB8AAAAEAAEAAAAPAB8AAAADAAEAAAAPAB8AAAACAAEAAAAPAB8AAAABAAEAAAAPAB8AAAAAAAEAAAAPAB8AAAD//wEAAAAPAB8AAAD+/wEAAAAPAB8AAAD9/wEAAAAPAB8AAAD8/wEAAAAPAB8AAAD8/wAAAAAPAB8AAAD9/wAAAAAPAB8AAAD+/wAAAAAPAB8AAAD//wAAAAAPAB8AAAAAAAAAAAAPAB8AAAABAAAAAAAPAB8AAAACAAAAAAAPAB8AAAADAAAAAAAPAB8AAAAEAAAAAAAPAB8AAAAEAP//AAAPAB8AAAADAP//AAAPAB8AAAACAP//AAAPAB8AAAABAP//AAAPAB8AAAAAAP//AAAPAB8AAAD/////AAAPAB8AAAD+////AAAPAB8AAAD9////AAAPAB8AAAD8////AAAPAB8AAAD7//7/AAAPAB8AAAD7////AAAPAB8AAAD7/wAAAAAPAB8AAAD7/wEAAAAPAB8AAAD7/wIAAAAPAB8AAAD7/wcAAAAPAB8AAAD7/wYAAAAPAB8AAAD7/wUAAAAPAB8AAAD7/wQAAAAPAB8AAAD7/wMAAAAPAB8AAAD8/wcAAAANAB8AAAD9/wcAAAANAB8AAAD+/wcAAAANAB8AAAD//wgAAAAPAB8AAAABAAgAAAAPAB8AAAACAAcAAAANAB8AAAADAAcAAAANAB8AAAAEAAcAAAANAB8AAAAFAAcAAAAPAB8AAAAFAAYAAAAPAB8AAAAFAAUAAAAPAB8AAAAFAAQAAAAPAB8AAAAFAAMAAAAPAB8AAAAFAAIAAAAPAB8AAAAFAAEAAAAPAB8AAAAFAAAAAAAPAB8AAAAFAP//AAAPAB8AAAAFAP7/AAAPAB8AAAAEAP7/AAAPAB8AAAADAP7/AAAPAB8AAAACAP7/AAAPAB8AAAABAP7/AAAPAB8AAAAAAP7/AAAPAB8AAAD///7/AAAPAB8AAAD+//7/AAAPAB8AAAD9//7/AAAPAB8AAAD8//7/AAAPAB8AAAAAAAIAAAAOAB8AAAD//wIAAAAOAB8AAAD8/wIAAAAOAB8AAAADAAMAAAAOAB8AAAABAAcAAAANAB8AAAD//wcAAAANAB8AAAD8/wYAAAAMAB8AAAD8/wUAAAAMAB8AAAD8/wQAAAALAB8AAAA=")
 tile_set = SubResource("TileSet_ukdna")
+
+[node name="CookingStation" parent="." instance=ExtResource("12_rcqcf")]
+position = Vector2(0, 31)

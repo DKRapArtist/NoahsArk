@@ -9,3 +9,6 @@ name = "Dumbo Octopus"
 texture = ExtResource("2_rwds2")
 max_stack = 20
 amount = 1
+item_type = 3
+id_type = "raw"
+id = "fish_dumbooctopus_raw"

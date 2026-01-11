@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://c2ammnv0yg0fp"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_b4d8i"]
+[ext_resource type="Texture2D" uid="uid://dv4qyf52yjlfu" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/BeachCooked/14 - Ballan WrasseCooked.png" id="2_lby0u"]
+
+[resource]
+script = ExtResource("1_b4d8i")
+name = "Ballan Wrasse Cooked"
+texture = ExtResource("2_lby0u")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_ballanwrasse_cooked"

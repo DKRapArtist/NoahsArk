@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://ddsymaai1r0hg"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_4u0ij"]
+[ext_resource type="Texture2D" uid="uid://bjwvnq7i8lu1h" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/DocksCooked/21 - WhitingCooked.png" id="2_1ri7x"]
+
+[resource]
+script = ExtResource("1_4u0ij")
+name = "Whiting Cooked"
+texture = ExtResource("2_1ri7x")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_whiting_cooked"

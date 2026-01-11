@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=4 uid="uid://btrhhyiun1g4r"]
+[gd_scene load_steps=90 format=4 uid="uid://btrhhyiun1g4r"]
 
 [ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scenes/Areas/StartingArea/StartingArea.gd" id="1_ejlk6"]
 [ext_resource type="Texture2D" uid="uid://iehyyh7pqbn6" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/trees & stuff.png" id="2_csbud"]
@@ -32,6 +32,8 @@
 [ext_resource type="Script" uid="uid://bqsui7fub84oe" path="res://Scenes/Skills/Fishing/FishingScripts/FishTable.gd" id="30_2i6aa"]
 [ext_resource type="Resource" uid="uid://dev88an8an1ik" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Squid.tres" id="30_utfnq"]
 [ext_resource type="Resource" uid="uid://53vrymfbvicy" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Dumbo Octopus.tres" id="31_aa82x"]
+[ext_resource type="PackedScene" uid="uid://bo7oe63sovwpw" path="res://Scenes/Characters/NPC/NPC.tscn" id="33_hjo4u"]
+[ext_resource type="Texture2D" uid="uid://dlitrpfm6sjpy" path="res://Assets/PlayerSpriteSheets/NPC's/NoahIdleSpriteSheet.png" id="34_jwjmo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsau2"]
 size = Vector2(578, 498)
@@ -5873,6 +5875,34 @@ script = ExtResource("30_2i6aa")
 fish = Array[ExtResource("20_utfnq")]([SubResource("Resource_gtdqs"), SubResource("Resource_db521"), SubResource("Resource_s2vn6"), SubResource("Resource_qyb0v"), SubResource("Resource_24xw0"), SubResource("Resource_by0ys"), SubResource("Resource_wwaei"), SubResource("Resource_i7tml"), SubResource("Resource_utfnq"), SubResource("Resource_aa82x"), SubResource("Resource_hjo4u")])
 metadata/_custom_type_script = "uid://bqsui7fub84oe"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwjmo"]
+atlas = ExtResource("34_jwjmo")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h5c8"]
+atlas = ExtResource("34_jwjmo")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s33rv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwjmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5h5c8")
+}],
+"loop": true,
+"name": &"IdleDown",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwjmo"]
+size = Vector2(14.5, 6.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h5c8"]
+size = Vector2(16, 29)
+
 [node name="StartingArea" type="Node2D" node_paths=PackedStringArray("water_tilemap")]
 y_sort_enabled = true
 texture_filter = 1
@@ -5999,3 +6029,25 @@ position = Vector2(-142.965, -25.685)
 [node name="AreaFishing" type="Node2D" parent="." groups=["area_fishing"]]
 script = ExtResource("19_g6y1v")
 fish_table = SubResource("Resource_gk7a1")
+
+[node name="NPC" parent="." instance=ExtResource("33_hjo4u")]
+collision_layer = 2
+npc_id = "noah"
+dialogue_id = "noah_intro"
+npc_name = "Noah"
+
+[node name="AnimatedSprite2D" parent="NPC" index="0"]
+position = Vector2(67.99999, 22.999998)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_s33rv")
+animation = &"IdleDown"
+
+[node name="CollisionShape2D" parent="NPC" index="1"]
+position = Vector2(68, 30)
+shape = SubResource("RectangleShape2D_jwjmo")
+
+[node name="CollisionShape2D" parent="NPC/InteractArea" index="0"]
+position = Vector2(68, 20)
+shape = SubResource("RectangleShape2D_5h5c8")
+
+[editable path="NPC"]

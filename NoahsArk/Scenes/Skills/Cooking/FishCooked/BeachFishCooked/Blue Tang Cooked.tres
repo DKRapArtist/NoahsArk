@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://c1exkt0pncdhx"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_k37xv"]
+[ext_resource type="Texture2D" uid="uid://bv4kpyj3cdbt0" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/BeachCooked/12 - Blue TangCooked.png" id="2_edpil"]
+
+[resource]
+script = ExtResource("1_k37xv")
+name = "Blue Tang Cooked"
+texture = ExtResource("2_edpil")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_bluetang_cooked"

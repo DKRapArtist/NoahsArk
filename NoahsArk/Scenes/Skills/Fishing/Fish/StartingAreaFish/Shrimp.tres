@@ -5,7 +5,10 @@
 
 [resource]
 script = ExtResource("1_dm34v")
-name = "Clown FIsh"
+name = "Shrimp"
 texture = ExtResource("2_dm34v")
 max_stack = 20
 amount = 1
+item_type = 3
+id_type = "raw"
+id = "fish_shrimp_raw"

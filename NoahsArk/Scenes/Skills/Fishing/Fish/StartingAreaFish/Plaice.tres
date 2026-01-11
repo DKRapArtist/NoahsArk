@@ -9,3 +9,6 @@ name = "Plaice"
 texture = ExtResource("2_w6v30")
 max_stack = 20
 amount = 1
+item_type = 3
+id_type = "raw"
+id = "fish_plaice_raw"

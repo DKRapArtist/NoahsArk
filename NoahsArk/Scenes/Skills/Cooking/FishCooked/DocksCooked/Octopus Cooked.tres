@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://dtq3kfkoluhys"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_j7ls1"]
+[ext_resource type="Texture2D" uid="uid://bkfbdl2ijsd5k" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/DocksCooked/43 - OctopusCooked.png" id="2_5r11f"]
+
+[resource]
+script = ExtResource("1_j7ls1")
+name = "Octopus Cooked"
+texture = ExtResource("2_5r11f")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_octopus_cooked"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://d3whec22ah4ao"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_liso0"]
+[ext_resource type="Texture2D" uid="uid://cjcgw0ufogdek" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/BeachCooked/13 - PollockCooked.png" id="2_8h3wp"]
+
+[resource]
+script = ExtResource("1_liso0")
+name = "Pollock Cooked"
+texture = ExtResource("2_8h3wp")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_pollock_cooked"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://dpmx12jegberp"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_qlhpd"]
+[ext_resource type="Texture2D" uid="uid://depdhdox1yxsm" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/BeachCooked/42 - TurtleCooked.png" id="2_kery6"]
+
+[resource]
+script = ExtResource("1_qlhpd")
+name = "Turtle Cooked"
+texture = ExtResource("2_kery6")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_turtle_cooked"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://dkvnllir0we5c"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_7cpjt"]
+[ext_resource type="Texture2D" uid="uid://ckqblnp7toj2y" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/BeachCooked/11 - Atlantic BassCooked.png" id="2_unadt"]
+
+[resource]
+script = ExtResource("1_7cpjt")
+name = "Atlantic Bass Cooked"
+texture = ExtResource("2_unadt")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_alanticbass_cooked"

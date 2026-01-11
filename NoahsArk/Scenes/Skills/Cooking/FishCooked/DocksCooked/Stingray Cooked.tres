@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://drxasai8xwvr3"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_cwixx"]
+[ext_resource type="Texture2D" uid="uid://ptxtwmj4jqsr" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/DocksCooked/24 - StingrayCooked.png" id="2_55oy3"]
+
+[resource]
+script = ExtResource("1_cwixx")
+name = "Stingray Cooked"
+texture = ExtResource("2_55oy3")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_stingray_cooked"

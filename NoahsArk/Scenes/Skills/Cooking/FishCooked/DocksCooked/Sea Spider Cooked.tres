@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://civgo5agh3u7t"]
+
+[ext_resource type="Script" uid="uid://dohcr3jcw0bv6" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryItems.gd" id="1_rqr77"]
+[ext_resource type="Texture2D" uid="uid://ba7auuwog62m4" path="res://Assets/TileSets/fishing_full/CookedFish/OceanFishCooked/DocksCooked/Sea SpiderCooked.png" id="2_wju2f"]
+
+[resource]
+script = ExtResource("1_rqr77")
+name = "Sea Spider Cooked"
+texture = ExtResource("2_wju2f")
+max_stack = 20
+amount = 1
+item_type = 4
+id_type = "cooked"
+id = "fish_seaspider_cooked"
