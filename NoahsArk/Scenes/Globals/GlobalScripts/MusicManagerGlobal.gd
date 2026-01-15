@@ -28,6 +28,8 @@ func _ready() -> void:
 	tracks.append(load("res://Assets/SoundDesign/Music/Arsha Music Pack/DesertMusic.wav")) # 9
 	tracks.append(load("res://Assets/SoundDesign/Music/Arsha Music Pack/SwampMusic.wav")) # 10
 	tracks.append(load("res://Assets/SoundDesign/Music/Arsha Music Pack/VolcanoMusic.wav")) # 11
+	tracks.append(load("res://Assets/SoundDesign/Music/Arsha Music Pack/ArkMusic.wav")) # 12
+	
 
 	player = AudioStreamPlayer.new()
 	player.bus = "Master"

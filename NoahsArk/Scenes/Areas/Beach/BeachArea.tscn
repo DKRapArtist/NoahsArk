@@ -4987,7 +4987,7 @@ spawn_id = "FromStart"
 
 [node name="FromArk" type="Marker2D" parent="SpawnPoints"]
 z_index = 1
-position = Vector2(1328, -89)
+position = Vector2(1328, -67.375)
 script = ExtResource("6_2jw0k")
 spawn_id = "FromArk"
 
@@ -5031,6 +5031,7 @@ shape = SubResource("RectangleShape2D_o6n08")
 
 [node name="ToArk" type="Area2D" parent="Exits"]
 script = ExtResource("6_wa7n5")
+target_scene_path = "res://Scenes/Buildings/Beach/ArkInterior.tscn"
 target_spawn_name = "FromBeach"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToArk"]
