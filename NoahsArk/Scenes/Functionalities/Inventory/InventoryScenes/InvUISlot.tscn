@@ -40,3 +40,6 @@ offset_right = 40.0
 offset_bottom = 1.6100006
 scale = Vector2(0.23, 0.23)
 label_settings = SubResource("LabelSettings_qp306")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

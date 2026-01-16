@@ -7,9 +7,14 @@ extends Panel
 @onready var amount_text: Label = $CenterContainer/Panel/Label
 @onready var hotkey_label: Label = $CenterContainer/Panel/HotKeyLabel
 
+var current_item: InvItem
+var tooltip: Panel
+
 func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_STOP
 	if hotkey_label:
 		hotkey_label.text = hotkey_text
+		add_to_group("inventory_slot")
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -20,6 +25,18 @@ func _gui_input(event: InputEvent) -> void:
 				_on_left_click()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			_on_right_click()
+
+func _on_mouse_entered() -> void:
+	var inv_ui := get_tree().get_first_node_in_group("inventory_ui") as InventoryUI
+	if inv_ui and inv_ui.picked_slot_index != -1:
+		return
+
+	if current_item and tooltip:
+		tooltip.show_item(current_item, get_global_mouse_position() + Vector2(16, 16))
+
+func _on_mouse_exited() -> void:
+	if tooltip:
+		tooltip.hide_tooltip()
 
 func _on_double_click() -> void:
 	var inv_ui := get_tree().get_first_node_in_group("inventory_ui") as InventoryUI
@@ -40,10 +57,12 @@ func _on_right_click() -> void:
 
 func update(slot: InvSlot):
 	if slot == null or slot.item == null or slot.amount <= 0:
+		current_item = null
 		item_display.visible = false
 		amount_text.visible = false
 		amount_text.text = ""
 	else:
+		current_item = slot.item
 		item_display.visible = true
 		item_display.texture = slot.item.texture
 

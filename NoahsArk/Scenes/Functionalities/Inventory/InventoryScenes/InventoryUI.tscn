@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://creebnybkq5g7"]
+[gd_scene load_steps=5 format=3 uid="uid://creebnybkq5g7"]
 
 [ext_resource type="Script" uid="uid://cgra7kgsc8bi4" path="res://Scenes/Functionalities/Inventory/InventoryScripts/InventoryUI.gd" id="1_pbufk"]
 [ext_resource type="Texture2D" uid="uid://bqedo77duht07" path="res://Assets/HomeMadeAssets/UI/Inventory2.png" id="2_4h62o"]
 [ext_resource type="PackedScene" uid="uid://bnx8jjqmufsts" path="res://Scenes/Functionalities/Inventory/InventoryScenes/InvUISlot.tscn" id="3_4h62o"]
+[ext_resource type="PackedScene" uid="uid://dk7cfpfvsy6qv" path="res://Scenes/Functionalities/Inventory/InventoryScenes/ItemToolTip.tscn" id="4_agd1a"]
 
 [node name="InventoryUI" type="Control" groups=["inventory_ui"]]
 layout_mode = 3
@@ -160,3 +161,6 @@ layout_mode = 2
 
 [node name="InvUISlot30" parent="TextureRect/GridContainer2" instance=ExtResource("3_4h62o")]
 layout_mode = 2
+
+[node name="ItemToolTip" parent="." instance=ExtResource("4_agd1a")]
+layout_mode = 0

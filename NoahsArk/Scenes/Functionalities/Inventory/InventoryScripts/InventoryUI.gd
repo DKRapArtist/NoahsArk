@@ -24,6 +24,11 @@ func _ready() -> void:
 	slots.append_array($TextureRect/GridContainer2.get_children())
 	add_to_group("inventory_ui")
 
+	# ✅ AUTO-ASSIGN TOOLTIP
+	var tooltip := $ItemToolTip
+	for slot in slots:
+		slot.tooltip = tooltip
+
 	inv.inventory_changed.connect(update_slots)
 
 	for i in slots.size():
@@ -80,6 +85,11 @@ func open():
 func close():
 	visible = false
 	is_open = false
+
+	# ✅ HIDE TOOLTIP
+	var tooltip := $ItemToolTip
+	if tooltip:
+		tooltip.hide_tooltip()
 
 	# clear drag globally
 	var ui_root := get_tree().get_first_node_in_group("ui_root") as UIRoot
