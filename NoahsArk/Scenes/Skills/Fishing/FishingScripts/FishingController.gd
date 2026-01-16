@@ -26,13 +26,23 @@ var fishing_sfx_timer: Timer
 func _ready():
 	set_process_unhandled_input(true)
 
-	bite_timer.timeout.connect(_on_bite_timer_timeout)
-	bite_window_timer.timeout.connect(_on_bite_window_timeout)
+	# --- Timers already in the scene ---
+	if bite_timer:
+		bite_timer.timeout.connect(_on_bite_timer_timeout)
 
+	if bite_window_timer:
+		bite_window_timer.timeout.connect(_on_bite_window_timeout)
+
+	# --- Fishing SFX timer (runtime-created) ---
 	fishing_sfx_timer = Timer.new()
 	fishing_sfx_timer.one_shot = true
 	fishing_sfx_timer.timeout.connect(_on_fishing_sfx_timer)
 	add_child(fishing_sfx_timer)
+
+	# --- REGISTER FISH TABLE (for rarity / tooltip lookup) ---
+	var table := _get_fish_table()
+	if table:
+		FishDatabaseGlobal.register_table(table)
 
 
 # --------------------
@@ -56,6 +66,10 @@ func _unhandled_input(_event):
 func start_fishing() -> void:
 	if is_fishing:
 		return
+
+	var table := _get_fish_table()
+	if table:
+		FishDatabaseGlobal.register_table(table)
 
 	is_fishing = true
 	input_locked = true

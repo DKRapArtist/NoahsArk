@@ -23,6 +23,7 @@ PlayerProgressionGlobal="*res://Scenes/Globals/GlobalScripts/PlayerProgressionGl
 DialogueDataBase="*res://Scenes/Characters/NPCDialogue/DialogueDatabase.gd"
 DialogueManager="*res://Scenes/Characters/NPCDialogue/DialogueManager.gd"
 DialogueUI="*res://Scenes/Characters/NPCDialogue/DialogueUI.tscn"
+FishDatabaseGlobal="*res://Scenes/Globals/GlobalScripts/FishDatabaseGlobal.gd"
 
 [display]
 

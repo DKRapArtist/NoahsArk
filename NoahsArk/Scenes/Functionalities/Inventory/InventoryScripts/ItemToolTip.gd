@@ -1,9 +1,9 @@
-extends Panel
+extends Control
 
-@onready var item_name: Label = $MarginContainer/VBoxContainer/ItemName
-@onready var stars: HBoxContainer = $MarginContainer/VBoxContainer/Stars
-@onready var item_type: Label = $MarginContainer/VBoxContainer/ItemType
-@onready var description: Label = $MarginContainer/VBoxContainer/Description
+@onready var item_name: Label = $NinePatchRect/MarginContainer/VBoxContainer/ItemName
+@onready var stars: HBoxContainer = $NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Stars
+@onready var item_type: Label = $NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ItemType
+@onready var description: Label = $NinePatchRect/MarginContainer/VBoxContainer/Description
 
 const STAR_TEXTURES := {
 	InvItem.Rarity.COMMON: preload("res://Assets/HomeMadeAssets/UI/RarityStars/GreenStar.png"),
@@ -24,21 +24,21 @@ func show_item(item: InvItem, pos: Vector2):
 	description.text = item.description
 	item_type.text = "Type: %s" % InvItem.ItemType.keys()[item.item_type]
 
-	# Clear stars
+	# 🔴 HARD RESET (prevents double stars)
 	for c in stars.get_children():
 		c.queue_free()
+	stars.visible = false
 
-	# ✅ ONLY SHOW STARS IF ITEM HAS RARITY
-	if item.rarity != InvItem.Rarity.COMMON:
+	# ✅ ONLY USE FISH DATABASE
+	var rarity = FishDatabaseGlobal.item_to_rarity.get(item, -1)
+
+	if rarity != -1:
 		stars.visible = true
-
-		for i in RARITY_STARS[item.rarity]:
+		for i in RARITY_STARS[rarity]:
 			var star := TextureRect.new()
-			star.texture = STAR_TEXTURES[item.rarity]
+			star.texture = STAR_TEXTURES[rarity]
 			star.custom_minimum_size = Vector2(16, 16)
 			stars.add_child(star)
-	else:
-		stars.visible = false
 
 	global_position = pos
 	visible = true

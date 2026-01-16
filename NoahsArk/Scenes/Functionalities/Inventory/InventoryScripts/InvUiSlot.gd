@@ -8,7 +8,7 @@ extends Panel
 @onready var hotkey_label: Label = $CenterContainer/Panel/HotKeyLabel
 
 var current_item: InvItem
-var tooltip: Panel
+var tooltip: Control
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP

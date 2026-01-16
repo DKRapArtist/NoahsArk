@@ -15,3 +15,5 @@ cooked_version = ExtResource("1_wyl0y")
 item_type = 3
 id_type = "raw"
 id = "fish_turtle_raw"
+rarity = 3
+description = "Creature that can be caught in Joppa Coast"

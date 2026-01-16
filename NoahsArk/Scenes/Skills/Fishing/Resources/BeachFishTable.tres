@@ -1,3 +1,380 @@
-[gd_resource type="Resource" format=3 uid="uid://csagrb6j0e7dt"]
+[gd_resource type="Resource" script_class="FishTable" load_steps=70 format=3 uid="uid://csagrb6j0e7dt"]
+
+[ext_resource type="Script" uid="uid://lmk8lus6uit4" path="res://Scenes/Skills/Fishing/FishingScripts/FishingData.gd" id="1_snje5"]
+[ext_resource type="Script" uid="uid://bqsui7fub84oe" path="res://Scenes/Skills/Fishing/FishingScripts/FishTable.gd" id="2_u1v84"]
+[ext_resource type="Resource" uid="uid://essgl6lthrd0" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Atlantic Bass.tres" id="2_wek3a"]
+[ext_resource type="Resource" uid="uid://bxomovfvn0b5k" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Ballan Wrasse.tres" id="3_wek3a"]
+[ext_resource type="Resource" uid="uid://doavue673ts6f" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Banded Butterflyfish.tres" id="4_lomwi"]
+[ext_resource type="Resource" uid="uid://budc4id28mgnv" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Blue Tang.tres" id="5_6y2rn"]
+[ext_resource type="Resource" uid="uid://bquafem4h4x7f" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Bream.tres" id="6_da1lu"]
+[ext_resource type="Resource" uid="uid://dobjltnostbgf" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Crab.tres" id="7_rfmo4"]
+[ext_resource type="Resource" uid="uid://dewcp75hq7fxd" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Lobster.tres" id="8_3lxrb"]
+[ext_resource type="Resource" uid="uid://32erei4mvocy" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Pollock.tres" id="9_8w1dp"]
+[ext_resource type="Resource" uid="uid://bb1q67hgrrr2k" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Pufferfish.tres" id="10_0rkso"]
+[ext_resource type="Resource" uid="uid://udot8175coak" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Sea Angel.tres" id="11_xdf1m"]
+[ext_resource type="Resource" uid="uid://cqy8jp2h2qxsi" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Tuna.tres" id="12_dt1qi"]
+[ext_resource type="Resource" uid="uid://b5oy60ylo3xoa" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Turtle.tres" id="13_8np3k"]
+[ext_resource type="Resource" uid="uid://iw7y6xhmwac2" path="res://Scenes/Skills/Fishing/Fish/BeachFish/Weaver Fish.tres" id="14_kagya"]
+[ext_resource type="Resource" uid="uid://drw5f7ms40bly" path="res://Scenes/Skills/Fishing/Fish/Docks/Cod.tres" id="15_vnfmg"]
+[ext_resource type="Resource" uid="uid://dtucvoae1nx0w" path="res://Scenes/Skills/Fishing/Fish/Docks/Dab.tres" id="16_bacc5"]
+[ext_resource type="Resource" uid="uid://ngkk3ecjdrjj" path="res://Scenes/Skills/Fishing/Fish/Docks/Flounder.tres" id="17_6t24c"]
+[ext_resource type="Resource" uid="uid://cj57nes0fr47g" path="res://Scenes/Skills/Fishing/Fish/Docks/Halibut.tres" id="18_kktmy"]
+[ext_resource type="Resource" uid="uid://cnee5gyw5gv7x" path="res://Scenes/Skills/Fishing/Fish/Docks/Herring.tres" id="19_vi6t0"]
+[ext_resource type="Resource" uid="uid://ci35dsfutx38i" path="res://Scenes/Skills/Fishing/Fish/Docks/Octopus.tres" id="20_u13f8"]
+[ext_resource type="Resource" uid="uid://dbf4khhv5hubs" path="res://Scenes/Skills/Fishing/Fish/Docks/Pink Fantasia.tres" id="21_t3u2m"]
+[ext_resource type="Resource" uid="uid://c3c2ownlmuviy" path="res://Scenes/Skills/Fishing/Fish/Docks/Sea Spider.tres" id="22_6it3w"]
+[ext_resource type="Resource" uid="uid://cfll32208yffo" path="res://Scenes/Skills/Fishing/Fish/Docks/Stingray.tres" id="23_yrxfq"]
+[ext_resource type="Resource" uid="uid://voelxemvefr6" path="res://Scenes/Skills/Fishing/Fish/Docks/Whiting.tres" id="24_0v2e0"]
+[ext_resource type="Resource" uid="uid://dlo0v8mfacghh" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Clown Fish.tres" id="25_4fm1y"]
+[ext_resource type="Resource" uid="uid://53vrymfbvicy" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Dumbo Octopus.tres" id="26_uqson"]
+[ext_resource type="Resource" uid="uid://bnr8qio1g3ftv" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Lionfish.tres" id="27_clsy8"]
+[ext_resource type="Resource" uid="uid://dr3xckdtup5aq" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Mackerel.tres" id="28_faqb3"]
+[ext_resource type="Resource" uid="uid://byregij85b7g4" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Parrot Fish.tres" id="29_ifhun"]
+[ext_resource type="Resource" uid="uid://rfwtb6bvcuon" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Plaice.tres" id="30_vpjby"]
+[ext_resource type="Resource" uid="uid://cfqk06t2jxgmk" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Sea Horse.tres" id="31_3jhfh"]
+[ext_resource type="Resource" uid="uid://dhnp5p0cnwndf" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Shrimp.tres" id="32_c5qih"]
+[ext_resource type="Resource" uid="uid://cuajbmw770iyx" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Silver Eel.tres" id="33_i2xuk"]
+[ext_resource type="Resource" uid="uid://dev88an8an1ik" path="res://Scenes/Skills/Fishing/Fish/StartingAreaFish/Squid.tres" id="34_a0ayc"]
+
+[sub_resource type="Resource" id="Resource_lomwi"]
+script = ExtResource("1_snje5")
+id = "11"
+display_name = "Atlantic Bass"
+base_value = 16
+weight = 60.0
+item = ExtResource("2_wek3a")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_6y2rn"]
+script = ExtResource("1_snje5")
+id = "14"
+display_name = "Ballan Wrasse"
+base_value = 17
+weight = 60.0
+item = ExtResource("3_wek3a")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_da1lu"]
+script = ExtResource("1_snje5")
+id = "10"
+display_name = "Banded Butterfly"
+base_value = 18
+weight = 60.0
+item = ExtResource("4_lomwi")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_rfmo4"]
+script = ExtResource("1_snje5")
+id = "12"
+display_name = "Blue Tang"
+base_value = 38
+weight = 25.0
+item = ExtResource("5_6y2rn")
+fishing_xp = 10
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_3lxrb"]
+script = ExtResource("1_snje5")
+id = "16"
+display_name = "Bream"
+base_value = 19
+weight = 60.0
+item = ExtResource("6_da1lu")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_8w1dp"]
+script = ExtResource("1_snje5")
+id = "39"
+display_name = "Crab"
+base_value = 40
+weight = 25.0
+item = ExtResource("7_rfmo4")
+fishing_xp = 10
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_0rkso"]
+script = ExtResource("1_snje5")
+id = "40"
+display_name = "Lobster"
+base_value = 120
+weight = 10.0
+item = ExtResource("8_3lxrb")
+fishing_xp = 25
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_xdf1m"]
+script = ExtResource("1_snje5")
+id = "13"
+display_name = "Pollock"
+base_value = 15
+weight = 60.0
+item = ExtResource("9_8w1dp")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_dt1qi"]
+script = ExtResource("1_snje5")
+id = "17"
+display_name = "Pufferfish"
+base_value = 105
+weight = 10.0
+item = ExtResource("10_0rkso")
+fishing_xp = 25
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_8np3k"]
+script = ExtResource("1_snje5")
+id = "41"
+display_name = "Sea Angel"
+base_value = 45
+weight = 25.0
+item = ExtResource("11_xdf1m")
+fishing_xp = 10
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_kagya"]
+script = ExtResource("1_snje5")
+id = "9"
+display_name = "Tuna"
+base_value = 35
+weight = 25.0
+item = ExtResource("12_dt1qi")
+fishing_xp = 10
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_vnfmg"]
+script = ExtResource("1_snje5")
+id = "42"
+display_name = "Turtle"
+base_value = 320
+weight = 2.0
+item = ExtResource("13_8np3k")
+fishing_xp = 75
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_bacc5"]
+script = ExtResource("1_snje5")
+id = "15"
+display_name = "Weaver Fish"
+base_value = 90
+weight = 10.0
+item = ExtResource("14_kagya")
+fishing_xp = 25
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_6t24c"]
+script = ExtResource("1_snje5")
+id = "18"
+display_name = "Cod"
+base_value = 22
+weight = 60.0
+item = ExtResource("15_vnfmg")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_kktmy"]
+script = ExtResource("1_snje5")
+id = "19"
+display_name = "Dab"
+base_value = 20
+weight = 60.0
+item = ExtResource("16_bacc5")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_vi6t0"]
+script = ExtResource("1_snje5")
+id = "20"
+display_name = "Flounder"
+base_value = 50
+weight = 25.0
+item = ExtResource("17_6t24c")
+fishing_xp = 10
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_u13f8"]
+script = ExtResource("1_snje5")
+id = "22"
+display_name = "Halibut"
+base_value = 140
+weight = 10.0
+item = ExtResource("18_kktmy")
+fishing_xp = 25
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_t3u2m"]
+script = ExtResource("1_snje5")
+id = "23"
+display_name = "Herring"
+base_value = 55
+weight = 25.0
+item = ExtResource("19_vi6t0")
+fishing_xp = 10
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_6it3w"]
+script = ExtResource("1_snje5")
+id = "43"
+display_name = "Octopus"
+base_value = 65
+weight = 25.0
+item = ExtResource("20_u13f8")
+fishing_xp = 10
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_yrxfq"]
+script = ExtResource("1_snje5")
+id = "44"
+display_name = "Pink Fantasia"
+base_value = 380
+weight = 2.0
+item = ExtResource("21_t3u2m")
+fishing_xp = 75
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_0v2e0"]
+script = ExtResource("1_snje5")
+id = "45"
+display_name = "Sea Spider"
+base_value = 26
+weight = 60.0
+item = ExtResource("22_6it3w")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_4fm1y"]
+script = ExtResource("1_snje5")
+id = "24"
+display_name = "Stingray"
+base_value = 160
+weight = 10.0
+item = ExtResource("23_yrxfq")
+fishing_xp = 25
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_uqson"]
+script = ExtResource("1_snje5")
+id = "21"
+display_name = "Whiting"
+base_value = 24
+weight = 60.0
+item = ExtResource("24_0v2e0")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_clsy8"]
+script = ExtResource("1_snje5")
+id = "3"
+display_name = "Clown Fish"
+base_value = 22
+weight = 25.0
+item = ExtResource("25_4fm1y")
+fishing_xp = 10
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_faqb3"]
+script = ExtResource("1_snje5")
+id = "8"
+display_name = "Cow Fish"
+base_value = 24
+weight = 25.0
+item = ExtResource("25_4fm1y")
+fishing_xp = 10
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_ifhun"]
+script = ExtResource("1_snje5")
+id = "38"
+display_name = "Dumbo Octopus"
+base_value = 160
+weight = 2.0
+item = ExtResource("26_uqson")
+fishing_xp = 75
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_vpjby"]
+script = ExtResource("1_snje5")
+id = "7"
+display_name = "Lionfish"
+base_value = 60
+weight = 10.0
+item = ExtResource("27_clsy8")
+fishing_xp = 25
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_3jhfh"]
+script = ExtResource("1_snje5")
+id = "2"
+display_name = "Mackerel"
+base_value = 9
+weight = 60.0
+item = ExtResource("28_faqb3")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_c5qih"]
+script = ExtResource("1_snje5")
+id = "1"
+display_name = "Parrot Fish"
+weight = 60.0
+item = ExtResource("29_ifhun")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_i2xuk"]
+script = ExtResource("1_snje5")
+id = "4"
+display_name = "Plaice"
+base_value = 8
+weight = 60.0
+item = ExtResource("30_vpjby")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_a0ayc"]
+script = ExtResource("1_snje5")
+id = "6"
+display_name = "Sea Horse"
+base_value = 26
+weight = 25.0
+item = ExtResource("31_3jhfh")
+fishing_xp = 10
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_fx60q"]
+script = ExtResource("1_snje5")
+id = "36"
+display_name = "Shrimp"
+base_value = 7
+weight = 60.0
+item = ExtResource("32_c5qih")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_svjyx"]
+script = ExtResource("1_snje5")
+id = "5"
+display_name = "Silver Eel"
+base_value = 55
+weight = 10.0
+item = ExtResource("33_i2xuk")
+fishing_xp = 25
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
+
+[sub_resource type="Resource" id="Resource_gccij"]
+script = ExtResource("1_snje5")
+id = "37"
+display_name = "Squid"
+base_value = 12
+weight = 60.0
+item = ExtResource("34_a0ayc")
+fishing_xp = 5
+metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [resource]
+script = ExtResource("2_u1v84")
+fish = Array[ExtResource("1_snje5")]([SubResource("Resource_lomwi"), SubResource("Resource_6y2rn"), SubResource("Resource_da1lu"), SubResource("Resource_rfmo4"), SubResource("Resource_3lxrb"), SubResource("Resource_8w1dp"), SubResource("Resource_0rkso"), SubResource("Resource_xdf1m"), SubResource("Resource_dt1qi"), SubResource("Resource_8np3k"), SubResource("Resource_kagya"), SubResource("Resource_vnfmg"), SubResource("Resource_bacc5"), SubResource("Resource_6t24c"), SubResource("Resource_kktmy"), SubResource("Resource_vi6t0"), SubResource("Resource_u13f8"), SubResource("Resource_t3u2m"), SubResource("Resource_6it3w"), SubResource("Resource_yrxfq"), SubResource("Resource_0v2e0"), SubResource("Resource_4fm1y"), SubResource("Resource_uqson"), SubResource("Resource_clsy8"), SubResource("Resource_faqb3"), SubResource("Resource_ifhun"), SubResource("Resource_vpjby"), SubResource("Resource_3jhfh"), SubResource("Resource_c5qih"), SubResource("Resource_i2xuk"), SubResource("Resource_a0ayc"), SubResource("Resource_fx60q"), SubResource("Resource_svjyx"), SubResource("Resource_gccij")])

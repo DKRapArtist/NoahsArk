@@ -7223,81 +7223,102 @@ sources/0 = SubResource("TileSetAtlasSource_pi676")
 
 [sub_resource type="Resource" id="Resource_fkid5"]
 script = ExtResource("18_2faka")
+id = "23"
 display_name = "Herring"
-base_value = 40
-weight = 30.0
+base_value = 55
+weight = 25.0
 item = ExtResource("19_y8v37")
+fishing_xp = 10
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_hfvve"]
 script = ExtResource("18_2faka")
+id = "19"
 display_name = "Dab"
-base_value = 55
-weight = 26.0
+base_value = 20
+weight = 60.0
 item = ExtResource("20_v6e5j")
+fishing_xp = 5
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_0dwps"]
 script = ExtResource("18_2faka")
+id = "21"
 display_name = "Whiting"
-base_value = 70
-weight = 22.0
+base_value = 24
+weight = 60.0
 item = ExtResource("21_ycajc")
+fishing_xp = 5
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_biaf0"]
 script = ExtResource("18_2faka")
+id = "18"
 display_name = "Cod"
-base_value = 110
-weight = 16.0
+base_value = 22
+weight = 60.0
 item = ExtResource("22_ckxp3")
+fishing_xp = 5
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_ubwm4"]
 script = ExtResource("18_2faka")
+id = "20"
 display_name = "Flounder"
-base_value = 130
-weight = 14.0
+base_value = 50
+weight = 25.0
 item = ExtResource("23_dddqt")
+fishing_xp = 10
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_vdtrk"]
 script = ExtResource("18_2faka")
+id = "43"
 display_name = "Octopus"
-base_value = 200
-weight = 10.0
+base_value = 65
+weight = 25.0
 item = ExtResource("24_pxc0o")
+fishing_xp = 10
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_a6r27"]
 script = ExtResource("18_2faka")
+id = "22"
 display_name = "Halibut"
-base_value = 260
-weight = 7.0
+base_value = 140
+weight = 10.0
 item = ExtResource("25_ffknl")
+fishing_xp = 25
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_y8v37"]
 script = ExtResource("18_2faka")
+id = "24"
 display_name = "Stingray"
-base_value = 450
-weight = 3.0
+base_value = 160
+weight = 10.0
 item = ExtResource("26_ejbls")
+fishing_xp = 25
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_v6e5j"]
 script = ExtResource("18_2faka")
+id = "44"
 display_name = "Pink Fantasia"
-base_value = 600
+base_value = 380
 weight = 2.0
 item = ExtResource("27_s315h")
+fishing_xp = 75
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_ycajc"]
 script = ExtResource("18_2faka")
+id = "45"
 display_name = "Sea Spider"
-base_value = 900
+base_value = 26
+weight = 60.0
 item = ExtResource("28_davj0")
+fishing_xp = 5
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_ckxp3"]

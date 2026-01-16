@@ -4853,105 +4853,132 @@ sources/0 = SubResource("TileSetAtlasSource_lu8hg")
 
 [sub_resource type="Resource" id="Resource_kym7m"]
 script = ExtResource("14_kym7m")
+id = "9"
 display_name = "Tuna"
-base_value = 320
-weight = 4.0
+base_value = 35
+weight = 25.0
 item = ExtResource("15_332p5")
+fishing_xp = 10
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_8k5o1"]
 script = ExtResource("14_kym7m")
+id = "10"
 display_name = "Banded Butterflyfish"
-base_value = 45
-weight = 65.0
+base_value = 18
+weight = 60.0
 item = ExtResource("16_332p5")
+fishing_xp = 5
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_ghotg"]
 script = ExtResource("14_kym7m")
+id = "11"
 display_name = "Atlantic Bass"
-base_value = 90
-weight = 30.0
+base_value = 16
+weight = 60.0
 item = ExtResource("17_ghotg")
+fishing_xp = 5
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_w61w3"]
 script = ExtResource("14_kym7m")
+id = "12"
 display_name = "Blue Tang"
-base_value = 40
-weight = 70.0
+base_value = 38
+weight = 25.0
 item = ExtResource("18_w61w3")
+fishing_xp = 10
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_8isp6"]
 script = ExtResource("14_kym7m")
+id = "13"
 display_name = "Pollock"
-base_value = 120
-weight = 22.0
+base_value = 15
+weight = 60.0
 item = ExtResource("19_8isp6")
+fishing_xp = 5
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_b6yit"]
 script = ExtResource("14_kym7m")
+id = "14"
 display_name = "Ballan Wrasse"
-base_value = 65
-weight = 45.0
+base_value = 17
+weight = 60.0
 item = ExtResource("20_b6yit")
+fishing_xp = 5
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_124mn"]
 script = ExtResource("14_kym7m")
+id = "15"
 display_name = "Weaver Fish"
-base_value = 220
-weight = 8.0
+base_value = 90
+weight = 10.0
 item = ExtResource("21_124mn")
+fishing_xp = 25
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_u13il"]
 script = ExtResource("14_kym7m")
+id = "16"
 display_name = "Bream"
-base_value = 55
-weight = 55.0
+base_value = 19
+weight = 60.0
 item = ExtResource("22_u13il")
+fishing_xp = 5
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_qpxc1"]
 script = ExtResource("14_kym7m")
+id = "17"
 display_name = "Pufferfish"
-base_value = 180
-weight = 12.0
+base_value = 105
+weight = 10.0
 item = ExtResource("23_qpxc1")
+fishing_xp = 25
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_srpya"]
 script = ExtResource("14_kym7m")
+id = "39"
 display_name = "Crab"
-base_value = 60
-weight = 22.0
+base_value = 40
+weight = 25.0
 item = ExtResource("25_peyn0")
+fishing_xp = 10
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_2xs5d"]
 script = ExtResource("14_kym7m")
+id = "40"
 display_name = "Lobster"
-base_value = 220
-weight = 5.0
+base_value = 120
+weight = 10.0
 item = ExtResource("26_srpya")
+fishing_xp = 25
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_8e7wd"]
 script = ExtResource("14_kym7m")
+id = "41"
 display_name = "Sea Angel"
-base_value = 300
-weight = 5.0
+base_value = 45
+weight = 25.0
 item = ExtResource("27_2xs5d")
+fishing_xp = 10
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_nf5bt"]
 script = ExtResource("14_kym7m")
+id = "42"
 display_name = "Turtle"
-base_value = 800
+base_value = 320
+weight = 2.0
 item = ExtResource("28_8e7wd")
+fishing_xp = 75
 metadata/_custom_type_script = "uid://lmk8lus6uit4"
 
 [sub_resource type="Resource" id="Resource_332p5"]
