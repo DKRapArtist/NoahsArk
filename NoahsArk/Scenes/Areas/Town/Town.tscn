@@ -36,7 +36,7 @@ size = Vector2(48, 30)
 size = Vector2(46, 112.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f46o4"]
-size = Vector2(25, 29)
+size = Vector2(27, 27.939941)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdxtg"]
 texture = ExtResource("1_74r3k")
@@ -9204,6 +9204,11 @@ position = Vector2(-360, -1249)
 script = ExtResource("10_oq6rk")
 spawn_id = "FromChefs"
 
+[node name="FromSalon" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-152.23, -1622)
+script = ExtResource("10_oq6rk")
+spawn_id = "FromSalon"
+
 [node name="Exits" type="Node2D" parent="."]
 
 [node name="ToFarm" type="Area2D" parent="Exits"]
@@ -9231,6 +9236,15 @@ target_spawn_name = "FromTown"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToChefs"]
 position = Vector2(-360.5, -1290.5)
+shape = SubResource("RectangleShape2D_f46o4")
+
+[node name="ToSalon" type="Area2D" parent="Exits"]
+script = ExtResource("4_8g2cq")
+target_scene_path = "res://Scenes/Buildings/Town/SalonInterior.tscn"
+target_spawn_name = "FromTown"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToSalon"]
+position = Vector2(-152.5, -1659.97)
 shape = SubResource("RectangleShape2D_f46o4")
 
 [node name="YSort" type="Node2D" parent="."]

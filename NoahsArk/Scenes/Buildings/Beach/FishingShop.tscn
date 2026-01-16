@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://bp4ksamucxj6e" path="res://Scenes/Areas/StartingArea/HouseRoof.gd" id="2_uju7s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wh3aq"]
-size = Vector2(14.5, 25)
+size = Vector2(14.5, 29.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nxx60"]
-size = Vector2(29.5, 25)
+size = Vector2(29.5, 29.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyin2"]
-size = Vector2(70, 63)
+size = Vector2(70, 62)
 
 [node name="FishingShop" type="Node2D" groups=["houses"]]
 
@@ -29,11 +29,11 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HouseBase/StaticBody2D"]
-position = Vector2(71, -13)
+position = Vector2(71, -15.25)
 shape = SubResource("RectangleShape2D_wh3aq")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HouseBase/StaticBody2D"]
-position = Vector2(33, -14)
+position = Vector2(33, -15.25)
 shape = SubResource("RectangleShape2D_nxx60")
 
 [node name="HouseRoof" type="Node2D" parent="." groups=["house_roof"]]
@@ -49,5 +49,5 @@ region_rect = Rect2(0, -1.2067585, 96, 61.676247)
 [node name="RoofTrigger" type="Area2D" parent="HouseRoof"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HouseRoof/RoofTrigger"]
-position = Vector2(49, -55.5)
+position = Vector2(49, -56)
 shape = SubResource("RectangleShape2D_jyin2")
