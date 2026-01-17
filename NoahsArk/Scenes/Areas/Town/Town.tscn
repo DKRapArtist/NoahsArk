@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=4 uid="uid://ceuis1bnsebvl"]
+[gd_scene load_steps=81 format=4 uid="uid://ceuis1bnsebvl"]
 
 [ext_resource type="Texture2D" uid="uid://crtkccgfck1i8" path="res://Assets/TileSets/pixel 16 woods v2.0/!spring[main]/tilesetV2.png" id="1_74r3k"]
 [ext_resource type="Script" uid="uid://ba424ealqsn5r" path="res://Scenes/Areas/Town/Town.gd" id="1_hcwu3"]
@@ -39,6 +39,9 @@ size = Vector2(46, 112.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f46o4"]
 size = Vector2(27, 27.939941)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wsyt"]
+size = Vector2(19, 23.999939)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdxtg"]
 texture = ExtResource("1_74r3k")
@@ -9239,6 +9242,11 @@ position = Vector2(-152.23, -1622)
 script = ExtResource("10_oq6rk")
 spawn_id = "FromSalon"
 
+[node name="FromShop" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(359.47, -1654.17)
+script = ExtResource("10_oq6rk")
+spawn_id = "FromShop"
+
 [node name="Exits" type="Node2D" parent="."]
 
 [node name="ToFarm" type="Area2D" parent="Exits"]
@@ -9276,6 +9284,15 @@ target_spawn_name = "FromTown"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToSalon"]
 position = Vector2(-152.5, -1659.97)
 shape = SubResource("RectangleShape2D_f46o4")
+
+[node name="ToShop" type="Area2D" parent="Exits"]
+script = ExtResource("4_8g2cq")
+target_scene_path = "res://Scenes/Buildings/Town/TownShopInterior.tscn"
+target_spawn_name = "FromTown"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToShop"]
+position = Vector2(359.5, -1692)
+shape = SubResource("RectangleShape2D_6wsyt")
 
 [node name="YSort" type="Node2D" parent="."]
 
