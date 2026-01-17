@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3dq84fxcb1t1"]
+
+[ext_resource type="Script" uid="uid://dle56fch1hpc3" path="res://Scenes/Functionalities/Inventory/InventoryScripts/Chest.gd" id="1_eg08n"]
+[ext_resource type="Texture2D" uid="uid://cerw6t1ak0h8w" path="res://Assets/TileSets/DG Fire Zone Asset Pack/Fire Chest.png" id="2_b2j8w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2j8w"]
+size = Vector2(16, 16)
+
+[node name="Chest" type="Area2D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_eg08n")
+slot_count = 30
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_b2j8w")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b2j8w")

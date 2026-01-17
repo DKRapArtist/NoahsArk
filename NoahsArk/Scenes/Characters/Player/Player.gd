@@ -212,12 +212,21 @@ func _input(event: InputEvent) -> void:
 		if cooking and cooking.is_cooking:
 			return
 
+		# 🟫 WORLD INTERACTION (CHESTS, ETC.)
+		if interact_ray.is_colliding():
+			var target := interact_ray.get_collider()
+			if target and target.has_method("interact"):
+				target.interact()
+				return
+
+		# 🍳 COOKING STATION
 		if nearby_cooking_station != null and cooking:
 			var item := _get_held_item()
 			if item and item.is_cookable and item.cooked_version:
 				cooking.start_cooking(item)
 				return
 
+		# 💬 NPC
 		if nearby_npc != null:
 			nearby_npc.interact()
 			return

@@ -7,4 +7,5 @@
 script = ExtResource("1_2up72")
 name = "Wood"
 texture = ExtResource("2_wdc66")
+description = "Wood gained from woodcutting trees. A resource used to craft something."
 metadata/_custom_type_script = "uid://dohcr3jcw0bv6"

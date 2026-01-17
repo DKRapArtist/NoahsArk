@@ -30,6 +30,7 @@ FishDatabaseGlobal="*res://Scenes/Globals/GlobalScripts/FishDatabaseGlobal.gd"
 window/size/viewport_width=512
 window/size/viewport_height=288
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://b26b7h8wr5rc8"
 
 [input]
 
@@ -122,6 +123,7 @@ interact={
 2d_physics/layer_3="TreeHitArea"
 2d_physics/layer_4="TreeCanopy"
 2d_physics/layer_5="TallGrass"
+2d_physics/layer_6="Interactable"
 
 [rendering]
 

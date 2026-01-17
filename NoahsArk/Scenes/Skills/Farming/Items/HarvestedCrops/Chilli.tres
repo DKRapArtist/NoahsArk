@@ -7,5 +7,6 @@
 script = ExtResource("1_qhje3")
 name = "Chilli"
 texture = ExtResource("2_ugwvh")
-item_type = 2
+item_type = 3
 power = 0
+description = "This is a chilli, an ingredient used to make something. Is very spicy! "

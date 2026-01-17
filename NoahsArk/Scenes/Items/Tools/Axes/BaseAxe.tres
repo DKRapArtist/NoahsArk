@@ -10,3 +10,4 @@ texture = ExtResource("2_rml8c")
 max_stack = 1
 item_type = 1
 tool_type = "Axe"
+description = "This is a base axe which you can find in the world of Mystrilia"

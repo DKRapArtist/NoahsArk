@@ -12,3 +12,4 @@ amount = 1
 item_type = 4
 id_type = "cooked"
 id = "fish_shrimp_cooked"
+description = "A cooked creature that can be consumed, give it a taste! "

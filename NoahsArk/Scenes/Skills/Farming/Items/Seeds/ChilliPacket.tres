@@ -9,3 +9,4 @@ name = "ChilliSeeds"
 texture = ExtResource("2_rnydb")
 item_type = 2
 seed_crop_id = "Chilli"
+description = "This is a packet of Chilli Seeds. Used to plant Chilli crops, plant it on farm patches and see what happens."

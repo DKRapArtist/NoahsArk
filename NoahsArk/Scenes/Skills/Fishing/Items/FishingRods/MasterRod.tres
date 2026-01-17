@@ -12,3 +12,5 @@ amount = 0
 item_type = 1
 tool_type = "FishingRod"
 power = 4
+rarity = 1
+description = "This is a Master Rod, used and found in the world of Mystrilia. Makes you more efficient in fishing."

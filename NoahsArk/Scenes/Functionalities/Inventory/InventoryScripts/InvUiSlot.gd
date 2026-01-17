@@ -2,13 +2,14 @@ extends Panel
 
 @export var index: int = -1
 @export var hotkey_text: String = ""
+@export var is_chest_slot := false
 
 @onready var item_display: Sprite2D = $CenterContainer/Panel/ItemDisplay
 @onready var amount_text: Label = $CenterContainer/Panel/Label
 @onready var hotkey_label: Label = $CenterContainer/Panel/HotKeyLabel
 
 var current_item: InvItem
-var tooltip: Control
+var tooltip: Control = null
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -31,12 +32,27 @@ func _on_mouse_entered() -> void:
 	if inv_ui and inv_ui.picked_slot_index != -1:
 		return
 
-	if current_item and tooltip:
-		tooltip.show_item(current_item, get_global_mouse_position() + Vector2(16, 16))
+	if current_item == null:
+		return
+
+	if tooltip == null:
+		return
+
+	if not is_instance_valid(tooltip):
+		return
+
+	tooltip.show_item(
+		current_item,
+		get_global_mouse_position() + Vector2(16, 16)
+	)
 
 func _on_mouse_exited() -> void:
-	if tooltip:
-		tooltip.hide_tooltip()
+	if tooltip == null:
+		return
+	if not is_instance_valid(tooltip):
+		return
+
+	tooltip.hide_tooltip()
 
 func _on_double_click() -> void:
 	var inv_ui := get_tree().get_first_node_in_group("inventory_ui") as InventoryUI
@@ -48,7 +64,7 @@ func _on_left_click() -> void:
 	if inv_ui == null:
 		return
 
-	inv_ui.on_slot_clicked(index)
+	inv_ui.on_slot_clicked(index, self)
 
 func _on_right_click() -> void:
 	var inv_ui := get_tree().get_first_node_in_group("inventory_ui") as InventoryUI

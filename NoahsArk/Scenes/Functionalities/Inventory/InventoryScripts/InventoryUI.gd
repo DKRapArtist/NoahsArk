@@ -5,8 +5,10 @@ signal drop_item_to_world(item: InvItem, amount: int)
 signal inventory_opened
 signal inventory_closed
 
-@onready var inv: Inv = preload("res://Scenes/Functionalities/Inventory/PlayerInventory.tres")
+var inv: Inv
 @onready var slots: Array = []
+@onready var player_slots: Array = []
+@onready var chest_slots: Array = []
 
 var is_open = false
 var picked_slot_index: int = -1  # -1 = nothing in hand
@@ -16,23 +18,45 @@ var held_total: int = 0  # total stack in hand
 var is_split_drag: bool = false
 var split_total: int = 0
 var split_preview_remainder
+var player_inv: Inv
+var container_inv: Inv = null
+var is_container_open := false
 
 func _ready() -> void:
-	inv.ensure_clean_slots()
-	slots.clear()
-	slots.append_array($TextureRect/GridContainer.get_children())
-	slots.append_array($TextureRect/GridContainer2.get_children())
+	# --- PLAYER INVENTORY ---
+	player_inv = preload("res://Scenes/Functionalities/Inventory/PlayerInventory.tres")
+	set_inventory(player_inv)
+
 	add_to_group("inventory_ui")
 
-	# ✅ AUTO-ASSIGN TOOLTIP
+	# --- SLOT COLLECTION ---
+	player_slots.clear()
+	chest_slots.clear()
+
+	# Player inventory slots
+	player_slots.append_array($TextureRect/PlayerGrid.get_children())
+	player_slots.append_array($TextureRect/HotbarGrid.get_children())
+
+	# Chest inventory slots
+	chest_slots.append_array($ChestBackground/ChestGrid.get_children())
+
+	# --- TOOLTIP ---
 	var tooltip := $ItemToolTip
-	for slot in slots:
+	for slot in player_slots:
 		slot.tooltip = tooltip
+		slot.is_chest_slot = false   # ✅ IMPORTANT
 
-	inv.inventory_changed.connect(update_slots)
+	for slot in chest_slots:
+		slot.tooltip = tooltip
+		slot.is_chest_slot = true    # ✅ IMPORTANT
+		slot.mouse_filter = Control.MOUSE_FILTER_STOP  # ✅ ENABLE INPUT
 
-	for i in slots.size():
-		slots[i].index = i
+	# --- SLOT INDEXING ---
+	for i in player_slots.size():
+		player_slots[i].index = i
+
+	for i in chest_slots.size():
+		chest_slots[i].index = i
 
 	update_slots()
 	close()
@@ -45,15 +69,21 @@ func _process(_delta: float) -> void:
 			open()
 
 func update_slots() -> void:
-	for i in slots.size():
-		var ui_slot = slots[i]
+	print("Chest open:", is_container_open, " Container inv:", container_inv)
+
+	# --------------------
+	# PLAYER INVENTORY (HOTBAR + MAIN)
+	# --------------------
+	for i in player_slots.size():
+		var ui_slot = player_slots[i]
 		var slot_data: InvSlot = null
 
-		if i < inv.slots.size():
-			slot_data = inv.slots[i] as InvSlot
+		if player_inv and i < player_inv.slots.size():
+			slot_data = player_inv.slots[i]
 
 		ui_slot.update(slot_data)
 
+		# Hotbar numbers (first 10 slots only)
 		if i == 0:
 			ui_slot.set_hotkey_text("1")
 		elif i == 1:
@@ -77,37 +107,74 @@ func update_slots() -> void:
 		else:
 			ui_slot.set_hotkey_text("")
 
+	# --------------------
+	# CHEST INVENTORY
+	# --------------------
+	for i in chest_slots.size():
+		var ui_slot = chest_slots[i]
+		var slot_data: InvSlot = null
+
+		if is_container_open and container_inv and i < container_inv.slots.size():
+			slot_data = container_inv.slots[i]
+
+		print("Chest slot", i, "data:", slot_data)
+		ui_slot.update(slot_data)
+
+
 func open():
 	visible = true
 	is_open = true
+	
+	var tooltip := $ItemToolTip
+	for slot in slots:
+		if slot is InvSlot:
+			slot.tooltip = tooltip
 	inventory_opened.emit()
 
 func close():
 	visible = false
 	is_open = false
 
-	# ✅ HIDE TOOLTIP
 	var tooltip := $ItemToolTip
 	if tooltip:
 		tooltip.hide_tooltip()
 
-	# clear drag globally
 	var ui_root := get_tree().get_first_node_in_group("ui_root") as UIRoot
 	if ui_root:
 		ui_root.stop_drag()
-		picked_slot_index = -1
+
+	# 🔁 CLOSE CHEST MODE
+	if is_container_open:
+		if container_inv and container_inv.inventory_changed.is_connected(update_slots):
+			container_inv.inventory_changed.disconnect(update_slots)
+
+		container_inv = null
+		is_container_open = false
+		$ChestBackground.visible = false
 
 	inventory_closed.emit()
 
-func on_slot_clicked(slot_index: int) -> void:
-	if slot_index < 0 or slot_index >= inv.slots.size():
+func on_slot_clicked(slot_index: int, ui_slot = null) -> void:
+	var target_inv: Inv
+
+	# --------------------
+	# DETERMINE INVENTORY
+	# --------------------
+	if ui_slot and ui_slot.is_chest_slot:
+		if not is_container_open or container_inv == null:
+			return
+		target_inv = container_inv
+	else:
+		target_inv = player_inv
+
+	if slot_index < 0 or slot_index >= target_inv.slots.size():
 		return
 
 	var ui_root := get_tree().get_first_node_in_group("ui_root") as UIRoot
 	if ui_root == null:
 		return
 
-	var clicked_slot: InvSlot = inv.slots[slot_index]
+	var clicked_slot: InvSlot = target_inv.slots[slot_index]
 
 	# 1️⃣ NOTHING IN HAND → PICK UP
 	if picked_slot_index == -1:
@@ -119,24 +186,24 @@ func on_slot_clicked(slot_index: int) -> void:
 		held_total = clicked_slot.amount
 		held_amount = held_total
 
-		inv.slots[slot_index] = null
+		target_inv.slots[slot_index] = null
 		ui_root.start_drag(slot_index, clicked_slot)
 		ui_root.set_drag_amount(held_amount)
-		inv.notify_changed()
+		target_inv.notify_changed()
 		return
 
 	# 2️⃣ HOLDING SOMETHING
 	if held_item == null or held_total <= 0:
 		return
 
-	var target_slot := inv.slots[slot_index]
+	var target_slot := target_inv.slots[slot_index]
 
 	# 🟩 EMPTY SLOT → PLACE
 	if target_slot == null:
 		var new_slot := InvSlot.new()
 		new_slot.item = held_item
 		new_slot.amount = held_total
-		inv.slots[slot_index] = new_slot
+		target_inv.slots[slot_index] = new_slot
 
 		ui_root.stop_drag()
 		picked_slot_index = -1
@@ -144,7 +211,7 @@ func on_slot_clicked(slot_index: int) -> void:
 		held_total = 0
 		held_amount = 0
 
-		inv.notify_changed()
+		target_inv.notify_changed()
 		return
 
 	# 🟨 SAME ITEM → STACK
@@ -165,23 +232,19 @@ func on_slot_clicked(slot_index: int) -> void:
 				held_amount = held_total
 				ui_root.set_drag_amount(held_amount)
 
-			inv.notify_changed()
+			target_inv.notify_changed()
 		return
 
-	# 🔁 TRUE SLOT-TO-SLOT SWAP (instant, no hand left)
-	# Recreate the original slot from what was in hand
+	# 🔁 TRUE SLOT-TO-SLOT SWAP
 	var original_slot := InvSlot.new()
 	original_slot.item = held_item
 	original_slot.amount = held_total
 
-	# target_slot already exists earlier in the function
 	var temp_slot := target_slot
 
-	# Perform the swap
-	inv.slots[picked_slot_index] = temp_slot
-	inv.slots[slot_index] = original_slot
+	target_inv.slots[picked_slot_index] = temp_slot
+	target_inv.slots[slot_index] = original_slot
 
-	# Clear hand completely
 	picked_slot_index = -1
 	held_item = null
 	held_total = 0
@@ -190,8 +253,7 @@ func on_slot_clicked(slot_index: int) -> void:
 	if ui_root:
 		ui_root.stop_drag()
 
-	inv.notify_changed()
-	return
+	target_inv.notify_changed()
 
 func drop_held_item_to_world() -> void:
 	if held_item == null or held_total <= 0 or held_amount <= 0:
@@ -365,3 +427,41 @@ func combine_item_stacks(slot_index: int) -> void:
 		remaining -= to_add
 
 	inv.notify_changed()
+
+func set_inventory(new_inv: Inv) -> void:
+	if inv:
+		inv.inventory_changed.disconnect(update_slots)
+
+	inv = new_inv
+	inv.ensure_clean_slots()
+	inv.inventory_changed.connect(update_slots)
+	update_slots()
+
+func _update_inventory_slots(source_inv: Inv, ui_slots: Array) -> void:
+	for i in ui_slots.size():
+		var slot_data: InvSlot = null
+		if source_inv and i < source_inv.slots.size():
+			slot_data = source_inv.slots[i]
+		ui_slots[i].update(slot_data)
+
+func open_container(container: Inv) -> void:
+	container_inv = container
+	is_container_open = true
+
+	container_inv.ensure_clean_slots()
+	container_inv.inventory_changed.connect(update_slots)
+
+	update_slots()
+	open()
+
+func open_chest(container: Inv) -> void:
+	container_inv = container
+	is_container_open = true
+
+	$ChestBackground.visible = true
+
+	container_inv.ensure_clean_slots()
+	container_inv.inventory_changed.connect(update_slots)
+
+	update_slots()
+	open()

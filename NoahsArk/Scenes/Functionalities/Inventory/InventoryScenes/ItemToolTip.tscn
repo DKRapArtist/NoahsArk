@@ -1,64 +1,101 @@
-[gd_scene load_steps=3 format=3 uid="uid://dk7cfpfvsy6qv"]
+[gd_scene load_steps=4 format=3 uid="uid://dk7cfpfvsy6qv"]
 
 [ext_resource type="Script" uid="uid://c5pke6nuqv5im" path="res://Scenes/Functionalities/Inventory/InventoryScripts/ItemToolTip.gd" id="1_1yvte"]
-[ext_resource type="Texture2D" uid="uid://dbt8rkgehgu8a" path="res://Assets/HomeMadeAssets/UI/ItemToolTip.png" id="2_8lb0p"]
 
-[node name="ItemToolTip" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yvte"]
+bg_color = Color(0.6117647, 0.43529412, 0.2627451, 0.6784314)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lb0p"]
+bg_color = Color(0.09562151, 0.055756964, 0.020409876, 0.6784314)
+border_color = Color(0.7294118, 0.5294118, 0.32941177, 0.6784314)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 2
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[node name="ItemToolTip" type="PanelContainer"]
 z_index = 100
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-script = ExtResource("1_1yvte")
-
-[node name="NinePatchRect" type="TextureRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -427.0
+offset_bottom = -203.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
-texture = ExtResource("2_8lb0p")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1yvte")
+script = ExtResource("1_1yvte")
 
-[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(0.942076, 0.8355443, 0.7374072, 1)
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8lb0p")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 0
-offset_left = -5.0
-offset_right = 211.0
-offset_bottom = 81.0
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+offset_right = 84.0
+offset_bottom = 49.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 84.0
+offset_bottom = 49.0
+theme_override_constants/separation = 0
+
+[node name="ItemName" type="RichTextLabel" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 4
+size_flags_vertical = 3
+theme_override_constants/line_separation = 0
+theme_override_constants/paragraph_separation = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/text_highlight_h_padding = 1
+theme_override_constants/text_highlight_v_padding = 1
+theme_override_constants/table_h_separation = 0
+theme_override_constants/table_v_separation = 0
+theme_override_font_sizes/normal_font_size = 10
+text = "Item name"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
 
-[node name="ItemName" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="TypeRow" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 6
-vertical_alignment = 1
+theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="ItemType" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ItemType" type="RichTextLabel" parent="Panel/VBoxContainer/TypeRow"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 3
+theme_override_font_sizes/normal_font_size = 7
+text = "Item Type"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 3
 
-[node name="Stars" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Stars" type="HBoxContainer" parent="Panel/VBoxContainer/TypeRow"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 2
 
-[node name="Description" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+[node name="Description" type="RichTextLabel" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "This is the description of the item"
+fit_content = true
+scroll_active = false
 autowrap_mode = 2
