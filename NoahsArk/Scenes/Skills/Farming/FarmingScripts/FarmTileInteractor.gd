@@ -2,43 +2,29 @@ extends Node
 class_name FarmTileInteractor
 
 func get_facing_farm_cell(player: CharacterBody2D) -> Dictionary:
-	print("🧩 FarmTileInteractor called")
-
 	var world := player.get_tree().get_first_node_in_group("world") as World
-	print("🌍 interactor world =", world)
-
 	if world == null:
-		print("❌ World not found")
 		return {}
 
-	var area := world.current_area
-	print("🗺️ current area =", area)
+	if world.current_area == null or world.current_area.get_child_count() == 0:
+		return {}
 
+	var area := world.current_area.get_child(0) as Node
 	if area == null:
-		print("❌ current_area is null")
 		return {}
 
 	var tilemaps := area.find_children("*", "TileMapLayer", true, false)
-	print("🧱 Found tilemaps:", tilemaps.size())
 
 	for tilemap in tilemaps:
 		var cell := _get_facing_cell(player, tilemap)
 		var data: TileData = tilemap.get_cell_tile_data(cell)
-
 		if data == null:
-			print("➡️ checking cell", cell, "NO TILE DATA")
 			continue
-
 		if not data.has_custom_data("tile_type"):
-			print("➡️ checking cell", cell, "NO tile_type")
 			continue
 
-		# 🔧 EXPLICIT TYPE FIX
-		var tile_type: String = data.get_custom_data("tile_type")
-		print("➡️ checking cell", cell, "tile_type =", tile_type)
-
+		var tile_type: String = str(data.get_custom_data("tile_type"))
 		if tile_type == "farm":
-			print("✅ FARM TILE FOUND")
 			return {
 				"tilemap": tilemap,
 				"cell": cell

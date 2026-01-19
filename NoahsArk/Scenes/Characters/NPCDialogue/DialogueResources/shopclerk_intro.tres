@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3 uid="uid://bn7ve05ovq83y"]
+
+[ext_resource type="Script" uid="uid://cdlrjmdnh8xu3" path="res://Scenes/Characters/NPCDialogue/DialogueData.gd" id="1_o7raf"]
+
+[resource]
+script = ExtResource("1_o7raf")
+id = "shopclerk_intro"
+lines = Array[String](["You wanna buy some of these nuts?"])
+metadata/_custom_type_script = "uid://cdlrjmdnh8xu3"

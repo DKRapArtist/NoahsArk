@@ -1,6 +1,6 @@
-[gd_scene load_steps=31 format=4 uid="uid://dvmiixnjbclps"]
+[gd_scene load_steps=34 format=4 uid="uid://dvmiixnjbclps"]
 
-[ext_resource type="Script" uid="uid://qvx3vjqark11" path="res://Scenes/Areas/StartingArea/StartingArea.gd" id="1_k4x5e"]
+[ext_resource type="Script" uid="uid://d0s4uv0spbmqg" path="res://Scenes/Buildings/StartingArea/Home.gd" id="1_oysor"]
 [ext_resource type="Texture2D" uid="uid://cdbbqwxe0oi2q" path="res://Assets/TileSets/Home Made Assets/Exported/HouseInt.png" id="1_qk4ws"]
 [ext_resource type="Script" uid="uid://dvj7f44od4114" path="res://Scenes/Functionalities/Exits/Door.gd" id="2_j4lkw"]
 [ext_resource type="Script" uid="uid://c223dphhm6648" path="res://Scenes/Functionalities/SpawnPoints/SpawnPoint.gd" id="4_tyggk"]
@@ -10,6 +10,9 @@
 [ext_resource type="Resource" uid="uid://mirlg0te7dns" path="res://Scenes/Skills/Fishing/Items/FishingRods/BeginnerRod.tres" id="7_j4lkw"]
 [ext_resource type="Texture2D" uid="uid://uywoi7fs2ra7" path="res://Assets/TileSets/Home Made Assets/Exported/FarmingHouseInt.png" id="8_l3hyo"]
 [ext_resource type="Resource" uid="uid://bmwi83cgv4iuv" path="res://Scenes/Skills/Farming/Items/Seeds/ChilliPacket.tres" id="8_r6b7a"]
+[ext_resource type="Resource" uid="uid://6sr0sidpq2bm" path="res://Scenes/Skills/Fishing/Items/FishingRods/AmateurRod.tres" id="8_ucbn6"]
+[ext_resource type="Resource" uid="uid://dd8a8n61fxajm" path="res://Scenes/Skills/Fishing/Items/FishingRods/ProRod.tres" id="9_oysor"]
+[ext_resource type="Resource" uid="uid://c3tcbllamcxdx" path="res://Scenes/Skills/Fishing/Items/FishingRods/MasterRod.tres" id="10_oysor"]
 [ext_resource type="Texture2D" uid="uid://mx4qe13a84d2" path="res://Assets/TileSets/Home Made Assets/Exported/FishingShopInt.png" id="10_r6b7a"]
 [ext_resource type="PackedScene" uid="uid://yh2by4eyqp7w" path="res://Scenes/Skills/Cooking/CookingScenes/CookingStation.tscn" id="12_rcqcf"]
 [ext_resource type="PackedScene" uid="uid://d3dq84fxcb1t1" path="res://Scenes/Functionalities/Inventory/InventoryScenes/Chest.tscn" id="13_wdh05"]
@@ -1940,7 +1943,7 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_tyggk")
 
 [node name="Home" type="Node2D"]
-script = ExtResource("1_k4x5e")
+script = ExtResource("1_oysor")
 
 [node name="Exit" type="Area2D" parent="."]
 script = ExtResource("2_j4lkw")
@@ -1966,15 +1969,27 @@ spawn_id = "BedSpawn"
 [node name="Items" type="Node2D" parent="."]
 
 [node name="Axe" parent="Items" instance=ExtResource("4_ukdna")]
-position = Vector2(-41, 76)
+position = Vector2(-39.63, 74.45)
 item = SubResource("Resource_s2keo")
 
 [node name="Rod" parent="Items" instance=ExtResource("4_ukdna")]
-position = Vector2(58, 93)
+position = Vector2(64.015, 77.955)
 item = ExtResource("7_j4lkw")
 
+[node name="Rod2" parent="Items" instance=ExtResource("4_ukdna")]
+position = Vector2(64.16, 103.49)
+item = ExtResource("8_ucbn6")
+
+[node name="Rod3" parent="Items" instance=ExtResource("4_ukdna")]
+position = Vector2(36.56, 104.65)
+item = ExtResource("9_oysor")
+
+[node name="Rod4" parent="Items" instance=ExtResource("4_ukdna")]
+position = Vector2(36.56, 77.455)
+item = ExtResource("10_oysor")
+
 [node name="ChilliPacket" parent="Items" instance=ExtResource("4_ukdna")]
-position = Vector2(12.725, 74.535)
+position = Vector2(-39.06, 104.505)
 item = ExtResource("8_r6b7a")
 amount = 100
 
@@ -2004,7 +2019,7 @@ tile_map_data = PackedByteArray("AAD8/wEAAAAMAAEAAAD8/wIAAAAMAAIAAAD//wUAAAAVAAg
 tile_set = SubResource("TileSet_vu3nn")
 
 [node name="Collision" type="TileMapLayer" parent="YSort/TileMapLayers"]
-tile_map_data = PackedByteArray("AAADAAIAAAAPAB8AAAAEAAIAAAAOAB8AAAAEAAEAAAAPAB8AAAADAAEAAAAPAB8AAAACAAEAAAAPAB8AAAABAAEAAAAPAB8AAAAAAAEAAAAPAB8AAAD//wEAAAAPAB8AAAD+/wEAAAAPAB8AAAD9/wEAAAAPAB8AAAD8/wEAAAAPAB8AAAD8/wAAAAAPAB8AAAD9/wAAAAAPAB8AAAD+/wAAAAAPAB8AAAD//wAAAAAPAB8AAAAAAAAAAAAPAB8AAAABAAAAAAAPAB8AAAACAAAAAAAPAB8AAAADAAAAAAAPAB8AAAAEAAAAAAAPAB8AAAAEAP//AAAPAB8AAAADAP//AAAPAB8AAAACAP//AAAPAB8AAAABAP//AAAPAB8AAAAAAP//AAAPAB8AAAD/////AAAPAB8AAAD+////AAAPAB8AAAD9////AAAPAB8AAAD8////AAAPAB8AAAD7//7/AAAPAB8AAAD7////AAAPAB8AAAD7/wAAAAAPAB8AAAD7/wEAAAAPAB8AAAD7/wIAAAAPAB8AAAD7/wcAAAAPAB8AAAD7/wYAAAAPAB8AAAD7/wUAAAAPAB8AAAD7/wQAAAAPAB8AAAD7/wMAAAAPAB8AAAD8/wcAAAANAB8AAAD9/wcAAAANAB8AAAD+/wcAAAANAB8AAAD//wgAAAAPAB8AAAABAAgAAAAPAB8AAAACAAcAAAANAB8AAAADAAcAAAANAB8AAAAEAAcAAAANAB8AAAAFAAcAAAAPAB8AAAAFAAYAAAAPAB8AAAAFAAUAAAAPAB8AAAAFAAQAAAAPAB8AAAAFAAMAAAAPAB8AAAAFAAIAAAAPAB8AAAAFAAEAAAAPAB8AAAAFAAAAAAAPAB8AAAAFAP//AAAPAB8AAAAFAP7/AAAPAB8AAAAEAP7/AAAPAB8AAAADAP7/AAAPAB8AAAACAP7/AAAPAB8AAAABAP7/AAAPAB8AAAAAAP7/AAAPAB8AAAD///7/AAAPAB8AAAD+//7/AAAPAB8AAAD9//7/AAAPAB8AAAD8//7/AAAPAB8AAAAAAAIAAAAOAB8AAAD//wIAAAAOAB8AAAD8/wIAAAAOAB8AAAADAAMAAAAOAB8AAAABAAcAAAANAB8AAAD//wcAAAANAB8AAAD8/wYAAAAMAB8AAAD8/wUAAAAMAB8AAAD8/wQAAAALAB8AAAA=")
+tile_map_data = PackedByteArray("AAADAAIAAAAPAB8AAAAEAAIAAAAOAB8AAAAEAAEAAAAPAB8AAAADAAEAAAAPAB8AAAACAAEAAAAPAB8AAAABAAEAAAAPAB8AAAAAAAEAAAAPAB8AAAD//wEAAAAPAB8AAAD+/wEAAAAPAB8AAAD9/wEAAAAPAB8AAAD8/wEAAAAPAB8AAAD8/wAAAAAPAB8AAAD9/wAAAAAPAB8AAAD+/wAAAAAPAB8AAAD//wAAAAAPAB8AAAAAAAAAAAAPAB8AAAABAAAAAAAPAB8AAAACAAAAAAAPAB8AAAADAAAAAAAPAB8AAAAEAAAAAAAPAB8AAAAEAP//AAAPAB8AAAADAP//AAAPAB8AAAACAP//AAAPAB8AAAABAP//AAAPAB8AAAAAAP//AAAPAB8AAAD/////AAAPAB8AAAD+////AAAPAB8AAAD9////AAAPAB8AAAD8////AAAPAB8AAAD7//7/AAAPAB8AAAD7////AAAPAB8AAAD7/wAAAAAPAB8AAAD7/wEAAAAPAB8AAAD7/wIAAAAPAB8AAAD7/wcAAAAPAB8AAAD7/wYAAAAPAB8AAAD7/wUAAAAPAB8AAAD7/wQAAAAPAB8AAAD7/wMAAAAPAB8AAAD8/wcAAAANAB8AAAD9/wcAAAANAB8AAAD+/wcAAAANAB8AAAD//wgAAAAPAB8AAAABAAgAAAAPAB8AAAACAAcAAAANAB8AAAADAAcAAAANAB8AAAAEAAcAAAANAB8AAAAFAAcAAAAPAB8AAAAFAAYAAAAPAB8AAAAFAAUAAAAPAB8AAAAFAAQAAAAPAB8AAAAFAAMAAAAPAB8AAAAFAAIAAAAPAB8AAAAFAAEAAAAPAB8AAAAFAAAAAAAPAB8AAAAFAP//AAAPAB8AAAAFAP7/AAAPAB8AAAAEAP7/AAAPAB8AAAADAP7/AAAPAB8AAAACAP7/AAAPAB8AAAABAP7/AAAPAB8AAAAAAP7/AAAPAB8AAAD///7/AAAPAB8AAAD+//7/AAAPAB8AAAD9//7/AAAPAB8AAAD8//7/AAAPAB8AAAAAAAIAAAAOAB8AAAD//wIAAAAOAB8AAAD8/wIAAAAOAB8AAAADAAMAAAAOAB8AAAABAAcAAAANAB8AAAD//wcAAAANAB8AAAD8/wYAAAAMAB8AAAD8/wUAAAAMAB8AAAD8/wQAAAALAB8AAAAAAAkAAAAPAB8AAAA=")
 tile_set = SubResource("TileSet_ukdna")
 
 [node name="CookingStation" parent="." instance=ExtResource("12_rcqcf")]
@@ -2012,3 +2027,5 @@ position = Vector2(0, 31)
 
 [node name="Chest" parent="." instance=ExtResource("13_wdh05")]
 position = Vector2(-32, 32)
+
+[node name="DroppedItemsRoot" type="Node2D" parent="."]

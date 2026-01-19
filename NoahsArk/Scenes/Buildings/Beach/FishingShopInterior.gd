@@ -1,8 +1,8 @@
 extends Node2D
 
-const MUSIC_TRACK_INDEX := 1
+@export var area_id: String = "fishing_shop_interior"
 
-@export var area_id: String = "mystrilia_farm"
+const MUSIC_TRACK_INDEX := 2
 
 func _ready() -> void:
 	MusicManagerGlobal.play_track(MUSIC_TRACK_INDEX)

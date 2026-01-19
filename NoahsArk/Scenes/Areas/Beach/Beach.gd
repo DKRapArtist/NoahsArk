@@ -2,6 +2,7 @@ extends Node2D
 class_name Beach
 
 @export var water_tilemap: TileMapLayer
+@export var area_id: String = "joppa_coast"
 
 const MUSIC_TRACK_INDEX := 2
 

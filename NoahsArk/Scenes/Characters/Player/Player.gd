@@ -28,6 +28,9 @@ var nearby_cooking_station: CookingStation = null
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interact_ray: RayCast2D = $InteractRay
 
+func _ready() -> void:
+	inv = preload("res://Scenes/Functionalities/Inventory/PlayerInventory.tres")
+
 # --------------------
 # MOVEMENT
 # --------------------
@@ -264,6 +267,7 @@ func _input(event: InputEvent) -> void:
 func try_use_tool() -> void:
 	if block_planting_this_frame:
 		return
+
 	if is_swinging:
 		return
 
@@ -273,6 +277,7 @@ func try_use_tool() -> void:
 
 	if active_hotbar_index == -1 or inv == null:
 		return
+
 	if active_hotbar_index >= inv.slots.size():
 		return
 
@@ -283,68 +288,64 @@ func try_use_tool() -> void:
 	var item := slot.item
 
 	# -------------------------------------------------
-	# FARM / SEED INTERACTION (restored)
+	# 🌱 SEED / FARMING (CONSUMABLES) — HANDLE FIRST
 	# -------------------------------------------------
-	var world := get_tree().get_first_node_in_group("world") as World
-	if world != null:
+	if item.item_type == InvItem.ItemType.CONSUMABLE and item.seed_crop_id != "":
+		var world := get_tree().get_first_node_in_group("world") as World
+		if world == null:
+			return
+
 		var area := world.current_area.get_child(0) as Node2D
 		if area == null:
 			return
 
 		var farm := world.get_node_or_null("FarmTileInteractor")
-		if farm != null:
-			var farm_target: Dictionary
+		if farm == null:
+			return
 
-			# Seeds -> mouse based targeting
-			if item.item_type == InvItem.ItemType.CONSUMABLE and item.seed_crop_id != "":
-				farm_target = _get_mouse_farm_cell()
-			else:
-				# Tools -> facing based targeting
-				farm_target = farm.get_facing_farm_cell(self)
+		var farm_target := _get_mouse_farm_cell()
+		if farm_target.is_empty():
+			return
 
-			if not farm_target.is_empty():
-				# If holding seeds and targeting farm tile, plant
-				if item.item_type == InvItem.ItemType.CONSUMABLE and item.seed_crop_id != "":
-					var tilemap: TileMapLayer = farm_target["tilemap"]
-					var cell: Vector2i = farm_target["cell"]
+		var tilemap: TileMapLayer = farm_target["tilemap"]
+		var cell: Vector2i = farm_target["cell"]
 
-					if not _is_within_plant_distance(tilemap, cell):
-						return
+		if not _is_within_plant_distance(tilemap, cell):
+			return
 
-					var crop_registry := world.get_node_or_null("CropRegistry") as CropRegistry
-					if crop_registry == null:
-						return
+		var crop_registry := world.get_node_or_null("CropRegistry") as CropRegistry
+		if crop_registry == null:
+			return
 
-					var planted: bool = crop_registry.plant_seed(
-						area,
-						tilemap,
-						cell,
-						item.seed_crop_id
-					)
+		var planted := crop_registry.plant_seed(
+			area,
+			tilemap,
+			cell,
+			item.seed_crop_id
+		)
 
-					if planted:
-						# Consume seed
-						slot.amount -= 1
-						if slot.amount <= 0:
-							inv.slots[active_hotbar_index] = null
+		if planted:
+			slot.amount -= 1
+			if slot.amount <= 0:
+				inv.slots[active_hotbar_index] = null
 
-						inv.notify_changed()
+			inv.notify_changed()
 
-						# Immediate visual feedback
-						var key := crop_registry._make_key(tilemap, cell)
-						var data = crop_registry.planted_crops[key]
-						crop_registry.spawn_single_crop_visual(area, tilemap, cell, data)
+			var key := crop_registry._make_key(tilemap, cell)
+			var data = crop_registry.planted_crops[key]
+			crop_registry.spawn_single_crop_visual(area, tilemap, cell, data)
 
-					return  # stop further tool logic only if we attempted planting
+		return  # 🔑 CRITICAL: STOP HERE FOR SEEDS
 
 	# -------------------------------------------------
-	# TOOL INTERACTION (AXE / FISHING)
+	# 🛠️ TOOLS ONLY AFTER THIS POINT
 	# -------------------------------------------------
 	if item.item_type != InvItem.ItemType.TOOL:
 		return
 
 	var fishing := $FishingController as FishingController
 	var cooking := $CookingController as CookingController
+
 	if cooking and cooking.is_cooking:
 		return
 
@@ -360,6 +361,7 @@ func try_use_tool() -> void:
 		_:
 			pass
 
+
 func _start_axe_swing(tool: InvItem) -> void:
 	is_swinging = true
 	has_hit_this_swing = false
@@ -369,13 +371,23 @@ func _start_axe_swing(tool: InvItem) -> void:
 func _start_fishing() -> void:
 	var fishing := $FishingController as FishingController
 	if fishing == null:
+		print("❌ _start_fishing: FishingController is null")
 		return
+
+	print("🎣 _start_fishing called")
 
 	var water_tilemap := fishing._get_water_tilemap()
 	if water_tilemap == null:
+		print("❌ no water tilemap found")
 		return
+
+	print("🌊 water tilemap found")
+
 	if not fishing._is_facing_water(water_tilemap):
+		print("❌ NOT facing water")
 		return
+
+	print("✅ facing water — starting fishing")
 
 	anim.play("FishingCast" + last_direction)
 	fishing.start_fishing()

@@ -7439,3 +7439,5 @@ tree_scene = ExtResource("9_72h43")
 [node name="AreaFishing" type="Node2D" parent="." groups=["area_fishing"]]
 script = ExtResource("17_2cbnb")
 fish_table = SubResource("Resource_ckxp3")
+
+[node name="DroppedItemsRoot" type="Node2D" parent="."]

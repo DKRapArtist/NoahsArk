@@ -6,7 +6,6 @@ signal inventory_opened
 signal inventory_closed
 
 var inv: Inv
-@onready var slots: Array = []
 @onready var player_slots: Array = []
 @onready var chest_slots: Array = []
 
@@ -44,12 +43,12 @@ func _ready() -> void:
 	var tooltip := $ItemToolTip
 	for slot in player_slots:
 		slot.tooltip = tooltip
-		slot.is_chest_slot = false   # ✅ IMPORTANT
+		slot.is_chest_slot = false
 
 	for slot in chest_slots:
 		slot.tooltip = tooltip
-		slot.is_chest_slot = true    # ✅ IMPORTANT
-		slot.mouse_filter = Control.MOUSE_FILTER_STOP  # ✅ ENABLE INPUT
+		slot.is_chest_slot = true
+		slot.mouse_filter = Control.MOUSE_FILTER_STOP
 
 	# --- SLOT INDEXING ---
 	for i in player_slots.size():
@@ -69,8 +68,6 @@ func _process(_delta: float) -> void:
 			open()
 
 func update_slots() -> void:
-	print("Chest open:", is_container_open, " Container inv:", container_inv)
-
 	# --------------------
 	# PLAYER INVENTORY (HOTBAR + MAIN)
 	# --------------------
@@ -117,18 +114,11 @@ func update_slots() -> void:
 		if is_container_open and container_inv and i < container_inv.slots.size():
 			slot_data = container_inv.slots[i]
 
-		print("Chest slot", i, "data:", slot_data)
 		ui_slot.update(slot_data)
-
 
 func open():
 	visible = true
 	is_open = true
-	
-	var tooltip := $ItemToolTip
-	for slot in slots:
-		if slot is InvSlot:
-			slot.tooltip = tooltip
 	inventory_opened.emit()
 
 func close():
@@ -155,6 +145,28 @@ func close():
 	inventory_closed.emit()
 
 func on_slot_clicked(slot_index: int, ui_slot = null) -> void:
+	# 🔁 SHIFT-CLICK QUICK TRANSFER (ONLY when not holding anything)
+	if picked_slot_index == -1 and Input.is_key_pressed(KEY_SHIFT):
+		# Only do quick transfer if a chest/container is actually open
+		if is_container_open and container_inv != null and ui_slot != null:
+			if ui_slot.is_chest_slot:
+				# Chest → Player
+				_transfer_slot_between_inventories(
+					container_inv,
+					player_inv,
+					slot_index
+				)
+				return
+			else:
+				# Player → Chest
+				_transfer_slot_between_inventories(
+					player_inv,
+					container_inv,
+					slot_index
+				)
+				return
+		# If no chest is open, SHIFT-click should behave like a normal click (so we do NOT return)
+
 	var target_inv: Inv
 
 	# --------------------
@@ -299,19 +311,18 @@ func set_active_hotbar(index: int) -> void:
 	_highlight_hotbar_slot(index)
 
 func _highlight_hotbar_slot(index: int) -> void:
-	for i in range(10):
-		if i < slots.size():
-			slots[i].set_hotkey_color(Color.WHITE)
+	# Reset hotbar colors (first 10 player slots)
+	for i in range(min(10, player_slots.size())):
+		player_slots[i].set_hotkey_color(Color.WHITE)
 
-	if index >= 0 and index < slots.size() and index < 10:
-		slots[index].set_hotkey_color(Color.RED)
+	# Highlight selected
+	if index >= 0 and index < min(10, player_slots.size()):
+		player_slots[index].set_hotkey_color(Color.RED)
 
 func _change_held_amount(delta: int) -> void:
-	# ✅ Wheel ONLY works while split-dragging (right click)
 	if not is_split_drag:
 		return
 
-	# Safety
 	if held_item == null or picked_slot_index < 0 or picked_slot_index >= inv.slots.size():
 		return
 
@@ -319,15 +330,13 @@ func _change_held_amount(delta: int) -> void:
 	if slot == null or slot.item != held_item:
 		return
 
-	# split_total is the original stack size (hand + slot must always equal this)
-	var new_hand = clamp(held_amount + delta, 1, split_total - 1) # keep at least 1 in slot
+	var new_hand = clamp(held_amount + delta, 1, split_total - 1)
 	if new_hand == held_amount:
 		return
 
 	held_amount = new_hand
 	held_total = held_amount
 
-	# ✅ ACTUALLY update the inventory remainder
 	slot.amount = split_total - held_amount
 	if slot.amount <= 0:
 		inv.slots[picked_slot_index] = null
@@ -353,19 +362,16 @@ func on_slot_right_clicked(slot_index: int) -> void:
 	if ui_root == null:
 		return
 
-	# ✅ Remember original total (constant during split scroll)
 	split_total = slot.amount
 	is_split_drag = true
 
 	var take := int(ceil(split_total / 2.0))
 
-	# hand owns taken amount
 	picked_slot_index = slot_index
 	held_item = slot.item
 	held_total = take
 	held_amount = take
 
-	# slot keeps remainder (ACTUAL inventory update)
 	slot.amount = split_total - take
 	if slot.amount <= 0:
 		inv.slots[slot_index] = null
@@ -379,7 +385,6 @@ func on_slot_right_clicked(slot_index: int) -> void:
 	ui_root.set_drag_amount(held_amount)
 
 func combine_item_stacks(slot_index: int) -> void:
-	# Don’t allow while dragging
 	if picked_slot_index != -1:
 		return
 
@@ -393,7 +398,6 @@ func combine_item_stacks(slot_index: int) -> void:
 	var item := base_slot.item
 	var max_stack := item.max_stack
 
-	# 1️⃣ Collect total amount of this item
 	var total := 0
 	for i in range(inv.slots.size()):
 		var slot := inv.slots[i]
@@ -401,10 +405,8 @@ func combine_item_stacks(slot_index: int) -> void:
 			total += slot.amount
 			inv.slots[i] = null
 
-	# 2️⃣ Refill starting from the clicked slot
 	var remaining := total
 
-	# Fill clicked slot first
 	var first_amount = min(max_stack, remaining)
 	var new_base := InvSlot.new()
 	new_base.item = item
@@ -412,7 +414,6 @@ func combine_item_stacks(slot_index: int) -> void:
 	inv.slots[slot_index] = new_base
 	remaining -= first_amount
 
-	# 3️⃣ Fill ONLY empty slots (skip occupied ones)
 	for i in range(inv.slots.size()):
 		if remaining <= 0:
 			break
@@ -465,3 +466,47 @@ func open_chest(container: Inv) -> void:
 
 	update_slots()
 	open()
+
+func _transfer_slot_between_inventories(
+	from_inv: Inv,
+	to_inv: Inv,
+	slot_index: int
+) -> void:
+	if from_inv == null or to_inv == null:
+		return
+	if slot_index < 0 or slot_index >= from_inv.slots.size():
+		return
+
+	var slot := from_inv.slots[slot_index]
+	if slot == null:
+		return
+
+	var item := slot.item
+	var amount := slot.amount
+
+	# 1️⃣ Try stacking first
+	for i in range(to_inv.slots.size()):
+		var target := to_inv.slots[i]
+		if target and target.item == item:
+			var space := item.max_stack - target.amount
+			if space > 0:
+				var move = min(space, amount)
+				target.amount += move
+				amount -= move
+				if amount <= 0:
+					from_inv.slots[slot_index] = null
+					from_inv.notify_changed()
+					to_inv.notify_changed()
+					return
+
+	# 2️⃣ Put remaining into empty slots
+	for i in range(to_inv.slots.size()):
+		if to_inv.slots[i] == null:
+			var new_slot := InvSlot.new()
+			new_slot.item = item
+			new_slot.amount = amount
+			to_inv.slots[i] = new_slot
+			from_inv.slots[slot_index] = null
+			from_inv.notify_changed()
+			to_inv.notify_changed()
+			return

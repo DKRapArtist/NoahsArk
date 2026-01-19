@@ -11,6 +11,7 @@ collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_eg08n")
 slot_count = 30
+chest_id = "homechest"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_b2j8w")

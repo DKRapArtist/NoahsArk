@@ -8,6 +8,7 @@ class_name World
 @onready var item_scene := preload("res://Scenes/Functionalities/PickUps/PickUpScenes/ItemPickUp.tscn")
 
 var first_load := true
+var current_area_id: String = ""
 
 # ===============================
 # LIFECYCLE
@@ -28,10 +29,19 @@ func _ready() -> void:
 # INVENTORY DROP
 # ===============================
 func _on_item_dropped_from_inventory(item: InvItem, amount: int) -> void:
+	if current_area.get_child_count() == 0:
+		return
+
+	var area: Node2D = current_area.get_child(0)
+	var drops_root := area.get_node_or_null("DroppedItemsRoot")
+
+	if drops_root == null:
+		push_warning("DroppedItemsRoot not found in area")
+		return
+
 	var pickup := item_scene.instantiate() as ItemPickup
 	pickup.item = item
 	pickup.amount = amount
-
 	pickup.use_auto_pickup_delay = true
 	pickup.auto_pickup_time = 3.0
 
@@ -41,7 +51,17 @@ func _on_item_dropped_from_inventory(item: InvItem, amount: int) -> void:
 	else:
 		pickup.global_position = Vector2.ZERO
 
-	pickups_root.add_child(pickup)
+	# ✅ AREA-SCOPED
+	drops_root.add_child(pickup)
+
+	# ✅ SAVE RESOURCE PATH (THIS IS THE KEY FIX)
+	SaveDataGlobal.add_dropped_item({
+		"area_id": current_area_id,
+		"x": pickup.position.x,
+		"y": pickup.position.y,
+		"item_path": item.resource_path,
+		"amount": amount
+	})
 
 # ===============================
 # AREA LOADING
@@ -53,6 +73,12 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 	else:
 		TransitionScene.transition()
 		await TransitionScene.on_transition_finished
+
+	# ===============================
+	# 🔹 SAVE CHESTS BEFORE UNLOADING AREA  ✅ THIS IS THE FIX
+	# ===============================
+	if has_method("save_all_chests_in_current_area"):
+		save_all_chests_in_current_area()
 
 	# ===============================
 	# CLEAN UP OLD AREA
@@ -86,13 +112,32 @@ func load_area(scene_path: String, spawn_id: String) -> void:
 
 	await get_tree().process_frame
 
-# ===============================
-# SPAWN CROPS FOR THIS AREA
-# ===============================
+	# ===============================
+	# 🔹 SET CURRENT AREA ID
+	# ===============================
+	if area.has_method("get") and area.get("area_id") != null:
+		current_area_id = area.area_id
+	else:
+		current_area_id = scene_path  # safe fallback
+
+	# ===============================
+	# SPAWN CROPS FOR THIS AREA
+	# ===============================
 	var crop_registry := get_node_or_null("CropRegistry") as CropRegistry
 	if crop_registry:
 		crop_registry.spawn_crops_for_area(area)
 
+	# ===============================
+	# 🔹 SPAWN DROPPED ITEMS FOR THIS AREA
+	# ===============================
+	if has_method("spawn_dropped_items_for_current_area"):
+		spawn_dropped_items_for_current_area()
+
+	# ===============================
+	# 🔹 SPAWN CHESTS FOR THIS AREA
+	# ===============================
+	if has_method("spawn_chests_for_current_area"):
+		spawn_chests_for_current_area()
 
 	# ===============================
 	# MOVE WORLD OBJECTS INTO YSORT
@@ -227,9 +272,96 @@ func move_group_to_ysort(group_name: String) -> void:
 			node.global_position = pos
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		print("ESCAPE HANDLED BY WORLD")
+	if not event.is_action_pressed("ui_cancel"):
+		return
 
-		var level_ui = $UIRoot/LevelUI
-		if level_ui:
-			level_ui.visible = !level_ui.visible
+	# 1️⃣ BLOCK if inventory is open
+	var inv_ui := get_tree().get_first_node_in_group("inventory_ui") as InventoryUI
+	if inv_ui and inv_ui.is_open:
+		return
+
+	# 2️⃣ BLOCK if chest / container UI is open
+	if inv_ui and inv_ui.is_container_open:
+		return
+
+	# 3️⃣ Toggle Level / Skills UI
+	var level_ui := $UIRoot/LevelUI
+	if level_ui:
+		level_ui.visible = !level_ui.visible
+
+func spawn_dropped_items_for_current_area() -> void:
+	if current_area.get_child_count() == 0:
+		return
+
+	var area: Node2D = current_area.get_child(0)
+	var drops_root := area.get_node_or_null("DroppedItemsRoot")
+
+	if drops_root == null:
+		push_warning("DroppedItemsRoot not found in area")
+		return
+
+	for child in drops_root.get_children():
+		child.queue_free()
+
+	for d in SaveDataGlobal.dropped_items:
+		if d.area_id != current_area_id:
+			continue
+
+		var drop := create_world_drop(d.item_path, d.amount)
+		if drop == null:
+			continue
+
+		drops_root.add_child(drop)
+		drop.position = Vector2(d.x, d.y)
+
+func create_world_drop(item_path: String, amount: int) -> Node2D:
+	var pickup := item_scene.instantiate() as ItemPickup
+	pickup.item = load(item_path) as InvItem
+	pickup.amount = amount
+	pickup.use_auto_pickup_delay = false
+	return pickup
+
+func place_chest_at(world_pos: Vector2) -> void:
+	if current_area.get_child_count() == 0:
+		return
+
+	var area: Node2D = current_area.get_child(0)
+
+	var chest := preload("res://Scenes/Functionalities/Inventory/InventoryScenes/Chest.tscn").instantiate() as Chest
+	chest.chest_id = SaveDataGlobal.generate_chest_id()
+	chest.global_position = world_pos
+
+	area.add_child(chest)
+
+	# ✅ SAVE THAT THIS CHEST EXISTS
+	SaveDataGlobal.placed_chests.append({
+		"chest_id": chest.chest_id,
+		"area_id": current_area_id,
+		"x": world_pos.x,
+		"y": world_pos.y
+	})
+
+func spawn_chests_for_current_area() -> void:
+	if current_area.get_child_count() == 0:
+		return
+
+	var area: Node2D = current_area.get_child(0)
+
+	for c in SaveDataGlobal.placed_chests:
+		if c.area_id != current_area_id:
+			continue
+
+		var chest := preload("res://Scenes/Functionalities/Inventory/InventoryScenes/Chest.tscn").instantiate() as Chest
+		chest.chest_id = c.chest_id
+		chest.global_position = Vector2(c.x, c.y)
+		area.add_child(chest)
+
+func save_all_chests_in_current_area() -> void:
+	if current_area.get_child_count() == 0:
+		return
+
+	var area: Node = current_area.get_child(0)
+
+	for chest in area.get_children():
+		if chest is Chest:
+			chest.save_contents()

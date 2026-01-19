@@ -35,6 +35,16 @@ func _physics_process(delta: float) -> void:
 	if player == null:
 		return
 
+	# 🔒 Block magnet + pickup if inventory is full
+	var inv_ui := get_tree().get_first_node_in_group("inventory_ui")
+	if inv_ui == null or inv_ui.inv == null:
+		return
+
+	var inv: Inv = inv_ui.inv
+	if not _can_accept_item(inv):
+		is_magnetized = false
+		return
+
 	var dist := global_position.distance_to(player.global_position)
 
 	if dist <= magnet_radius:
@@ -66,6 +76,19 @@ func _update_visual() -> void:
 	else:
 		sprite.visible = true
 		sprite.texture = item.texture
+
+func _can_accept_item(inv: Inv) -> bool:
+	# Check if item can stack
+	for slot in inv.slots:
+		if slot and slot.item == item and slot.amount < item.max_stack:
+			return true
+
+	# Check for empty slot
+	for slot in inv.slots:
+		if slot == null:
+			return true
+
+	return false
 
 func try_pickup() -> void:
 	if item == null:

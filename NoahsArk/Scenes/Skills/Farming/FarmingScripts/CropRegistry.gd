@@ -49,7 +49,8 @@ func plant_seed(
 		"crop_id": seed_crop_id,
 		"planted_time": Time.get_unix_time_from_system(),
 		"area_path": area.scene_file_path,
-		"tilemap_path": tilemap.get_path(),
+		# ✅ store RELATIVE path so we can resolve it reliably after reload
+		"tilemap_path": area.get_path_to(tilemap),
 		"cell": cell
 	}
 

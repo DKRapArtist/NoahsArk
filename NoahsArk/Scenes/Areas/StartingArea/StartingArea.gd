@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var water_tilemap: TileMapLayer
+@export var area_id: String = "oakvale"
 
 const MUSIC_TRACK_INDEX := 0
 

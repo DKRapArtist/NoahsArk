@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3 uid="uid://d5rhulyd6u8f"]
+
+[ext_resource type="Script" uid="uid://cdlrjmdnh8xu3" path="res://Scenes/Characters/NPCDialogue/DialogueData.gd" id="1_1jkwh"]
+
+[resource]
+script = ExtResource("1_1jkwh")
+id = "scientist_intro"
+lines = Array[String](["I am so Smart I know DK is a poo poo head!"])
+metadata/_custom_type_script = "uid://cdlrjmdnh8xu3"

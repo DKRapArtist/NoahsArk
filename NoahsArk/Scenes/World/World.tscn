@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dwjcltlvvv3sh"]
+[gd_scene load_steps=26 format=3 uid="uid://dwjcltlvvv3sh"]
 
 [ext_resource type="Script" uid="uid://ckox3i4862uu1" path="res://Scenes/World/World.gd" id="1_5nsto"]
 [ext_resource type="PackedScene" uid="uid://bg60q61fxbuyh" path="res://Scenes/Characters/Player/Player.tscn" id="1_j0p05"]
@@ -22,6 +22,8 @@
 [ext_resource type="Resource" uid="uid://cf4edb3ayncb0" path="res://Scenes/Characters/NPCDialogue/DialogueResources/noah_intro.tres" id="14_jclsg"]
 [ext_resource type="Resource" uid="uid://h4mruwpqfxxe" path="res://Scenes/Characters/NPCDialogue/DialogueResources/salon_intro.tres" id="15_lqys3"]
 [ext_resource type="Resource" uid="uid://crth5pochyj01" path="res://Scenes/Characters/NPCDialogue/DialogueResources/oldman_intro.tres" id="16_qs546"]
+[ext_resource type="Resource" uid="uid://bn7ve05ovq83y" path="res://Scenes/Characters/NPCDialogue/DialogueResources/shopclerk_intro.tres" id="17_41ig8"]
+[ext_resource type="Resource" uid="uid://d5rhulyd6u8f" path="res://Scenes/Characters/NPCDialogue/DialogueResources/scientist_intro.tres" id="18_hlwfy"]
 [ext_resource type="PackedScene" uid="uid://dx574wn4wv1np" path="res://Scenes/Menu/SkillsUI/LevelUI.tscn" id="19_c1bjq"]
 
 [node name="World" type="Node2D" groups=["world"]]
@@ -44,7 +46,7 @@ crops = Array[ExtResource("5_ng1ea")]([ExtResource("6_0d0er")])
 
 [node name="DialogueDataBase" type="Node" parent="." groups=["dialogue_database"]]
 script = ExtResource("9_liy54")
-dialogues = Array[ExtResource("10_c1bjq")]([ExtResource("11_7n4rk"), ExtResource("12_jclsg"), ExtResource("13_7n4rk"), ExtResource("14_jclsg"), ExtResource("15_lqys3"), ExtResource("16_qs546")])
+dialogues = Array[ExtResource("10_c1bjq")]([ExtResource("11_7n4rk"), ExtResource("12_jclsg"), ExtResource("13_7n4rk"), ExtResource("14_jclsg"), ExtResource("15_lqys3"), ExtResource("16_qs546"), ExtResource("17_41ig8"), ExtResource("18_hlwfy")])
 
 [node name="SeedTilePreview" parent="." groups=["seed_preview"] instance=ExtResource("9_lp0bp")]
 visible = false

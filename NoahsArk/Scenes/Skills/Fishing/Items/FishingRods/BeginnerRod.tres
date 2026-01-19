@@ -11,4 +11,4 @@ max_stack = 1
 amount = 0
 item_type = 1
 tool_type = "FishingRod"
-description = "This is a Beginner Rod, used and found in the world of Mystrilia. Makes you slightly more efficient in fishing."
+description = "This is a Beginner Rod, used and found in the world of Mystrilia. Is very slow to fish though."

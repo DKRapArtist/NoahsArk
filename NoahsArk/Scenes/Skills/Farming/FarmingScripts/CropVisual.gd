@@ -96,8 +96,6 @@ func _harvest() -> void:
 	if player:
 		player.block_planting_this_frame = true
 
-	print("🌾 Harvesting crop:", crop_id)
-
 	var world := get_tree().get_first_node_in_group("world") as World
 	if world == null:
 		return
@@ -115,13 +113,22 @@ func _harvest() -> void:
 
 	# Get harvest item
 	if not crop_registry.crop_items.has(crop_id):
-		push_error("❌ No inventory item registered for crop: " + crop_id)
 		queue_free()
 		return
 
 	var item: InvItem = crop_registry.crop_items[crop_id]
 
-	# Spawn pickup
+	# -----------------------------------
+	# SPAWN PICKUP IN AREA DROPS ROOT
+	# -----------------------------------
+	if world.current_area == null or world.current_area.get_child_count() == 0:
+		return
+
+	var area := world.current_area.get_child(0) as Node2D
+	var drops_root := area.get_node_or_null("DroppedItemsRoot")
+	if drops_root == null:
+		return
+
 	var pickup_scene := preload(
 		"res://Scenes/Functionalities/PickUps/PickUpScenes/ItemPickUp.tscn"
 	)
@@ -131,7 +138,18 @@ func _harvest() -> void:
 	pickup.amount = 1
 	pickup.use_auto_pickup_delay = false
 
-	world.get_node("YSort").add_child(pickup)
+	drops_root.add_child(pickup)
 	pickup.global_position = global_position
+
+	# -----------------------------------
+	# SAVE HARVESTED ITEM
+	# -----------------------------------
+	SaveDataGlobal.add_dropped_item({
+		"area_id": world.current_area_id,
+		"x": pickup.position.x,
+		"y": pickup.position.y,
+		"item_path": item.resource_path,
+		"amount": 1
+	})
 
 	queue_free()
